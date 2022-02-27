@@ -1,24 +1,24 @@
 ---
-Nombre: Change request
-Descripción: Petición de cambio de una funcionalidad existente
-Titulo: 'CR: '
-Etiquetas: change
-Asignados: 
+name: Change request
+about: Petición de cambio al proyecto.
+title: 'CR: '
+labels: change
+assignees: josaloroc
 
 ---
 
-**Solicitante/s**: @
+**Solicitante/s**: Incluir @
 
-**Tipo**: alcance, requisitos, ...
+**Tipo**: tipo de cambio, alcance, costes, etc...
 
-**Historia relacionada**: #IDhistoria (si procede)
+**Requisito relacionado**: Introducir identificador de requisito o issue 
 
 # Descripcion
-descripción clara de qué se debe cambiar y por qué
+Describir y justificar el cambio que se quiere introducir.
 
 # Propuestas de cambio
-- propuesta 1
-- propuesta 2
+- Numerar propuesta
+-...
 
 ## Otras consideraciones
 **Capturas de pantalla**

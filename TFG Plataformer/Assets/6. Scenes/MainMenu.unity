@@ -365,7 +365,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 27b9454b97efb9a4da579fbee6640b10, type: 2}
-  m_audioClip: {fileID: 8300000, guid: c0f5786f639278d479c9da914217fdad, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d982bf23091606944b3e1175644d374c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2257,8 +2257,8 @@ MonoBehaviour:
   BackGroundMusic: {fileID: 188259660}
   masterVol: 0
   effectsVol: 0
-  masterSlider: {fileID: 0}
-  effectSlider: {fileID: 0}
+  masterSlider: {fileID: 1266748469}
+  effectSlider: {fileID: 1225080670}
 --- !u!4 &1600980196
 Transform:
   m_ObjectHideFlags: 0

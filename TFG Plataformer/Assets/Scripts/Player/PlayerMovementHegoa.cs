@@ -7,7 +7,9 @@ public class PlayerMovementHegoa : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 7;
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 17;
+    [SerializeField] private float jumpForce = 15.5f;
+    [SerializeField] private int extraJumps = 1;
+    [SerializeField] private float extraJumpsForce = 12;
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rigidBody;
@@ -15,12 +17,14 @@ public class PlayerMovementHegoa : MonoBehaviour
     private bool facingRight = true;
     private float direction = 0;
     private bool jump = false;
+    private bool extraJump = false;
     private bool cancelJump = false;
     private bool isJumping = false;
     private float coyoteTime = 0.07f;
     private float coyoteTimeCounter;
     private float jumpBufferTime = 0.07f;
     private float jumpBufferCounter;
+    private int extraJumpsCounter;
 
     Vector2 targetVelocity;
 
@@ -58,6 +62,12 @@ public class PlayerMovementHegoa : MonoBehaviour
             jump = false;
             isJumping = true;
         }
+        if (extraJump)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0);
+            rigidBody.AddForce(new Vector2(0, extraJumpsForce), ForceMode2D.Impulse);
+            extraJump = false;
+        }
         if(cancelJump & rigidBody.velocity.y > 0f)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
@@ -87,10 +97,17 @@ public class PlayerMovementHegoa : MonoBehaviour
         {
             coyoteTimeCounter = coyoteTime;
             isJumping = false;
+            extraJumpsCounter = extraJumps;
         }
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
+
+            if(extraJumpsCounter > 0 & Input.GetKeyDown(KeyCode.Space))
+            {
+                extraJump = true;
+                extraJumpsCounter -= 1;
+            }
         }
         //JumpBuffer: si se presiona la tecla de salto un poco antes de tocar el suelo se registra y cuando se toque el suelo se vuelve a saltar (evita tener que ser super preciso)
         if(Input.GetKeyDown(KeyCode.Space))
@@ -103,7 +120,7 @@ public class PlayerMovementHegoa : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
         //Si la tecla se mantiene presionada salta mas alto que si se suelta
-        if (jumpBufferCounter > 0 & coyoteTimeCounter > 0)
+        if ((jumpBufferCounter > 0 & coyoteTimeCounter > 0))
         {
             jump = true;
             jumpBufferCounter = 0;

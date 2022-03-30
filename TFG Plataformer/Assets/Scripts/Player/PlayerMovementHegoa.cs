@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class PlayerMovementHegoa : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 6;
-    [SerializeField] private float movetSmoothing = .05f;
-    [SerializeField] private float jumpForce = 45;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 7;
+    [Header("Jump")]
+    [SerializeField] private float jumpForce = 17;
     [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D rigidBody;
     private CircleCollider2D circleCollider;
     private bool facingRight = true;
     private float direction = 0;
-    private bool jumpKeyDown = false;
-    private bool jumpKeyUp = false;
+    private bool jump = false;
+    private bool cancelJump = false;
+    private bool isJumping = false;
+    private float coyoteTime = 0.07f;
+    private float coyoteTimeCounter;
+    private float jumpBufferTime = 0.07f;
+    private float jumpBufferCounter;
 
     Vector2 targetVelocity;
 
@@ -46,15 +52,16 @@ public class PlayerMovementHegoa : MonoBehaviour
 
         //Salto
         //Si la tecla se mantiene presionada se salta mas alto que si se suelta
-        if (jumpKeyDown)
+        if (jump)
         {
-            jumpKeyDown = false;
             rigidBody.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            jump = false;
+            isJumping = true;
         }
-        if(jumpKeyUp)
+        if(cancelJump & rigidBody.velocity.y > 0f)
         {
-            jumpKeyUp = false;
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.3f);
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
+            cancelJump = false;
         }
 
         //Girar el modelo si cambia de direccion
@@ -75,14 +82,37 @@ public class PlayerMovementHegoa : MonoBehaviour
         direction = Input.GetAxisRaw("Horizontal");
 
         //Salto
-        //Si la tecla se mantiene presionada se salta mas alto que si se suelta
-        if (Input.GetKeyDown(KeyCode.Space) & IsGrounded())
+        //CoyoteTime: un margen desde que el jugador deja de tocar el suelo para que pueda saltar mejor desde bordes
+        if(IsGrounded())
         {
-            jumpKeyDown = true;
+            coyoteTimeCounter = coyoteTime;
+            isJumping = false;
         }
-        if (Input.GetKeyUp(KeyCode.Space) & rigidBody.velocity.y > 0f)
+        else
         {
-            jumpKeyUp = true;
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        //JumpBuffer: si se presiona la tecla de salto un poco antes de tocar el suelo se registra y cuando se toque el suelo se vuelve a saltar (evita tener que ser super preciso)
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            jumpBufferCounter = jumpBufferTime;
+            cancelJump = false;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+        //Si la tecla se mantiene presionada salta mas alto que si se suelta
+        if (jumpBufferCounter > 0 & coyoteTimeCounter > 0)
+        {
+            jump = true;
+            jumpBufferCounter = 0;
+        }
+        if (Input.GetKeyUp(KeyCode.Space) & isJumping)
+        {
+            cancelJump = true;
+            //Impide que se pueda dar saltar más veces si pulsas muy rápido la tecla de nuevo
+            coyoteTimeCounter = 0;
         }
     }
 
@@ -97,7 +127,7 @@ public class PlayerMovementHegoa : MonoBehaviour
         float extraHeight = 0.1f;
         RaycastHit2D rayCastHit = Physics2D.CircleCast(circleCollider.bounds.center, circleCollider.radius, Vector2.down, extraHeight, groundLayer);
 
-        Debug.Log(rayCastHit.collider);
+        //Debug.Log(rayCastHit.collider);
 
         return rayCastHit.collider != null;
     }

@@ -2,76 +2,169 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
+    [SerializeField] private Animator animator;
+    [Header("Movement")]
+    [SerializeField] private float moveSpeed = 7;
+    [Header("Jump")]
+    [SerializeField] private float jumpForce = 15.5f;
+    [SerializeField] private int extraJumps = 1;
+    [SerializeField] private float extraJumpsForce = 12;
+    [SerializeField] private LayerMask groundLayer;
 
-    public CharacterController2D controller;
-    public Animator animator;
+    private Rigidbody2D rigidBody;
+    private CircleCollider2D circleCollider;
+    private bool facingRight = true;
+    private float horizontalSpeed = 0;
+    private bool jump = false;
+    private bool airJump = false;
+    private bool cancelJump = false;
+    private float coyoteTime = 0.07f;
+    private float coyoteTimeCounter = 0;
+    private float jumpBufferTime = 0.07f;
+    private float jumpBufferCounter = 0;
+    private int extraJumpsCounter = 0;
 
-    public static float runSpeed = 40f;
+    Vector2 targetVelocity;
 
-    float horizontalMove = 0f;
-    bool jump = false;
-    bool crouch = false;
-
-    public GameObject[] players;
-
-
+    // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        rigidBody = GetComponent<Rigidbody2D>();
+        circleCollider = GetComponent<CircleCollider2D>();
     }
+
     // Update is called once per frame
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-        
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        GetMovementInputs();
+        SetAnimations();
+    }
 
-        if(Input.GetButtonDown("Jump"))
+    private void FixedUpdate()
+    {
+        SetMovement();
+    }
+
+
+    private void SetMovement()
+    {
+        //Movimiento horizontal
+        rigidBody.velocity = new Vector2(horizontalSpeed, rigidBody.velocity.y);
+
+        //Salto
+        //Si la tecla se mantiene presionada se salta mas alto que si se suelta
+        if (jump)
+        {
+            Debug.Log("Jump");
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+            jump = false;
+        }
+        else if (airJump)
+        {
+            Debug.Log("DoubleJump");
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
+            airJump = false;
+        }
+        if(cancelJump & rigidBody.velocity.y > 0f)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
+            cancelJump = false;
+        }
+
+        //Girar el modelo si cambia de direccion
+        if (horizontalSpeed > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (horizontalSpeed < 0 && facingRight)
+        {
+            Flip();
+        }
+    }
+
+    private void GetMovementInputs()
+    {
+
+        //Movimiento horizontal
+        horizontalSpeed = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        
+
+        //Salto
+        //CoyoteTime: un margen desde que el jugador deja de tocar el suelo para que pueda saltar mejor desde bordes
+        if(IsGrounded())
+        {
+            coyoteTimeCounter = coyoteTime;
+            extraJumpsCounter = extraJumps;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+
+            //Salto doble/multiple
+            if(extraJumpsCounter > 0 & Input.GetKeyDown(KeyCode.Space) & coyoteTimeCounter <= 0)
+            {
+                airJump = true;
+                extraJumpsCounter -= 1;
+            }
+        }
+        //JumpBuffer: si se presiona la tecla de salto un poco antes de tocar el suelo se registra y cuando se toque el suelo se vuelve a saltar (evita tener que ser super preciso)
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            jumpBufferCounter = jumpBufferTime;
+            cancelJump = false;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+        //Si la tecla se mantiene presionada salta mas alto que si se suelta
+        if ((jumpBufferCounter > 0 & coyoteTimeCounter > 0))
         {
             jump = true;
-            animator.SetBool("IsJumping", true);
+            extraJumpsCounter = extraJumps;
+            jumpBufferCounter = 0;
         }
-
-        if (Input.GetButtonDown("Crouch"))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            crouch = true;
-        } else if (Input.GetButtonUp("Crouch")) 
-        { 
-            crouch = false;
+            cancelJump = true;
+            //Impide que se pueda dar saltar más veces si pulsas muy rápido la tecla de nuevo
+            coyoteTimeCounter = 0;
         }
-
     }
 
-    public void OnLanding ()
+    private void Flip()
     {
-        animator.SetBool("IsJumping", false);
+        facingRight = !facingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 
-    public void OnCrouching (bool isCrouching)
+    private bool IsGrounded()
     {
-        animator.SetBool("IsCrouching", isCrouching);
+        float extraHeight = 0.1f;
+        RaycastHit2D rayCastHit = Physics2D.CircleCast(circleCollider.bounds.center, circleCollider.radius, Vector2.down, extraHeight, groundLayer);
+
+        //Debug.Log(rayCastHit.collider);
+
+        return rayCastHit.collider != null;
     }
-    void FixedUpdate ()
+
+    private void SetAnimations()
     {
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-        jump = false;
+        //Correr
+        animator.SetFloat("Hspeed", Mathf.Abs(horizontalSpeed));
 
-    }
-
-    private void OnLevelWasLoaded(int level)
-    {
-        FindStartPos();
-        players = GameObject.FindGameObjectsWithTag("Player");
-
-        if(players.Length > 1)
+        //Salto
+        animator.SetFloat("Vspeed", rigidBody.velocity.y);
+        if (IsGrounded())
         {
-            Destroy(players[1]);
+            animator.SetBool("IsGrounded", true);
         }
-    }
+        else
+        {
+            animator.SetBool("IsGrounded", false);
+        }
 
-    void FindStartPos()
-    {
-        transform.position = GameObject.FindWithTag("StartPos").transform.position;
     }
 }

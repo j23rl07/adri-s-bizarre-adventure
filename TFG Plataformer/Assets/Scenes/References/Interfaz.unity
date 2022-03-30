@@ -1223,7 +1223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1041638322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5088,12 +5088,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deec611fc4a5c67468cdd53cad189506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  jumpForce: 17
-  coyoteTime: 0.1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  controller: {fileID: 0}
+  animator: {fileID: 0}
+  players: []
 --- !u!4 &2736275027413493640
 Transform:
   m_ObjectHideFlags: 0

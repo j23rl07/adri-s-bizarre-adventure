@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 7;
+    [SerializeField] private float moveSpeed = 10;
     [Header("Jump")]
     [SerializeField] private float jumpForce = 15.5f;
     [SerializeField] private int extraJumps = 1;
@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
     private float jumpBufferTime = 0.07f;
     private float jumpBufferCounter = 0;
     private int extraJumpsCounter = 0;
-
-    Vector2 targetVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -57,13 +55,11 @@ public class PlayerMovement : MonoBehaviour
         //Si la tecla se mantiene presionada se salta mas alto que si se suelta
         if (jump)
         {
-            Debug.Log("Jump");
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
             jump = false;
         }
         else if (airJump)
         {
-            Debug.Log("DoubleJump");
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
             airJump = false;
         }

@@ -5088,9 +5088,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deec611fc4a5c67468cdd53cad189506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
-  animator: {fileID: 0}
-  players: []
+  animator: {fileID: 2736275026930957114}
+  moveSpeed: 10
+  jumpForce: 15.5
+  extraJumps: 1
+  extraJumpsForce: 12
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &2736275027413493640
 Transform:
   m_ObjectHideFlags: 0

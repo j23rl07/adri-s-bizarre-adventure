@@ -5096,6 +5096,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dashSpeed: 40
+  dashLength: 0.25
+  dashCooldown: 0.2
 --- !u!4 &2736275027413493640
 Transform:
   m_ObjectHideFlags: 0

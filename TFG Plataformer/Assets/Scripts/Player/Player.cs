@@ -68,7 +68,6 @@ public class Player : MonoBehaviour
         if(currentHealth <= 0)
         {
             GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<CharacterController2D>().enabled = false;
             animator.SetBool("IsDead",true);
             GameObject.Destroy(gameObject, 2);
         }

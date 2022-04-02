@@ -12,11 +12,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private float extraJumpsForce = 12;
     [SerializeField] private LayerMask groundLayer;
-
+    [Header("Dash")]
+    [SerializeField] private float dashSpeed = 25f;
+    [SerializeField] private float dashLength = .15f;
+    [SerializeField] private float dashCooldown = .5f;
+    
     private Rigidbody2D rigidBody;
     private CircleCollider2D circleCollider;
-    private bool facingRight = true;
+    private int facingRight = 1;
     private float horizontalSpeed = 0;
+
     private bool jump = false;
     private bool airJump = false;
     private bool cancelJump = false;
@@ -26,11 +31,17 @@ public class PlayerMovement : MonoBehaviour
     private float jumpBufferCounter = 0;
     private int extraJumpsCounter = 0;
 
+    private bool dash = false;
+    private bool isDashing = false;
+    private float dashCdCounter = 0;
+    private float gravity;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        gravity = rigidBody.gravityScale;
     }
 
     // Update is called once per frame
@@ -48,36 +59,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetMovement()
     {
-        //Movimiento horizontal
-        rigidBody.velocity = new Vector2(horizontalSpeed, rigidBody.velocity.y);
+        if (dash){
+            StartCoroutine(Dash());
+        }
+        if(!isDashing)
+        {
+            //Movimiento horizontal
+            rigidBody.velocity = new Vector2(horizontalSpeed, rigidBody.velocity.y);
 
-        //Salto
-        //Si la tecla se mantiene presionada se salta mas alto que si se suelta
-        if (jump)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
-            jump = false;
-        }
-        else if (airJump)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
-            airJump = false;
-        }
-        if(cancelJump & rigidBody.velocity.y > 0f)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
-            cancelJump = false;
+            //Salto
+            //Si la tecla se mantiene presionada se salta mas alto que si se suelta
+            if (jump)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+                jump = false;
+            }
+            else if (airJump)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
+                airJump = false;
+            }
+            if(cancelJump & rigidBody.velocity.y > 0f)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
+                cancelJump = false;
+            }
+
+            //Girar el modelo si cambia de direccion
+            if (horizontalSpeed > 0 && facingRight == -1)
+            {
+                Flip();
+            }
+            else if (horizontalSpeed < 0 && facingRight == 1)
+            {
+                Flip();
+            }
         }
 
-        //Girar el modelo si cambia de direccion
-        if (horizontalSpeed > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (horizontalSpeed < 0 && facingRight)
-        {
-            Flip();
-        }
     }
 
     private void GetMovementInputs()
@@ -128,11 +146,21 @@ public class PlayerMovement : MonoBehaviour
             //Impide que se pueda dar saltar más veces si pulsas muy rápido la tecla de nuevo
             coyoteTimeCounter = 0;
         }
+
+        //Dash
+        if ((Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift)) & dashCdCounter <= 0)
+        {
+            dash = true;
+        }
+        else if(dashCdCounter > 0)
+        {
+            dashCdCounter -= Time.deltaTime;
+        }
     }
 
     private void Flip()
     {
-        facingRight = !facingRight;
+        facingRight = facingRight * -1;
         transform.Rotate(0f, 180f, 0f);
     }
 
@@ -162,5 +190,17 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsGrounded", false);
         }
 
+    }
+
+    IEnumerator Dash()
+    {
+        dash = false;
+        isDashing = true;
+        rigidBody.velocity = new Vector2(dashSpeed * facingRight, 0);
+        rigidBody.gravityScale = 0;
+        yield return new WaitForSeconds(dashLength);
+        rigidBody.gravityScale = gravity;
+        isDashing = false;
+        dashCdCounter = dashCooldown;
     }
 }

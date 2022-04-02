@@ -24,6 +24,12 @@ public class Weapon : MonoBehaviour {
     public Transform dsLeftTopFirePoint;
     public Transform dsRightTopFirePoint;
 
+    [Header("GammaRay FirePoints")]
+    public Transform bRightFirePoint;
+    public Transform bLeftFirePoint;
+    public Transform bTopFirePoint;
+    public Transform bBottomFirePoint;
+
     [Header("Other")]
     public GameObject bulletPrefab;
     public Animator animator;
@@ -64,6 +70,16 @@ public class Weapon : MonoBehaviour {
             Instantiate(bulletPrefab, dsRightBottomFirePoint.position, dsRightBottomFirePoint.rotation);
             Instantiate(bulletPrefab, dsLeftTopFirePoint.position, dsLeftTopFirePoint.rotation);
             Instantiate(bulletPrefab, dsRightTopFirePoint.position, dsRightTopFirePoint.rotation);
+        }
+
+        if (bulletPrefab.name == "GammaRay")
+        {
+            player.useMana(20);
+            Instantiate(bulletPrefab, bRightFirePoint.position, bRightFirePoint.rotation);
+            Instantiate(bulletPrefab, bLeftFirePoint.position, bLeftFirePoint.rotation);
+            Instantiate(bulletPrefab, bTopFirePoint.position, bTopFirePoint.rotation);
+            Instantiate(bulletPrefab, bBottomFirePoint.position, bBottomFirePoint.rotation);
+
         }
     }
 

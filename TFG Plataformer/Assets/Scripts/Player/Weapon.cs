@@ -13,6 +13,11 @@ public class Weapon : MonoBehaviour {
     public Transform cfMidFirePoint;
     public Transform cfBottomFirePoint;
 
+    [Header("Horizontal Projectile FirePoints")]
+    public Transform hpLeftFirePoint;
+    public Transform hpCenterFirePoint;
+    public Transform hpRightFirePoint;
+
     [Header("Other")]
     public GameObject bulletPrefab;
     public Animator animator;
@@ -36,6 +41,14 @@ public class Weapon : MonoBehaviour {
         {
             player.useMana(3);
             Instantiate(bulletPrefab, fbMidFirePoint.position, fbMidFirePoint.rotation);
+        }
+
+        if (bulletPrefab.name == "HorizontalProjectile")
+        {
+            player.useMana(10);
+            Instantiate(bulletPrefab, hpLeftFirePoint.position, hpLeftFirePoint.rotation);
+            Instantiate(bulletPrefab, hpCenterFirePoint.position, hpCenterFirePoint.rotation);
+            Instantiate(bulletPrefab, hpRightFirePoint.position, hpRightFirePoint.rotation);
         }
     }
 

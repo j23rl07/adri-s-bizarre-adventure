@@ -18,6 +18,12 @@ public class Weapon : MonoBehaviour {
     public Transform hpCenterFirePoint;
     public Transform hpRightFirePoint;
 
+    [Header("Descarga FirePoints")]
+    public Transform dsLeftBottomFirePoint;
+    public Transform dsRightBottomFirePoint;
+    public Transform dsLeftTopFirePoint;
+    public Transform dsRightTopFirePoint;
+
     [Header("Other")]
     public GameObject bulletPrefab;
     public Animator animator;
@@ -49,6 +55,15 @@ public class Weapon : MonoBehaviour {
             Instantiate(bulletPrefab, hpLeftFirePoint.position, hpLeftFirePoint.rotation);
             Instantiate(bulletPrefab, hpCenterFirePoint.position, hpCenterFirePoint.rotation);
             Instantiate(bulletPrefab, hpRightFirePoint.position, hpRightFirePoint.rotation);
+        }
+
+        if (bulletPrefab.name == "Descarga")
+        {
+            player.useMana(15);
+            Instantiate(bulletPrefab, dsLeftBottomFirePoint.position, dsLeftBottomFirePoint.rotation);
+            Instantiate(bulletPrefab, dsRightBottomFirePoint.position, dsRightBottomFirePoint.rotation);
+            Instantiate(bulletPrefab, dsLeftTopFirePoint.position, dsLeftTopFirePoint.rotation);
+            Instantiate(bulletPrefab, dsRightTopFirePoint.position, dsRightTopFirePoint.rotation);
         }
     }
 

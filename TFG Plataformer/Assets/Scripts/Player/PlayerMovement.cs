@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10;
     [Header("Jump")]
@@ -14,13 +13,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 25f;
-    [SerializeField] private float dashLength = .15f;
+    [SerializeField] private float dashLength = .22f;
     [SerializeField] private float dashCooldown = .5f;
-    
+
     private Rigidbody2D rigidBody;
     private CircleCollider2D circleCollider;
     private int facingRight = 1;
-    private float horizontalSpeed = 0;
+    [HideInInspector] public float horizontalSpeed = 0;
+    [HideInInspector] public bool canFlip = true;
 
     private bool jump = false;
     private bool airJump = false;
@@ -32,15 +32,17 @@ public class PlayerMovement : MonoBehaviour
     private int extraJumpsCounter = 0;
 
     private bool dash = false;
-    private bool isDashing = false;
+    [HideInInspector] public bool isDashing = false;
     private float dashCdCounter = 0;
     private float gravity;
+
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        
         gravity = rigidBody.gravityScale;
     }
 
@@ -48,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         GetMovementInputs();
-        SetAnimations();
     }
 
     private void FixedUpdate()
@@ -160,11 +161,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        facingRight = facingRight * -1;
-        transform.Rotate(0f, 180f, 0f);
+        if (canFlip)
+        {
+            facingRight = facingRight * -1;
+            transform.Rotate(0f, 180f, 0f);
+        }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         float extraHeight = 0.1f;
         RaycastHit2D rayCastHit = Physics2D.CircleCast(circleCollider.bounds.center, circleCollider.radius, Vector2.down, extraHeight, groundLayer);
@@ -174,26 +178,12 @@ public class PlayerMovement : MonoBehaviour
         return rayCastHit.collider != null;
     }
 
-    private void SetAnimations()
-    {
-        //Correr
-        animator.SetFloat("Hspeed", Mathf.Abs(horizontalSpeed));
-
-        //Salto
-        animator.SetFloat("Vspeed", rigidBody.velocity.y);
-        if (IsGrounded())
-        {
-            animator.SetBool("IsGrounded", true);
-        }
-        else
-        {
-            animator.SetBool("IsGrounded", false);
-        }
-
-    }
-
     IEnumerator Dash()
     {
+        //Desactivar ataques y habilidades hasta que se complete el dash
+        GetComponent<PlayerCombat>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
+
         dash = false;
         isDashing = true;
         rigidBody.velocity = new Vector2(dashSpeed * facingRight, 0);
@@ -202,5 +192,8 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.gravityScale = gravity;
         isDashing = false;
         dashCdCounter = dashCooldown;
+
+        GetComponent<PlayerCombat>().enabled = true;
+        GetComponent<Weapon>().enabled = true;
     }
 }

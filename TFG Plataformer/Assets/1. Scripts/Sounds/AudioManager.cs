@@ -12,13 +12,15 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager instance;
 
-    [Range(-80,10)]
+    [Range(-80, 10)]
     public float masterVol, effectsVol;
 
     public Slider masterSlider, effectSlider;
 
-    private void Awake(){
-        if(instance == null){
+    private void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
         }
     }
@@ -43,15 +45,18 @@ public class AudioManager : MonoBehaviour
         EffectVolume();
     }
 
-    public void MasterVolume(){
+    public void MasterVolume()
+    {
         musicMixer.SetFloat("masterVolume", masterSlider.value);
     }
 
-    public void EffectVolume(){
+    public void EffectVolume()
+    {
         effectsMixer.SetFloat("effectVolume", effectSlider.value);
     }
 
-    public void PlayAudio(AudioSource audio){
+    public void PlayAudio(AudioSource audio)
+    {
         audio.Play();
     }
 }

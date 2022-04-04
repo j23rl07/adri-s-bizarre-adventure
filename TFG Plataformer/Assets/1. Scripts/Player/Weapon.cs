@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     {
         if (!pauseMenu.IsGamePaused())
         {
-            if (IInput.GetMouseButtonDown(1) & !isCasting)
+            if (Input.GetMouseButtonDown(1) & !isCasting)
             {
                 Shoot();
             }

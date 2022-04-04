@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private bool dash = false;
     [HideInInspector] public bool isDashing = false;
     private float dashCdCounter = 0;
+
+    private PauseMenu pauseMenu;
     
     [HideInInspector] public float gravity;
 
@@ -42,14 +44,16 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
-        
+        pauseMenu = FindObjectOfType<PauseMenu>();
+
         gravity = rigidBody.gravityScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetMovementInputs();
+        if(!pauseMenu.IsGamePaused())
+            GetMovementInputs();
     }
 
     private void FixedUpdate()

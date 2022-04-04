@@ -25,8 +25,9 @@ public class PlayerAnimationController : MonoBehaviour
     const string PLAYER_DEATH = "Player_death";
 
     private Animator animator;
-    private string currentState;
     private Rigidbody2D rigidBody;
+    private PauseMenu pauseMenu;
+    private string currentState;
     private bool canMove = true;
     private bool firstTime = true;
     private bool overrideAnimation = false;
@@ -41,93 +42,97 @@ public class PlayerAnimationController : MonoBehaviour
 
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*JERARQUÍA (Quién puede interrumpir a quien):
-         * 1. Muerte/daño
-         * 2. Dash/Ataque/habilidad 
-         * 3. Movimiento/salto
-         */
-        if (playerScript.isDead)
+        if (!pauseMenu.IsGamePaused())
         {
-            ChangeAnimationState(PLAYER_DEATH);
-        }
-        else
-        {
-            if (playerScript.isHurt)
+            /*JERARQUÍA (Quién puede interrumpir a quien):
+             * 1. Muerte/daño
+             * 2. Dash/Ataque/habilidad 
+             * 3. Movimiento/salto
+             */
+            if (playerScript.isDead)
             {
-                ChangeAnimationState(PLAYER_HURT);
-                StopMovement(new Vector2(0, 0), false);
-                overrideAnimation = true;
-
-                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2.5f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_HURT))
-                {
-                    playerScript.isHurt = false;
-                    canMove = true;
-                }
-            }
-            else if (playerCombatScript.isAttacking)
-            {
-                if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_ATTACK)) | overrideAnimation)
-                {
-                    playerCombatScript.isAttacking = false;
-                    weaponScript.enabled = true;
-                    canMove = true;
-                    overrideAnimation = false;
-                }
-                else
-                {
-                    ChangeAnimationState(PLAYER_ATTACK);
-                    weaponScript.enabled = false;
-                    StopMovement(new Vector2(0, 0), true);
-                }
-
-            }
-            else if (weaponScript.isCasting)
-            {
-                if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_CAST)) | overrideAnimation)
-                {
-                    weaponScript.isCasting = false;
-                    playerCombatScript.enabled = true;
-                    overrideAnimation = false;
-                }
-                else
-                {
-                    ChangeAnimationState(PLAYER_CAST);
-                    playerCombatScript.enabled = false;
-                }
-            }
-            else if (playerMovementScript.isDashing)
-            {
-                ChangeAnimationState(PLAYER_DASH);
+                ChangeAnimationState(PLAYER_DEATH);
             }
             else
             {
-                if (playerMovementScript.IsGrounded())
+                if (playerScript.isHurt)
                 {
-                    //Correr
-                    if (Mathf.Abs(playerMovementScript.horizontalSpeed) > 0)
+                    ChangeAnimationState(PLAYER_HURT);
+                    StopMovement(new Vector2(0, 0), false);
+                    overrideAnimation = true;
+
+                    if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2.5f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_HURT))
                     {
-                        ChangeAnimationState(PLAYER_RUN);
+                        playerScript.isHurt = false;
+                        canMove = true;
+                    }
+                }
+                else if (playerCombatScript.isAttacking)
+                {
+                    if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_ATTACK)) | overrideAnimation)
+                    {
+                        playerCombatScript.isAttacking = false;
+                        weaponScript.enabled = true;
+                        canMove = true;
+                        overrideAnimation = false;
                     }
                     else
                     {
-                        ChangeAnimationState(PLAYER_IDLE);
+                        ChangeAnimationState(PLAYER_ATTACK);
+                        weaponScript.enabled = false;
+                        StopMovement(new Vector2(0, 0), true);
                     }
+
+                }
+                else if (weaponScript.isCasting)
+                {
+                    if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_CAST)) | overrideAnimation)
+                    {
+                        weaponScript.isCasting = false;
+                        playerCombatScript.enabled = true;
+                        overrideAnimation = false;
+                    }
+                    else
+                    {
+                        ChangeAnimationState(PLAYER_CAST);
+                        playerCombatScript.enabled = false;
+                    }
+                }
+                else if (playerMovementScript.isDashing)
+                {
+                    ChangeAnimationState(PLAYER_DASH);
                 }
                 else
                 {
-                    //Salto
-                    if (rigidBody.velocity.y >= 0)
+                    if (playerMovementScript.IsGrounded())
                     {
-                        ChangeAnimationState(PLAYER_JUMP);
+                        //Correr
+                        if (Mathf.Abs(playerMovementScript.horizontalSpeed) > 0)
+                        {
+                            ChangeAnimationState(PLAYER_RUN);
+                        }
+                        else
+                        {
+                            ChangeAnimationState(PLAYER_IDLE);
+                        }
                     }
                     else
                     {
-                        ChangeAnimationState(PLAYER_FALL);
+                        //Salto
+                        if (rigidBody.velocity.y >= 0)
+                        {
+                            ChangeAnimationState(PLAYER_JUMP);
+                        }
+                        else
+                        {
+                            ChangeAnimationState(PLAYER_FALL);
+                        }
                     }
                 }
             }

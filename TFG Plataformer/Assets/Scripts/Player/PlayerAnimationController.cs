@@ -5,28 +5,40 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     //Scripts
-    private PlayerMovement playerMovement;
-    private PlayerCombat playerCombat;
+    private PlayerMovement playerMovementScript;
+    private PlayerCombat playerCombatScript;
+    private Player playerScript;
+    private Weapon weaponScript;
 
-    private Animator animator;
-    private string currentState;
-    private Rigidbody2D rigidBody;
-
-    //Movimiento
+    //Animaciones
+    //  Movimiento
     const string PLAYER_IDLE = "Player_idle";
     const string PLAYER_RUN = "Player_run";
     const string PLAYER_JUMP = "Player_jump";
     const string PLAYER_FALL = "Player_fall";
     const string PLAYER_DASH = "Player_dash";
 
-    //Combate
+    //  Combate
     const string PLAYER_ATTACK = "Player_attack";
+    const string PLAYER_HURT = "Player_hurt";
+    const string PLAYER_CAST = "Player_cast";
+    const string PLAYER_DEATH = "Player_death";
+
+    private Animator animator;
+    private string currentState;
+    private Rigidbody2D rigidBody;
+    private bool canMove = true;
+    private bool firstTime = true;
+    private bool overrideAnimation = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();
-        playerCombat = GetComponent<PlayerCombat>();
+        playerMovementScript = GetComponent<PlayerMovement>();
+        playerCombatScript = GetComponent<PlayerCombat>();
+        playerScript = GetComponent<Player>();
+        weaponScript = GetComponent<Weapon>();
+
         animator = GetComponent<Animator>();
         rigidBody = GetComponent<Rigidbody2D>();
     }
@@ -34,54 +46,89 @@ public class PlayerAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*JERARQUÍA:
-         * 1. Muerte
-         * 2. Daño
-         * 3. Dash
-         * 4. Ataque/habilidad
-         * 5. Movimiento/salto
+        /*JERARQUÍA (Quién puede interrumpir a quien):
+         * 1. Muerte/daño
+         * 2. Dash/Ataque/habilidad 
+         * 3. Movimiento/salto
          */
-
-        //if()
-
-        if (playerMovement.isDashing)
+        if (playerScript.isDead)
         {
-            ChangeAnimationState(PLAYER_DASH);
-        }
-        else if (playerCombat.attack)
-        {
-            ChangeAnimationState(PLAYER_ATTACK);
-
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_ATTACK))
-            {
-                playerCombat.attack = false;
-            }
-
+            ChangeAnimationState(PLAYER_DEATH);
         }
         else
         {
-            if (playerMovement.IsGrounded())
+            if (playerScript.isHurt)
             {
-                //Correr
-                if (Mathf.Abs(playerMovement.horizontalSpeed) > 0)
+                ChangeAnimationState(PLAYER_HURT);
+                StopMovement(new Vector2(0, 0), false);
+                overrideAnimation = true;
+
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2.5f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_HURT))
                 {
-                    ChangeAnimationState(PLAYER_RUN);
+                    playerScript.isHurt = false;
+                    canMove = true;
+                }
+            }
+            else if (playerCombatScript.isAttacking)
+            {
+                if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_ATTACK)) | overrideAnimation)
+                {
+                    playerCombatScript.isAttacking = false;
+                    weaponScript.enabled = true;
+                    canMove = true;
+                    overrideAnimation = false;
                 }
                 else
                 {
-                    ChangeAnimationState(PLAYER_IDLE);
+                    ChangeAnimationState(PLAYER_ATTACK);
+                    weaponScript.enabled = false;
+                    StopMovement(new Vector2(0, 0), true);
                 }
+
+            }
+            else if (weaponScript.isCasting)
+            {
+                if ((animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_CAST)) | overrideAnimation)
+                {
+                    weaponScript.isCasting = false;
+                    playerCombatScript.enabled = true;
+                    overrideAnimation = false;
+                }
+                else
+                {
+                    ChangeAnimationState(PLAYER_CAST);
+                    playerCombatScript.enabled = false;
+                }
+            }
+            else if (playerMovementScript.isDashing)
+            {
+                ChangeAnimationState(PLAYER_DASH);
             }
             else
             {
-                //Salto
-                if (rigidBody.velocity.y >= 0)
+                if (playerMovementScript.IsGrounded())
                 {
-                    ChangeAnimationState(PLAYER_JUMP);
+                    //Correr
+                    if (Mathf.Abs(playerMovementScript.horizontalSpeed) > 0)
+                    {
+                        ChangeAnimationState(PLAYER_RUN);
+                    }
+                    else
+                    {
+                        ChangeAnimationState(PLAYER_IDLE);
+                    }
                 }
                 else
                 {
-                    ChangeAnimationState(PLAYER_FALL);
+                    //Salto
+                    if (rigidBody.velocity.y >= 0)
+                    {
+                        ChangeAnimationState(PLAYER_JUMP);
+                    }
+                    else
+                    {
+                        ChangeAnimationState(PLAYER_FALL);
+                    }
                 }
             }
         }
@@ -97,5 +144,32 @@ public class PlayerAnimationController : MonoBehaviour
 
         //cambiar el estado actual al de la nueva animacion
         currentState = newState;
+    }
+
+    private IEnumerator StopMovementRoutine(Vector2 movement, bool stopGravity)
+    {
+        canMove = false;
+        playerMovementScript.enabled = false;
+        rigidBody.velocity = movement;
+        if (stopGravity)
+        {
+            rigidBody.gravityScale = 0;
+        }
+        while (!canMove)
+        {
+            yield return null;
+        }
+        rigidBody.gravityScale = playerMovementScript.gravity;
+        playerMovementScript.enabled = true;
+        firstTime = true;
+    }
+
+    private void StopMovement(Vector2 movement, bool stopGravity)
+    {
+        if (firstTime)
+        {
+            StartCoroutine(StopMovementRoutine(movement, stopGravity));
+            firstTime = false;
+        }
     }
 }

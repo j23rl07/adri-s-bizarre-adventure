@@ -14,18 +14,8 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
-    private PlayerMovement playerMovement;
-    private Rigidbody2D rigidBody;
-    private float gravity;
-    [HideInInspector] public bool attack = false;
+    [HideInInspector] public bool isAttacking = false;
 
-    private void Start()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-        rigidBody = GetComponent<Rigidbody2D>();
-
-        gravity = rigidBody.gravityScale;
-    }
 
     // Update is called once per frame
     void Update()
@@ -43,9 +33,7 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         //Play an attack animation
-        attack = true;
-        //Stop movement
-        StartCoroutine(stopMovement());
+        isAttacking = true;
         //Detect enemis in range of attack
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
         //Damage them
@@ -66,16 +54,5 @@ public class PlayerCombat : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    IEnumerator stopMovement()
-    {
-        playerMovement.enabled = false;
-        rigidBody.velocity = new Vector2(0, 0);
-        rigidBody.gravityScale = 0;
-        while (attack)
-        {
-            yield return null;
-        }
-        playerMovement.enabled = true;
-        rigidBody.gravityScale = gravity;
-    }
+    
 }

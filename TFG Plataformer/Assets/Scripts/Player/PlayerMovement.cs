@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour
     private bool dash = false;
     [HideInInspector] public bool isDashing = false;
     private float dashCdCounter = 0;
-    private float gravity;
-
+    
+    [HideInInspector] public float gravity;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetMovement();
+            SetMovement();
     }
 
 
@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
         return rayCastHit.collider != null;
     }
 
-    IEnumerator Dash()
+    private IEnumerator Dash()
     {
         //Desactivar ataques y habilidades hasta que se complete el dash
         GetComponent<PlayerCombat>().enabled = false;

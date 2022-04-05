@@ -755,7 +755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1041638322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -809,8 +809,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "X ATAQUE MELEE\nC HABILIDAD 1\nFLECHAS MOVERSE\nQ SUMA POCION\nP SUMA
-    MONEDA\nH HACERSE DA\xD1O"
+  m_Text: "Raton izq    ATAQUE MELEE\nRaton dcha    HABILIDAD 1\nFLECHAS/AD    MOVERSE\nQ   
+    SUMA POCION\nP    SUMA MONEDA\nH    HACERSE DA\xD1O"
 --- !u!222 &1041638324
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4579,6 +4579,8 @@ MonoBehaviour:
   invulDuration: 1
   nFlashes: 3
   animator: {fileID: 2736275026930957114}
+  isHurt: 0
+  isDead: 0
 --- !u!4 &2736275026930957107
 Transform:
   m_ObjectHideFlags: 0
@@ -4587,7 +4589,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2736275026930957112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -60.21, y: -0.78, z: 0}
+  m_LocalPosition: {x: -60.86, y: -0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4614,6 +4616,7 @@ MonoBehaviour:
   firePoint: {fileID: 2736275027413493640}
   bulletPrefab: {fileID: 9146214290917676854, guid: 1c08755c903bd654e91e04d269125a92, type: 3}
   animator: {fileID: 2736275026930957114}
+  isCasting: 0
 --- !u!114 &2736275026930957109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4647,6 +4650,7 @@ GameObject:
   - component: {fileID: 2736275026930957109}
   - component: {fileID: 2736275026930957108}
   - component: {fileID: 2736275026930957065}
+  - component: {fileID: 2736275026930957121}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -4693,7 +4697,8 @@ MonoBehaviour:
     m_Bits: 512
   attackDamage: 40
   attackRange: 0.5
-  attackRate: 2
+  attackRate: 2.1
+  isAttacking: 0
 --- !u!58 &2736275026930957116
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4769,7 +4774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deec611fc4a5c67468cdd53cad189506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2736275026930957114}
   moveSpeed: 10
   jumpForce: 15.5
   extraJumps: 1
@@ -4777,6 +4781,25 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  dashSpeed: 25
+  dashLength: 0.22
+  dashCooldown: 0.5
+  horizontalSpeed: 0
+  canFlip: 1
+  isDashing: 0
+  gravity: 0
+--- !u!114 &2736275026930957121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2736275026930957112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 105eee2fcdda91141bf3f7b07498a494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2736275027413493640
 Transform:
   m_ObjectHideFlags: 0

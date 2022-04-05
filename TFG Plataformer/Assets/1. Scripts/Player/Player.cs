@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     private Weapon cast;
     private Rigidbody2D rb2d;
 
-
+    [HideInInspector] public bool isHurt = false;
+    [HideInInspector] public bool isDead = false;
 
 
     // Start is called before the first frame update
@@ -59,8 +60,7 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        
-        animator.SetTrigger("Hurt");
+        isHurt = true;
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         StartCoroutine(invulnerability());
@@ -68,8 +68,7 @@ public class Player : MonoBehaviour
         if(currentHealth <= 0)
         {
             GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<CharacterController2D>().enabled = false;
-            animator.SetBool("IsDead",true);
+            isDead = true;
             GameObject.Destroy(gameObject, 2);
         }
     }

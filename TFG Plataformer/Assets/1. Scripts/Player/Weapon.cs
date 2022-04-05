@@ -10,6 +10,8 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Animator animator;
 
+    [HideInInspector] public bool isCasting = false;
+
     void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
@@ -19,7 +21,7 @@ public class Weapon : MonoBehaviour
     {
         if (!pauseMenu.IsGamePaused())
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetMouseButtonDown(1) & !isCasting)
             {
                 Shoot();
             }
@@ -28,7 +30,7 @@ public class Weapon : MonoBehaviour
 
     void Shoot()
     {
-        animator.SetTrigger("cast");
+        isCasting = true;
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
     }
 }

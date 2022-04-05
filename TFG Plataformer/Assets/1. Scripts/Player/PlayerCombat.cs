@@ -15,11 +15,12 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
+    [HideInInspector] public bool isAttacking = false;
+
     void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
     }
-
 
     // Update is called once per frame
     void Update()
@@ -28,7 +29,7 @@ public class PlayerCombat : MonoBehaviour
         {
             if (Time.time >= nextAttackTime)
             {
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetMouseButtonDown(0))
                 {
                     Attack();
                     nextAttackTime = Time.time + 1f / attackRate;
@@ -40,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
     void Attack()
     {
         //Play an attack animation
-        animator.SetTrigger("Attack");
+        isAttacking = true;
         //haz sonido
         AudioManager.instance.PlayAudio(AudioManager.instance.MissSword);
         //Detect enemis in range of attack
@@ -62,4 +63,6 @@ public class PlayerCombat : MonoBehaviour
             return;
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
+    
 }

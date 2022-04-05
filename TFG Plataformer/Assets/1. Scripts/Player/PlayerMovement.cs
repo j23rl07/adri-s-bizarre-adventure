@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10;
     [Header("Jump")]
@@ -12,11 +11,17 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private float extraJumpsForce = 12;
     [SerializeField] private LayerMask groundLayer;
+    [Header("Dash")]
+    [SerializeField] private float dashSpeed = 25f;
+    [SerializeField] private float dashLength = .22f;
+    [SerializeField] private float dashCooldown = .5f;
 
     private Rigidbody2D rigidBody;
     private CircleCollider2D circleCollider;
-    private bool facingRight = true;
-    private float horizontalSpeed = 0;
+    private int facingRight = 1;
+    [HideInInspector] public float horizontalSpeed = 0;
+    [HideInInspector] public bool canFlip = true;
+
     private bool jump = false;
     private bool airJump = false;
     private bool cancelJump = false;
@@ -26,58 +31,76 @@ public class PlayerMovement : MonoBehaviour
     private float jumpBufferCounter = 0;
     private int extraJumpsCounter = 0;
 
+    private bool dash = false;
+    [HideInInspector] public bool isDashing = false;
+    private float dashCdCounter = 0;
+
+    private PauseMenu pauseMenu;
+    
+    [HideInInspector] public float gravity;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
+
+        gravity = rigidBody.gravityScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetMovementInputs();
-        SetAnimations();
+        if(!pauseMenu.IsGamePaused())
+            GetMovementInputs();
     }
 
     private void FixedUpdate()
     {
-        SetMovement();
+            SetMovement();
     }
 
 
     private void SetMovement()
     {
-        //Movimiento horizontal
-        rigidBody.velocity = new Vector2(horizontalSpeed, rigidBody.velocity.y);
+        if (dash){
+            StartCoroutine(Dash());
+        }
+        if(!isDashing)
+        {
+            //Movimiento horizontal
+            rigidBody.velocity = new Vector2(horizontalSpeed, rigidBody.velocity.y);
 
-        //Salto
-        //Si la tecla se mantiene presionada se salta mas alto que si se suelta
-        if (jump)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
-            jump = false;
-        }
-        else if (airJump)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
-            airJump = false;
-        }
-        if(cancelJump & rigidBody.velocity.y > 0f)
-        {
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
-            cancelJump = false;
+            //Salto
+            //Si la tecla se mantiene presionada se salta mas alto que si se suelta
+            if (jump)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+                jump = false;
+            }
+            else if (airJump)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
+                airJump = false;
+            }
+            if(cancelJump & rigidBody.velocity.y > 0f)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
+                cancelJump = false;
+            }
+
+            //Girar el modelo si cambia de direccion
+            if (horizontalSpeed > 0 && facingRight == -1)
+            {
+                Flip();
+            }
+            else if (horizontalSpeed < 0 && facingRight == 1)
+            {
+                Flip();
+            }
         }
 
-        //Girar el modelo si cambia de direccion
-        if (horizontalSpeed > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (horizontalSpeed < 0 && facingRight)
-        {
-            Flip();
-        }
     }
 
     private void GetMovementInputs()
@@ -128,15 +151,28 @@ public class PlayerMovement : MonoBehaviour
             //Impide que se pueda dar saltar más veces si pulsas muy rápido la tecla de nuevo
             coyoteTimeCounter = 0;
         }
+
+        //Dash
+        if ((Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift)) & dashCdCounter <= 0)
+        {
+            dash = true;
+        }
+        else if(dashCdCounter > 0)
+        {
+            dashCdCounter -= Time.deltaTime;
+        }
     }
 
     private void Flip()
     {
-        facingRight = !facingRight;
-        transform.Rotate(0f, 180f, 0f);
+        if (canFlip)
+        {
+            facingRight = facingRight * -1;
+            transform.Rotate(0f, 180f, 0f);
+        }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         float extraHeight = 0.1f;
         RaycastHit2D rayCastHit = Physics2D.CircleCast(circleCollider.bounds.center, circleCollider.radius, Vector2.down, extraHeight, groundLayer);
@@ -146,21 +182,22 @@ public class PlayerMovement : MonoBehaviour
         return rayCastHit.collider != null;
     }
 
-    private void SetAnimations()
+    private IEnumerator Dash()
     {
-        //Correr
-        animator.SetFloat("Hspeed", Mathf.Abs(horizontalSpeed));
+        //Desactivar ataques y habilidades hasta que se complete el dash
+        GetComponent<PlayerCombat>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
 
-        //Salto
-        animator.SetFloat("Vspeed", rigidBody.velocity.y);
-        if (IsGrounded())
-        {
-            animator.SetBool("IsGrounded", true);
-        }
-        else
-        {
-            animator.SetBool("IsGrounded", false);
-        }
+        dash = false;
+        isDashing = true;
+        rigidBody.velocity = new Vector2(dashSpeed * facingRight, 0);
+        rigidBody.gravityScale = 0;
+        yield return new WaitForSeconds(dashLength);
+        rigidBody.gravityScale = gravity;
+        isDashing = false;
+        dashCdCounter = dashCooldown;
 
+        GetComponent<PlayerCombat>().enabled = true;
+        GetComponent<Weapon>().enabled = true;
     }
 }

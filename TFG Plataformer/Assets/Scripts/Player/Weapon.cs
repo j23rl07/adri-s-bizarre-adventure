@@ -36,10 +36,17 @@ public class Weapon : MonoBehaviour {
     public GameObject[] prefabs;
     private int i = 1;
     public Player player;
+    private PauseMenu pauseMenu;
+    [HideInInspector] public bool isCasting = false;
 
+    void Start()
+    {
+        pauseMenu = FindObjectOfType<PauseMenu>();
+    }
 
     void Shoot()
     {
+        isCasting = true;
         animator.SetTrigger("cast");
         if (bulletPrefab.name == "Cuchilla folio")
         {
@@ -85,15 +92,16 @@ public class Weapon : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Shoot();
+        if (!pauseMenu.IsGamePaused()) { 
+            if (Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
+            if (Input.GetKeyDown("v"))
+            {
+                changeSkill();
+            }
         }
-        if (Input.GetKeyDown("v"))
-        {
-            changeSkill();
-        }
-
     }
 
     void changeSkill()

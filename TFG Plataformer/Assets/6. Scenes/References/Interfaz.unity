@@ -4620,14 +4620,7 @@ MonoBehaviour:
   cfBottomFirePoint: {fileID: 6223063636310002992}
   bulletPrefab: {fileID: 9146214290917676854, guid: 1c08755c903bd654e91e04d269125a92, type: 3}
   animator: {fileID: 2736275026930957114}
-<<<<<<< HEAD:TFG Plataformer/Assets/Scenes/References/Interfaz.unity
-  prefabs:
-  - {fileID: 9146214290917676854, guid: 1c08755c903bd654e91e04d269125a92, type: 3}
-  - {fileID: 8988475175282237381, guid: 7923c3d134ddefe41ab84149d60b36e9, type: 3}
-  player: {fileID: 2736275026930957106}
-=======
   isCasting: 0
->>>>>>> origin/develop:TFG Plataformer/Assets/6. Scenes/References/Interfaz.unity
 --- !u!114 &2736275026930957109
 MonoBehaviour:
   m_ObjectHideFlags: 0

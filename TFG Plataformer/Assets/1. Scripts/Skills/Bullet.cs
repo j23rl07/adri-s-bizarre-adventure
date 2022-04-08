@@ -9,12 +9,24 @@ public class Bullet : MonoBehaviour
     public int damage = 40;
     public GameObject impactEffect;
 
+
     // Start is called before the first frame update
     void Start()
     {
         rb.velocity = transform.right * speed;
         Destroy(gameObject, 3);
     }
+
+    void OnEnable()
+    {
+        GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
+
+        foreach (GameObject obj in otherObjects)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+    }
+
 
     void OnTriggerEnter2D(Collider2D enemy)
     {

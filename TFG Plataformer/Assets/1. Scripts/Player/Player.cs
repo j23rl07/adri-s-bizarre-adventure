@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public int enemyDamage = 20;
 
 
+    [HideInInspector] public bool isHurt = false;
+    [HideInInspector] public bool isDead = false;
 
 
     // Start is called before the first frame update
@@ -62,8 +64,7 @@ public class Player : MonoBehaviour
     
     public void TakeDamage(int damage)
     {
-        
-        animator.SetTrigger("Hurt");
+        isHurt = true;
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         StartCoroutine(invulnerability());
@@ -71,8 +72,7 @@ public class Player : MonoBehaviour
         if(currentHealth <= 0)
         {
             GetComponent<PlayerMovement>().enabled = false;
-            GetComponent<CharacterController2D>().enabled = false;
-            animator.SetBool("IsDead",true);
+            isDead = true;
             GameObject.Destroy(gameObject, 2);
         }
     }
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void useMana(int manaUse)
+    public void useMana(int manaUse)
     {
         if(manaUse <= currentMana) {
             cast.enabled = cast.enabled;

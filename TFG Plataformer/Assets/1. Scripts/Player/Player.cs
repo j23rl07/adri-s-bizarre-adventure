@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void useMana(int manaUse)
+    public void useMana(int manaUse)
     {
         if(manaUse <= currentMana) {
             cast.enabled = cast.enabled;

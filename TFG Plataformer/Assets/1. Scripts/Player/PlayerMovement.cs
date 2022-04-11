@@ -15,6 +15,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private float dashLength = .22f;
     [SerializeField] private float dashCooldown = .5f;
+    [Header("WallJump")]
+    [SerializeField] private float wallJumpForceX = 15.5f;
+    [SerializeField] private float wallJumpForceY = 15.5f;
+    [SerializeField] private float wallJumpTime = 0.2f;
+    [SerializeField] private float wallSlideSpeed = 0.3f;
+    [SerializeField] private float wallDistance = 0.5f;
+    private bool isWallSliding = false;
+    RaycastHit2D WallCheckHit;
+    private float jumpTime;
 
     private Rigidbody2D rigidBody;
     private CircleCollider2D circleCollider;
@@ -25,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private bool jump = false;
     private bool airJump = false;
     private bool cancelJump = false;
+    private bool wallJump = false;
     private float coyoteTime = 0.07f;
     private float coyoteTimeCounter = 0;
     private float jumpBufferTime = 0.07f;
@@ -62,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void SetMovement()
+    private void SetMovement()//-------------crear variable walljump -> 
     {
         if (dash){
             StartCoroutine(Dash());
@@ -78,6 +88,20 @@ public class PlayerMovement : MonoBehaviour
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
                 jump = false;
+            }//---------------elseif walljump meter fuerza "impulse" en los 2 ejes
+            else if(wallJump)
+            {
+                if (facingRight == 1)
+                {
+                    rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
+                    wallJump = false;
+                }
+                else
+                {
+                    rigidBody.AddForce(new Vector2(wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
+                    wallJump = false;
+                }
+                
             }
             else if (airJump)
             {
@@ -98,6 +122,31 @@ public class PlayerMovement : MonoBehaviour
             else if (horizontalSpeed < 0 && facingRight == 1)
             {
                 Flip();
+            }
+
+            //wallJump
+            if (facingRight == 1)
+            {
+                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
+            } 
+            else
+            {
+                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
+            }
+
+            if (WallCheckHit && !IsGrounded() && horizontalSpeed != 0)
+            {
+                isWallSliding = true;
+                jumpTime = Time.time + wallJumpTime;
+            }
+            else if (jumpTime < Time.time)
+            {
+                isWallSliding = false;
+            }
+
+            if (isWallSliding)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, Mathf.Clamp(rigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
             }
         }
 
@@ -160,6 +209,11 @@ public class PlayerMovement : MonoBehaviour
         else if(dashCdCounter > 0)
         {
             dashCdCounter -= Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space) & isWallSliding)
+        {
+            wallJump = true;
         }
     }
 

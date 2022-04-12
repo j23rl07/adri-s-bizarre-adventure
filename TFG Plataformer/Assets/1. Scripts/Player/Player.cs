@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
 
     [Header("Mana")]
     public int maxMana = 100;
-    public static int currentMana;
-    private WaitForSeconds regenTick = new WaitForSeconds(1f);
+    public int currentMana;
+    public WaitForSeconds regenTick = new WaitForSeconds(1f);
     public ManaBar manaBar;
 
     [Header("iFrames")]
@@ -23,6 +23,10 @@ public class Player : MonoBehaviour
     public Animator animator;
     private Weapon cast;
     private Rigidbody2D rb2d;
+
+    [Header("Other")]
+    public int enemyDamage = 20;
+
 
     [HideInInspector] public bool isHurt = false;
     [HideInInspector] public bool isDead = false;
@@ -48,7 +52,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(20);
+            TakeDamage(enemyDamage);
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -93,28 +97,28 @@ public class Player : MonoBehaviour
         }
     }
 
-    void useMana(int manaUse)
+    public void useMana(int manaUse)
     {
         if(manaUse <= currentMana) {
             cast.enabled = cast.enabled;
             currentMana -= manaUse;
             manaBar.SetMana(currentMana);
-            StartCoroutine(RegenMana());
+            //StartCoroutine(RegenMana());
         }else {
             cast.enabled = !cast.enabled;
         }
     }
 
-    private IEnumerator RegenMana()
-    {
-        yield return new WaitForSeconds(2);
-        while(currentMana < maxMana)
-        {
-            currentMana += maxMana / 100;
-            manaBar.SetMana(currentMana);
-            yield return regenTick;
-        }
-    }
+    //private IEnumerator RegenMana()
+    //{
+        //yield return new WaitForSeconds(2);
+        //while(currentMana < maxMana)
+        //{
+            //currentMana += maxMana / 100;
+            //manaBar.SetMana(currentMana);
+            //yield return regenTick;
+        //}
+    //}
 
     private IEnumerator invulnerability()
     {

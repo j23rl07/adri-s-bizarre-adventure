@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.X))
         {
-            useMana(20);
+            healMana(20);
         }
         
     }
@@ -97,15 +97,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void useMana(int manaUse)
+    public bool useMana(int manaUse)
     {
         if(manaUse <= currentMana) {
-            cast.enabled = cast.enabled;
             currentMana -= manaUse;
             manaBar.SetMana(currentMana);
+            return true;
             //StartCoroutine(RegenMana());
         }else {
-            cast.enabled = !cast.enabled;
+            return false;
         }
     }
 

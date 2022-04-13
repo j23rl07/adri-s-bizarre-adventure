@@ -6768,13 +6768,17 @@ MonoBehaviour:
   dashSpeed: 25
   dashLength: 0.22
   dashCooldown: 0.5
-  wallJumpForceX: 50
-  wallJumpForceY: 10
+  wallJumpForceX: 20
+  wallJumpForceY: 13
   wallJumpTime: 0.00005
   wallSlideSpeed: -1.4
   wallDistance: 0.5
+  isWallJumping: 0
+  isWallSliding: 0
+  wallJumpAirTime: 0.3
   horizontalSpeed: 0
   canFlip: 1
+  isGrounded: 0
   isDashing: 0
   gravity: 0
 --- !u!114 &2736275026930957121

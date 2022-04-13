@@ -16,12 +16,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashLength = .22f;
     [SerializeField] private float dashCooldown = .5f;
     [Header("WallJump")]
-    [SerializeField] private float wallJumpForceX = 15.5f;
-    [SerializeField] private float wallJumpForceY = 15.5f;
+    [SerializeField] private float wallJumpForceX = 20f;
+    [SerializeField] private float wallJumpForceY = 13f;
     [SerializeField] private float wallJumpTime = 0.2f;
     [SerializeField] private float wallSlideSpeed = 0.3f;
     [SerializeField] private float wallDistance = 0.5f;
+    private bool isWallJumping = false;
     private bool isWallSliding = false;
+    [SerializeField] private float wallJumpAirTime = 0.3f;
     RaycastHit2D WallCheckHit;
     private float jumpTime;
 
@@ -31,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector] public float horizontalSpeed = 0;
     [HideInInspector] public bool canFlip = true;
 
+    private bool isGrounded = false;
     private bool jump = false;
     private bool airJump = false;
     private bool cancelJump = false;
@@ -72,12 +75,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void SetMovement()//-------------crear variable walljump -> 
+    private void SetMovement()
     {
         if (dash){
             StartCoroutine(Dash());
         }
-        if(!isDashing)
+        if(!isDashing & !isWallJumping)
         {
             //Movimiento horizontal
             rigidBody.velocity = new Vector2(horizontalSpeed, rigidBody.velocity.y);
@@ -88,20 +91,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
                 jump = false;
-            }//---------------elseif walljump meter fuerza "impulse" en los 2 ejes
-            else if(wallJump)
-            {
-                if (facingRight == 1)
-                {
-                    rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
-                    wallJump = false;
-                }
-                else
-                {
-                    rigidBody.AddForce(new Vector2(wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
-                    wallJump = false;
-                }
-                
             }
             else if (airJump)
             {
@@ -125,6 +114,11 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //wallJump
+            if (wallJump)
+            {
+
+                StartCoroutine(WallJump());
+            }
             if (facingRight == 1)
             {
                 WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
@@ -157,7 +151,6 @@ public class PlayerMovement : MonoBehaviour
 
         //Movimiento horizontal
         horizontalSpeed = Input.GetAxisRaw("Horizontal") * moveSpeed;
-        
 
         //Salto
         //CoyoteTime: un margen desde que el jugador deja de tocar el suelo para que pueda saltar mejor desde bordes
@@ -165,13 +158,13 @@ public class PlayerMovement : MonoBehaviour
         {
             coyoteTimeCounter = coyoteTime;
             extraJumpsCounter = extraJumps;
-        }
+}
         else
         {
             coyoteTimeCounter -= Time.deltaTime;
 
             //Salto doble/multiple
-            if(extraJumpsCounter > 0 & Input.GetKeyDown(KeyCode.Space) & coyoteTimeCounter <= 0)
+            if(extraJumpsCounter > 0 & Input.GetKeyDown(KeyCode.Space) & coyoteTimeCounter <= 0 & !isWallJumping & !isWallSliding)
             {
                 airJump = true;
                 extraJumpsCounter -= 1;
@@ -232,8 +225,9 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D rayCastHit = Physics2D.CircleCast(circleCollider.bounds.center, circleCollider.radius, Vector2.down, extraHeight, groundLayer);
 
         //Debug.Log(rayCastHit.collider);
+        isGrounded = rayCastHit.collider != null;
 
-        return rayCastHit.collider != null;
+        return isGrounded;
     }
 
     private IEnumerator Dash()
@@ -253,5 +247,22 @@ public class PlayerMovement : MonoBehaviour
 
         GetComponent<PlayerCombat>().enabled = true;
         GetComponent<Weapon>().enabled = true;
+    }
+
+    private IEnumerator WallJump()
+    {
+        isWallJumping = true;
+        wallJump = false;
+        if (facingRight == 1)
+        {
+            rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
+        }
+        else
+        {
+            rigidBody.AddForce(new Vector2(wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
+        }
+        Flip();
+        yield return new WaitForSeconds(wallJumpAirTime);
+        isWallJumping = false;
     }
 }

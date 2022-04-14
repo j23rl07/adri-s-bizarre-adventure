@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1bafe9d8b38ab4bf9ba9db099e4d7156, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -157,8 +157,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7542881d0aec6a7428cdb1ae4c537724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 10
-  frequency: 20
-  magnitude: 1
+  bulletSpeed: 5
+  frecuencia: 20
+  magnitud: 0.5
   damage: 40
   impactEffect: {fileID: 3392708303012216590, guid: 63404f8f461c7cb4ca0766fe6f4229f3, type: 3}

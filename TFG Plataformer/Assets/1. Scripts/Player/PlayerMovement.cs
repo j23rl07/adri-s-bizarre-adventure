@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
                 WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
             }
 
-            if (WallCheckHit && !IsGrounded() && horizontalSpeed != 0 & rigidBody.velocity.y < 0)
+            if (WallCheckHit && !IsGrounded() && horizontalSpeed != 0 )
             {
                 isWallSliding = true;
                 jumpTime = Time.time + wallJumpTime;
@@ -138,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
                 isWallSliding = false;
             }
 
-            if (isWallSliding)
+            if (isWallSliding & rigidBody.velocity.y < 0)
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * wallSlideSpeed);
             }

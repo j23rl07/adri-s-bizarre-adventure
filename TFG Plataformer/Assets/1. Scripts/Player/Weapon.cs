@@ -7,28 +7,39 @@ public class Weapon : MonoBehaviour {
     [Header("FireBall FirePoints")]
 
     public Transform fbMidFirePoint;
+    public Sprite fbSprite;
 
     [Header("CuchillaFolio FirePoints")]
     public Transform cfTopFirePoint;
     public Transform cfMidFirePoint;
     public Transform cfBottomFirePoint;
+    public Sprite cfSprite;
 
     [Header("Horizontal Projectile FirePoints")]
     public Transform hpLeftFirePoint;
     public Transform hpCenterFirePoint;
     public Transform hpRightFirePoint;
+    public Sprite hpSprite;
 
     [Header("Descarga FirePoints")]
     public Transform dsLeftBottomFirePoint;
     public Transform dsRightBottomFirePoint;
     public Transform dsLeftTopFirePoint;
     public Transform dsRightTopFirePoint;
+    public Sprite dsSprite;
 
     [Header("GammaRay FirePoints")]
     public Transform bRightFirePoint;
     public Transform bLeftFirePoint;
     public Transform bTopFirePoint;
     public Transform bBottomFirePoint;
+    public Sprite grSprite;
+
+    [Header("Boomerang Options")]
+    public Sprite bSprite;
+
+    [Header("Sprite Options")]
+    public SpriteRenderer rend;
 
     [Header("Other")]
     public GameObject bulletPrefab;
@@ -56,6 +67,7 @@ public class Weapon : MonoBehaviour {
                     Instantiate(bulletPrefab, cfTopFirePoint.position, cfTopFirePoint.rotation);
                     Instantiate(bulletPrefab, cfMidFirePoint.position, cfMidFirePoint.rotation);
                     Instantiate(bulletPrefab, cfBottomFirePoint.position, cfBottomFirePoint.rotation);
+                    
                 }
             }
 
@@ -65,6 +77,7 @@ public class Weapon : MonoBehaviour {
                 {
                     isCasting = true;
                     Instantiate(bulletPrefab, fbMidFirePoint.position, fbMidFirePoint.rotation);
+                    
                 }
             }
 
@@ -76,6 +89,7 @@ public class Weapon : MonoBehaviour {
                     Instantiate(bulletPrefab, hpLeftFirePoint.position, hpLeftFirePoint.rotation);
                     Instantiate(bulletPrefab, hpCenterFirePoint.position, hpCenterFirePoint.rotation);
                     Instantiate(bulletPrefab, hpRightFirePoint.position, hpRightFirePoint.rotation);
+                    
                 }
             }
 
@@ -88,6 +102,7 @@ public class Weapon : MonoBehaviour {
                     Instantiate(bulletPrefab, dsRightBottomFirePoint.position, dsRightBottomFirePoint.rotation);
                     Instantiate(bulletPrefab, dsLeftTopFirePoint.position, dsLeftTopFirePoint.rotation);
                     Instantiate(bulletPrefab, dsRightTopFirePoint.position, dsRightTopFirePoint.rotation);
+                    
                 }
             }
 
@@ -100,6 +115,7 @@ public class Weapon : MonoBehaviour {
                     Instantiate(bulletPrefab, bLeftFirePoint.position, bLeftFirePoint.rotation);
                     Instantiate(bulletPrefab, bTopFirePoint.position, bTopFirePoint.rotation);
                     Instantiate(bulletPrefab, bBottomFirePoint.position, bBottomFirePoint.rotation);
+                    
                 }
 
             }
@@ -110,6 +126,7 @@ public class Weapon : MonoBehaviour {
                 {
                     isCasting = true;
                     Instantiate(bulletPrefab, fbMidFirePoint.position, fbMidFirePoint.rotation);
+                    
                 }
             }
         }
@@ -135,6 +152,28 @@ public class Weapon : MonoBehaviour {
         if (i == prefabs.Length)
         {
             i = 0;
+        }
+
+        switch(bulletPrefab.name)
+        {
+            case "Fireball":
+                rend.sprite = fbSprite;
+                break;
+            case "Cuchilla folio":
+                rend.sprite = cfSprite;
+                break;
+            case "HorizontalProjectile":
+                rend.sprite = hpSprite;
+                break;
+            case "Descarga":
+                rend.sprite = dsSprite;
+                break;
+            case "GammaRay":
+                rend.sprite = grSprite;
+                break;
+            case "Boomerang":
+                rend.sprite = bSprite;
+                break;
         }
     }
 }

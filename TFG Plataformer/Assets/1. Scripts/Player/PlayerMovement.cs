@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("WallJump")]
     [SerializeField] private float wallJumpForceX = 20f;
     [SerializeField] private float wallJumpForceY = 13f;
-    [SerializeField] private float wallJumpTime = 0.2f;
-    [SerializeField] private float wallSlideSpeed = 0.3f;
+    [SerializeField] private float wallJumpTime = 0.05f;
+    [SerializeField] private float wallSlideSpeed = 0.7f;
     [SerializeField] private float wallDistance = 0.5f;
     private bool isWallJumping = false;
     private bool isWallSliding = false;
@@ -128,7 +128,7 @@ public class PlayerMovement : MonoBehaviour
                 WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
             }
 
-            if (WallCheckHit && !IsGrounded() && horizontalSpeed != 0)
+            if (WallCheckHit && !IsGrounded() && horizontalSpeed != 0 & rigidBody.velocity.y < 0)
             {
                 isWallSliding = true;
                 jumpTime = Time.time + wallJumpTime;
@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (isWallSliding)
             {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, Mathf.Clamp(rigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * wallSlideSpeed);
             }
         }
 

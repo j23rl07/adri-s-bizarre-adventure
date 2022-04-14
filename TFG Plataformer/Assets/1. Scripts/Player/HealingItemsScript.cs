@@ -13,25 +13,28 @@ public class HealingItemsScript : MonoBehaviour
         {
             player.maxHealth += 20;
             player.maxMana += 20;
+            Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "EnergyF")
         {
             player.maxHealth += 10;
+            Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "ManaF")
         {
             player.maxMana += 10;
+            Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "Cookie")
         {
             player.heal(System.Convert.ToInt32(player.maxHealth * 0.1));
+            Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "Essence")
         {
             player.healMana(System.Convert.ToInt32(player.maxMana * 0.1));
+            Destroy(healingObject.gameObject);
         }
-
-        Destroy(healingObject.gameObject);
     }
 
 }

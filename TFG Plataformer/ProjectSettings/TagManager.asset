@@ -6,15 +6,23 @@ TagManager:
   tags:
   - Enemy
   - MyCoin
+  - ManaF
+  - HealthPotion
+  - ManaPotion
+  - EnergyF
+  - Aprobado
+  - Cookie
+  - Essence
+  - SilverCoin
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - Ground
-  - 
+  - wall
   - 
   - 
   - 

@@ -13,7 +13,10 @@ public class PauseMenu : MonoBehaviour
 
     public Animator settingsAnimatorA;
     public GameObject pauseMenu;
-    private bool isPaused;
+    [HideInInspector] public static bool isGamePaused;
+    [HideInInspector] public static bool isPauseMenuOn = false;
+
+    private bool wasPaused = false;
 
     void Start()
     {
@@ -33,7 +36,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
-        isPaused = false;
+        isGamePaused = false;
     }
 
     // Update is called once per frame
@@ -44,21 +47,33 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !isPaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenu.activeSelf)
         {
+            if(isGamePaused)
+            {
+                wasPaused = true;
+            }
+
+            isPauseMenuOn = true;
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
-            isPaused = true;
+            isGamePaused = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        else if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf)
         {
-            Time.timeScale = 1;
+            if (!wasPaused)
+            {
+                isGamePaused = false;
+                Time.timeScale = 1;
+            }
+
+            isPauseMenuOn = false;
             pauseMenu.SetActive(false);
-            isPaused = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            wasPaused = false;
         }
     }
     public void GoToMainMenu()
@@ -68,11 +83,11 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseOff()
     {
-        if (isPaused)
+        if (isGamePaused)
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
-            isPaused = false;
+            isGamePaused = false;
         }
     }
     public void ShowASettings()
@@ -92,6 +107,6 @@ public class PauseMenu : MonoBehaviour
 
     public bool IsGamePaused()
     {
-        return isPaused;
+        return isGamePaused;
     }
 }

@@ -40,30 +40,49 @@ public class PotionCountScript : MonoBehaviour
     {
         if (Potion.tag == "HealthPotion")
         {
-            potionNum += 1;
+            addPotion();
             Destroy(Potion.gameObject);
-            potionCountText.text = "" + potionNum;
         }
         if (Potion.tag == "ManaPotion")
         {
-            manaPotionNum += 1;
+            addManaPotion();
             Destroy(Potion.gameObject);
-            manaPotionCountText.text = "" + manaPotionNum;
         }
     }
 
     private void usePotion()
     {
-        potionNum -= 1;
-        potionCountText.text = "" + potionNum;
+        subPotion();
         player.heal(System.Convert.ToInt32(player.maxHealth * 0.35));
     }
 
     private void useManaPotion()
     {
-        manaPotionNum -= 1;
-        manaPotionCountText.text = "" + manaPotionNum;
+        subManaPotion();
         player.healMana(System.Convert.ToInt32(player.maxMana * 0.5));
     }
 
+    public void addPotion()
+    {
+        potionNum += 1;
+        potionCountText.text = "" + potionNum;
+    }
+
+    public void subPotion()
+    {
+        potionNum -= 1;
+        potionCountText.text = "" + potionNum;
+    }
+
+    public void addManaPotion()
+    {
+        manaPotionNum += 1;
+        manaPotionCountText.text = "" + manaPotionNum;
+    }
+
+    public void subManaPotion()
+    {
+        manaPotionNum -= 1;
+        manaPotionCountText.text = "" + manaPotionNum;
+    }
 }

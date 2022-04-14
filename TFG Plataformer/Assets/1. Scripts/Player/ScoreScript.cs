@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
     public Text MyScoreText;
-    private int ScoreNum;
+    [HideInInspector] public int ScoreNum;
     public int goldValue = 10;
     public int silverValue = 1;
 
@@ -22,15 +22,19 @@ public class ScoreScript : MonoBehaviour
     {
         if (Coin.tag == "MyCoin")
         {
-            ScoreNum += 10;
+            addMoney(10);
             Destroy(Coin.gameObject);
-            MyScoreText.text = "" + goldValue;
         }
         if (Coin.tag == "SilverCoin")
         {
-            ScoreNum += 1;
+            addMoney(1);
             Destroy(Coin.gameObject);
-            MyScoreText.text = "" + silverValue;
         }
+    }
+
+    public void addMoney(int ammount)
+    {
+        ScoreNum += ammount;
+        MyScoreText.text = "" + ScoreNum;
     }
 }

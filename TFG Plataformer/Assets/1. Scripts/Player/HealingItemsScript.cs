@@ -7,6 +7,15 @@ public class HealingItemsScript : MonoBehaviour
     public HealthBar healthBar;
     public Player player;
 
+    [HideInInspector] public int shopEnergyF;
+    [HideInInspector] public int shopManaF;
+
+    private void Start()
+    {
+        shopEnergyF = 0;
+        shopManaF = 0;
+    }
+
     private void OnTriggerEnter2D(Collider2D healingObject)
     {
         if (healingObject.tag == "Aprobado")
@@ -17,12 +26,12 @@ public class HealingItemsScript : MonoBehaviour
         }
         if (healingObject.tag == "EnergyF")
         {
-            player.maxHealth += 10;
+            GetEnergyFragment();
             Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "ManaF")
         {
-            player.maxMana += 10;
+            GetManaFragment();
             Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "Cookie")
@@ -37,4 +46,13 @@ public class HealingItemsScript : MonoBehaviour
         }
     }
 
+    public void GetEnergyFragment()
+    {
+        player.maxHealth += 10;
+    }
+
+    public void GetManaFragment()
+    {
+        player.maxMana += 10;
+    }
 }

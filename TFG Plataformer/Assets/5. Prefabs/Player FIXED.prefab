@@ -1285,8 +1285,8 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0
 --- !u!1 &4017893387867055846
@@ -1706,6 +1706,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyScoreText: {fileID: 4017893387494090448}
+  ScoreNum: 0
   goldValue: 10
   silverValue: 1
 --- !u!114 &4017893389135811841
@@ -1766,7 +1767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionCountText: {fileID: 4017893389303153059}
+  potionNum: 0
   manaPotionCountText: {fileID: 1313748291958238944}
+  manaPotionNum: 0
   player: {fileID: 4017893389135811847}
   healthBar: {fileID: 1313748292237716061}
 --- !u!114 &4017893389135811956

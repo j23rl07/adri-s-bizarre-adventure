@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     [Header("Health")]
     public int maxHealth = 100;
-    public static int currentHealth;
+    public int currentHealth;
     public HealthBar healthBar;
 
     [Header("Mana")]
@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
         while (kbDuration > timer)
         {
             timer += Time.deltaTime;
-            rb2d.AddForce(new Vector3(kbDir.x * -10, kbDir.y + kbPow, transform.position.z));
+            rb2d.AddForce(new Vector3(kbDir.x, kbDir.y , transform.position.z));
         }
 
         yield return 0;

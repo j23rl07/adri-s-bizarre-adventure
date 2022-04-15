@@ -265,4 +265,5 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(wallJumpAirTime);
         isWallJumping = false;
     }
+
 }

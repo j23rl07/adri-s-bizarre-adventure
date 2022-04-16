@@ -28,6 +28,17 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
         }
     }
 
+    void OnEnable()
+    {
+        GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("Projectile");
+        
+
+        foreach (GameObject obj in otherObjects)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")

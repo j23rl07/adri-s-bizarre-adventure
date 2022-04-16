@@ -146,10 +146,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  currentHealth: 0
   animator: {fileID: 4497374806654062572}
   attackCd: 1
   range: 1.53
-  damage: 2
+  damage: 5
   boxCollider: {fileID: 4497374806654062575}
   colliderDistance: 0.75
   playerLayer:

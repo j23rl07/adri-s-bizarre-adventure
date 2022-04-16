@@ -152,7 +152,7 @@ MonoBehaviour:
   animator: {fileID: 540985470811267439}
   attackCd: 1
   range: 16
-  damage: 10
+  damage: 5
   firePoint: {fileID: 4172609130719600405}
   projectiles:
   - {fileID: 3499007880607718630}

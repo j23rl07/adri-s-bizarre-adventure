@@ -14,6 +14,9 @@ TagManager:
   - Cookie
   - Essence
   - SilverCoin
+  - Spikes
+  - Projectile
+  - Boomerang
   layers:
   - Default
   - TransparentFX
@@ -23,8 +26,8 @@ TagManager:
   - UI
   - Ground
   - wall
-  - 
-  - 
+  - Player
+  - Enemies
   - 
   - 
   - 

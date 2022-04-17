@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class basicCameraController : MonoBehaviour
 {
-    public Transform target;
-    public Vector3 offset;
+    [Header("Attached")]
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector3 offset;
+    [Header("Background")]
+    [SerializeField] private GameObject background = null;
 
-    float cameraWidth;
-    float cameraHeight;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        GetComponent<Camera>().orthographicSize = 7;
+    }
+
     void FixedUpdate()
     {
         transform.position = new Vector3(target.position.x + offset.x, offset.y, offset.z);
+
+        if(background != null)
+        {
+            background.transform.position = transform.position + new Vector3(0, 0, 1);
+        }
     }
 }

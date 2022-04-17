@@ -20,8 +20,14 @@ public class Bullet : MonoBehaviour
     void OnEnable()
     {
         GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
+        GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
 
         foreach (GameObject obj in otherObjects)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+        foreach (GameObject obj in projectiles)
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }

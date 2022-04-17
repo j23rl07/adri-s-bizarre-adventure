@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour {
 
@@ -44,7 +45,7 @@ public class Weapon : MonoBehaviour {
     [Header("Other")]
     public GameObject bulletPrefab;
     public Animator animator;
-    public GameObject[] prefabs;
+    public List<GameObject> prefabs;
     private int i = 1;
     public Player player;
     private PauseMenu pauseMenu;
@@ -149,7 +150,7 @@ public class Weapon : MonoBehaviour {
     void changeSkill()
     {
         bulletPrefab = prefabs[i++];
-        if (i == prefabs.Length)
+        if (i == prefabs.Count)
         {
             i = 0;
         }

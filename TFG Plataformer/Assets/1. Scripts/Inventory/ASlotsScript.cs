@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotsScript : MonoBehaviour
+public class ASlotsScript : MonoBehaviour
 {
     public bool isUsed;
 }

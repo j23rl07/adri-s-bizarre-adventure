@@ -13,24 +13,35 @@ public class InventoryButtons : MonoBehaviour
         inventory = Inventory.instance.GetComponent<Inventory>();
     }
 
-    public void UseItem()
+    public void UseItemT()
     {
-        if(GetComponent<ItemsUse>().itemType == ItemType.SKILL)
+        
+        if (transform.GetChild(0).gameObject.activeSelf)
         {
-            if (transform.GetChild(0).gameObject.activeSelf)
-            {
-                transform.GetChild(0).gameObject.SetActive(false);
-            }
-            else
-            {
-                transform.GetChild(0).gameObject.SetActive(true);
-            }
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
         }
         else
         {
-            inventory.useInventoriItems(gameObject.name);
-        }
+            inventory.CheckTrincketEInventory(GetComponent<ItemsUse>().itemType);
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(1).transform.position = new Vector2(transform.parent.transform.parent.position.x + 777, transform.parent.transform.parent.position.y);
+        }      
+    }
 
-        
+    public void UseItemH()
+    {
+
+        if (transform.GetChild(0).gameObject.activeSelf)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
+        else
+        {
+            inventory.CheckAEInventory(GetComponent<ItemsUse>().itemType);
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(0).transform.position = new Vector2(transform.parent.transform.parent.position.x + 774, transform.parent.transform.parent.position.y);
+        }
     }
 }

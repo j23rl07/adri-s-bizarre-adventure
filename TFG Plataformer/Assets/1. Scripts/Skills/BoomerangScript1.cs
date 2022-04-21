@@ -51,7 +51,7 @@ public class BoomerangScript1 : MonoBehaviour
     {
         if (target.CompareTag("Player"))
         {
-            inventory.CheckSlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
+            inventory.CheckTSlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
         }
 
         if (target.GetComponent<EnemyHealth>() != null & canTakeDamage)

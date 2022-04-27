@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 10;
     [Header("Jump")]
-    [SerializeField] private float jumpForce = 15.5f;
+    [SerializeField] public float jumpForce = 15.5f;
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private float extraJumpsForce = 12;
     [SerializeField] private LayerMask groundLayer;

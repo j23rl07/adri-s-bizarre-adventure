@@ -7,6 +7,7 @@ public class WaterScript : MonoBehaviour
     public Player player;
     private Rigidbody2D rb;
     private SpriteRenderer spr;
+    public PlayerMovement pm;
 
     void Start()
     {
@@ -19,8 +20,9 @@ public class WaterScript : MonoBehaviour
         if (collision.tag == "Player")
         {
             spr.color = Color.blue;
-            rb.mass = 0.8;
-            rb.gravityScale = 8;
+            rb.mass = 0.8f;
+            rb.gravityScale = 1.2f;
+            pm.jumpForce = 10;
         }
     }
 
@@ -32,6 +34,7 @@ public class WaterScript : MonoBehaviour
             spr.color = Color.white;
             rb.mass = 1;
             rb.gravityScale = 3;
+            pm.jumpForce = 15.5f;
         }
     }
 }

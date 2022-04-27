@@ -17,6 +17,19 @@ public class SpikeHead : EnemyDamage
 
     private void OnEnable()
     {
+        GameObject[] goldenCoin = GameObject.FindGameObjectsWithTag("MyCoin");
+        GameObject[] silverCoin = GameObject.FindGameObjectsWithTag("SilverCoin");
+
+
+        foreach (GameObject obj in goldenCoin)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+        foreach (GameObject obj in silverCoin)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
         Stop();
     }
 

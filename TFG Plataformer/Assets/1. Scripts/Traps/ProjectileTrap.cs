@@ -14,8 +14,21 @@ public class ProjectileTrap : MonoBehaviour
         timerCd = 0;
 
         projectiles[FindFireball()].transform.position = firePointRef.position;
-        projectiles[FindFireball()].GetComponent<EnemyProjectile>().triggerProjectile();
+        if (projectiles[FindFireball()].GetComponent<SinEnemyProjectile>() != null)
+        {
+            projectiles[FindFireball()].GetComponent<SinEnemyProjectile>().triggerProjectile();
+        } else if (projectiles[FindFireball()].GetComponent<EnemyProjectile>() != null)
+        {
+            projectiles[FindFireball()].GetComponent<EnemyProjectile>().triggerProjectile();
+        }
+        else
+        {
+            projectiles[FindFireball()].GetComponent<ArcEnemyProjectile>().triggerProjectile();
+        }
+        
+
     }
+
     private int FindFireball()
     {
         for(int i=0; i < projectiles.Length; i++)

@@ -21,7 +21,15 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            if(GetComponent<SinEnemyProjectile>() != null)
+            {
+                Deactivate();
+            }
+            else
+            {
+                Die();
+            }
+            
         }
 
         void Die()
@@ -56,5 +64,10 @@ public class EnemyHealth : MonoBehaviour
             }
             GameObject.Destroy(gameObject);
         }
+
+        void Deactivate()
+        {
+            gameObject.SetActive(false);
+        }   
     }
 }

@@ -17,6 +17,9 @@ TagManager:
   - Spikes
   - Projectile
   - Boomerang
+  - Lava
+  - Map
+  - CuchillaFolio
   layers:
   - Default
   - TransparentFX

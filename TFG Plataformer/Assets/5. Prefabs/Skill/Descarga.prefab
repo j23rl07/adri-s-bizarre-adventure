@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4427151574489351134}
   - component: {fileID: 1282981056033138592}
   - component: {fileID: 5621906291346132655}
+  - component: {fileID: 5917657845569147524}
   - component: {fileID: 7170265694415149345}
   - component: {fileID: 5236893706325301956}
   - component: {fileID: 6527575550187705969}
@@ -109,7 +110,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &7170265694415149345
+--- !u!58 &5917657845569147524
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +120,23 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.12617558, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.09426225
+--- !u!58 &7170265694415149345
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736671212006644589}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.2508499, y: 0}
@@ -137,10 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f483a97ed7061bb4a810314e9e1ee552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
   rb: {fileID: 5621906291346132655}
   damage: 40
   impactEffect: {fileID: 3392708303012216590, guid: 63404f8f461c7cb4ca0766fe6f4229f3, type: 3}
+  allowedLayerCollisions: 060000000700000009000000
 --- !u!95 &6527575550187705969
 Animator:
   serializedVersion: 4

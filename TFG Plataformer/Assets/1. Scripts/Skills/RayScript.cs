@@ -14,12 +14,14 @@ public class RayScript : MonoBehaviour
     [Header("Bullet")]
     public int damage = 40;
     public GameObject impactEffect;
-    [HideInInspector] public List<Collider2D> allowedCollisions;
+    [HideInInspector] public List<int> allowedLayerCollisions;
+
+    private readonly int groundLayer = 6;
 
     void Start()
     {
         pos = transform.position;
-        DestroyObject(gameObject, 5);
+        Destroy(gameObject, 5);
         eje = transform.right;  
 
     }
@@ -33,7 +35,7 @@ public class RayScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (allowedCollisions.Contains(collision))
+        if (allowedLayerCollisions.Contains(collision.gameObject.layer) && collision.gameObject.layer != groundLayer)
         {
             if (collision.GetComponent<EnemyHealth>() != null)
             {

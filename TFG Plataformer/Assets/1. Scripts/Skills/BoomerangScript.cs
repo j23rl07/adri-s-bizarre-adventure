@@ -12,7 +12,7 @@ public class BoomerangScript : MonoBehaviour
     private bool returning = false;
     private bool canTakeDamage = true;
     private GameObject player;
-    [HideInInspector] public List<Collider2D> allowedCollisions;
+    [HideInInspector] public List<int> allowedLayerCollisions;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +44,7 @@ public class BoomerangScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D target)
     {
-        if (allowedCollisions.Contains(target))
+        if (allowedLayerCollisions.Contains(target.gameObject.layer))
         {
             if (target.GetComponent<EnemyHealth>() != null & canTakeDamage)
             {
@@ -55,10 +55,11 @@ public class BoomerangScript : MonoBehaviour
             {
                 rb.velocity = new Vector2(-pullForce, 0);
             }
-            if (target.tag == "Player" & returning)
-            {
-                Destroy(gameObject);
-            }
+        }
+
+        if (target.CompareTag("Player") & returning)
+        {
+            Destroy(gameObject);
         }
     }
 

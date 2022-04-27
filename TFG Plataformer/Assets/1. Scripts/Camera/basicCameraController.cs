@@ -35,7 +35,7 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private GameObject background = null;
 
 
-    private void Start()
+    void Start()
     {
         GetComponent<Camera>().orthographicSize = 7;
         levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, -10);

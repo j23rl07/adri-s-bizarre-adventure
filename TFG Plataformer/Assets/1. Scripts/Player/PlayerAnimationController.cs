@@ -57,7 +57,16 @@ public class PlayerAnimationController : MonoBehaviour
              */
             if (playerScript.isDead)
             {
+                playerScript.isHurt = false;
                 ChangeAnimationState(PLAYER_DEATH);
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_DEATH))
+                {
+                    if (GetComponent<SpriteRenderer>().enabled)
+                    {
+                        GetComponent<SpriteRenderer>().enabled = false;
+                        playerScript.canRespawn = true;
+                    }
+                }
             }
             else
             {

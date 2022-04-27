@@ -190,6 +190,7 @@ public class Weapon : MonoBehaviour {
                 bulletPrefab.GetComponent<CuchillaFolioScript>().allowedLayerCollisions = allowedLayerCollisions;
                 break;
             case "Boomerang":
+                bulletPrefab.GetComponent<BoomerangScript>().allowedLayerCollisions = allowedLayerCollisions;
                 break;
             default:
                 bulletPrefab.GetComponent<Bullet>().allowedLayerCollisions = allowedLayerCollisions;

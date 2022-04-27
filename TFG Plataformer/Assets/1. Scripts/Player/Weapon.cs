@@ -46,6 +46,7 @@ public class Weapon : MonoBehaviour {
     public GameObject bulletPrefab;
     public Animator animator;
     public List<GameObject> prefabs;
+    public List<Collider2D> allowdCollisions;
     private int i = 1;
     public Player player;
     private PauseMenu pauseMenu;
@@ -54,6 +55,7 @@ public class Weapon : MonoBehaviour {
     void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
+        bulletPrefab.GetComponent<Bullet>().allowedCollisions = allowdCollisions;
     }
 
     void Shoot()
@@ -150,6 +152,8 @@ public class Weapon : MonoBehaviour {
     void changeSkill()
     {
         bulletPrefab = prefabs[i++];
+        
+
         if (i == prefabs.Count)
         {
             i = 0;
@@ -174,6 +178,18 @@ public class Weapon : MonoBehaviour {
                 break;
             case "Boomerang":
                 rend.sprite = bSprite;
+                break;
+        }
+
+        switch (bulletPrefab.name)
+        {
+            case "GammaRay":
+                bulletPrefab.GetComponent<RayScript>().allowedCollisions = allowdCollisions;
+                break;
+            case "Boomerang":
+                break;
+            default:
+                bulletPrefab.GetComponent<Bullet>().allowedCollisions = allowdCollisions;
                 break;
         }
     }

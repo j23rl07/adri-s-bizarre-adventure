@@ -14,6 +14,7 @@ public class RayScript : MonoBehaviour
     [Header("Bullet")]
     public int damage = 40;
     public GameObject impactEffect;
+    [HideInInspector] public List<Collider2D> allowedCollisions;
 
     void Start()
     {
@@ -30,25 +31,17 @@ public class RayScript : MonoBehaviour
         transform.position = pos + eje * Mathf.Sin(Time.time * frecuencia) * magnitud;
     }
 
-    void OnEnable()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
-
-        foreach (GameObject obj in otherObjects)
+        if (allowedCollisions.Contains(collision))
         {
-            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            if (collision.GetComponent<EnemyHealth>() != null)
+            {
+                collision.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
-    }
-
-
-    void OnTriggerEnter2D(Collider2D enemy)
-    {
-        if (enemy.GetComponent<EnemyHealth>() != null)
-        {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
-        }
-
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
 }

@@ -197,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift)) & dashCdCounter <= 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) & dashCdCounter <= 0)
         {
             dash = true;
         }

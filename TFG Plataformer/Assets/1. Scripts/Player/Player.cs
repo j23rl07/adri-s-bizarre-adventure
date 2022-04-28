@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Si toca un checkpoint
-        if(collision.gameObject.layer == 10)
+        if (collision.gameObject.layer == 10)
         {
             Vector3 location = collision.transform.GetChild(0).position;
             lastCheckpoint = new Vector3(location.x, location.y, transform.position.z);
@@ -80,7 +80,8 @@ public class Player : MonoBehaviour
         {
             Vector3 location = collision.transform.GetChild(0).position;
             location = new Vector3(location.x, location.y, transform.position.z);
-            StartCoroutine(HurtAndRespawn(location));
+            
+            StartCoroutine(HurtAndRespawn(location, fallDamage));
         }
     }
 
@@ -151,6 +152,8 @@ public class Player : MonoBehaviour
         GetComponent<PlayerCombat>().enabled = true;
         GetComponent<Weapon>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = true;
     }
     public void Recover()
     {
@@ -210,13 +213,15 @@ public class Player : MonoBehaviour
         rb2d.gravityScale = g;
     }
 
-    public IEnumerator HurtAndRespawn(Vector3 location)
+    public IEnumerator HurtAndRespawn(Vector3 location, int damage)
     {
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerCombat>().enabled = false;
         GetComponent<Weapon>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
         yield return new WaitForSeconds(respawnTimer);
         Respawn(location);
-        TakeDamage(fallDamage);
+        TakeDamage(damage);
     }
 }

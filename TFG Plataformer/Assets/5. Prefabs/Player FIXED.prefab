@@ -1482,11 +1482,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 4017893389135811853}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 3e624cdff1e1f12439d46c5e0271473a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.006060034, y: -0.25923228}
+  m_Offset: {x: 0.049076527, y: -0.25923228}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1497,7 +1497,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7665511, y: 0.72019434}
+  m_Size: {x: 0.6805181, y: 0.72019434}
   m_EdgeRadius: 0
 --- !u!58 &4017893389135811849
 CircleCollider2D:
@@ -1609,9 +1609,12 @@ MonoBehaviour:
   invulDuration: 1
   nFlashes: 3
   animator: {fileID: 4017893389135811855}
-  enemyDamage: 20
+  selfDamage: 20
+  fallDamage: 20
+  lastCheckpoint: {x: 0, y: 0, z: 0}
   isHurt: 0
   isDead: 0
+  canRespawn: 0
 --- !u!114 &4017893389135811840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,6 +1674,7 @@ MonoBehaviour:
   - {fileID: 4443177920443453439, guid: e908b9f6fa6c32646a695588ba16959a, type: 3}
   - {fileID: 1649759527522842908, guid: 06e6383ac7cd15d4ea347e7aa5fd50bf, type: 3}
   - {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
+  allowedLayerCollisions: 
   player: {fileID: 4017893389135811847}
   isCasting: 0
 --- !u!114 &4017893389135811900

@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
-    public Vector3 lastCheckpoint;
 
     [Header("Mana")]
     public int maxMana = 100;
@@ -26,7 +25,10 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [Header("Other")]
-    public int enemyDamage = 20;
+    public int selfDamage = 20;
+    public int fallDamage = 20;
+    public Vector3 lastCheckpoint;
+    private float respawnTimer = 1f;
 
 
     [HideInInspector] public bool isHurt = false;
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(enemyDamage);
+            TakeDamage(selfDamage);
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -76,7 +78,9 @@ public class Player : MonoBehaviour
         //Si toca una DeathZone
         if(collision.gameObject.layer == 11)
         {
-            StartCoroutine(DeathAndRespawn(lastCheckpoint));
+            Vector3 location = collision.transform.GetChild(0).position;
+            location = new Vector3(location.x, location.y, transform.position.z);
+            StartCoroutine(HurtAndRespawn(location));
         }
     }
 
@@ -142,16 +146,18 @@ public class Player : MonoBehaviour
         isDead = false;
         canRespawn = false;
 
-        currentHealth = maxHealth;
-        healthBar.SetHealth(currentHealth);
-        currentMana = maxMana;
-        manaBar.SetMana(currentMana);
-
         transform.position = location;
         GetComponent<PlayerMovement>().enabled = true;
         GetComponent<PlayerCombat>().enabled = true;
         GetComponent<Weapon>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
+    }
+    public void Recover()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
+        currentMana = maxMana;
+        manaBar.SetMana(currentMana);
     }
 
     //private IEnumerator RegenMana()
@@ -198,8 +204,24 @@ public class Player : MonoBehaviour
         Die();
         while (!canRespawn)
             yield return null;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(respawnTimer);
+        Respawn(location);
+        Recover();
+        rb2d.gravityScale = g;
+    }
+
+    public IEnumerator HurtAndRespawn(Vector3 location)
+    {
+        float g = rb2d.gravityScale;
+        rb2d.velocity = new Vector2(0, 0);
+        rb2d.gravityScale = 0;
+
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerCombat>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
+        yield return new WaitForSeconds(respawnTimer);
         Respawn(location);
         rb2d.gravityScale = g;
+        TakeDamage(fallDamage);
     }
 }

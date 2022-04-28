@@ -32,13 +32,13 @@ public class TrabajoExtraScript : MonoBehaviour
 
     void Equip()
     {
-        player.enemyDamage -= 10;
-        Debug.Log(player.enemyDamage);
+        player.selfDamage -= 10;
+        Debug.Log(player.selfDamage);
     }
 
     void Unequip()
     {
-        player.enemyDamage += 10;
-        Debug.Log(player.enemyDamage);
+        player.selfDamage += 10;
+        Debug.Log(player.selfDamage);
     }
 }

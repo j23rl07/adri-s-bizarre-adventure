@@ -80,6 +80,7 @@ public class PlayerAnimationController : MonoBehaviour
                     {
                         playerScript.isHurt = false;
                         canMove = true;
+                        overrideAnimation = false;
                     }
                 }
                 else if (playerCombatScript.isAttacking)

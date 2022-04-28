@@ -110,3 +110,4 @@ public class BasicCameraController : MonoBehaviour
         smoothFactor = storage;
     }
 }
+

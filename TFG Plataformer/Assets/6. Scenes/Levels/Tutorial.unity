@@ -6403,7 +6403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1560700912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.44, y: 1.89, z: -10}
+  m_LocalPosition: {x: -10.05, y: 1.89, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6419,13 +6419,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1560700912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00724e4ece089474baa5983be0c0508d, type: 3}
+  m_Script: {fileID: 11500000, guid: b7d8333e36704334b8de3e955a650194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1768247176}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 1, z: 0}
   smoothFactor: 8
-  levelMinBounds: {x: -12.48, y: 1.17, z: 0}
+  levelMinBounds: {x: -10.05, y: 1, z: 0}
   levelMaxBounds: {x: 1000, y: 100, z: 0}
   transitionDuration: 0.5
   transitionFactor: 8
@@ -7409,13 +7409,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 592397525}
     m_Modifications:
+    - target: {fileID: 6318625399322828251, guid: 47e9db3bf10cf4444b817f1434b129a8, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318625399322828251, guid: 47e9db3bf10cf4444b817f1434b129a8, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1103341349
+      objectReference: {fileID: 0}
     - target: {fileID: 6318625400226645450, guid: 47e9db3bf10cf4444b817f1434b129a8, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6318625400226645450, guid: 47e9db3bf10cf4444b817f1434b129a8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.99
+      value: 39.91
       objectReference: {fileID: 0}
     - target: {fileID: 6318625400226645450, guid: 47e9db3bf10cf4444b817f1434b129a8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7466,6 +7474,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 258996833}
     m_Modifications:
+    - target: {fileID: 7652194033089865584, guid: bb00414d3f350d14389b68218cac3c4c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652194033089865584, guid: bb00414d3f350d14389b68218cac3c4c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.62
+      objectReference: {fileID: 0}
     - target: {fileID: 8001483765210169152, guid: bb00414d3f350d14389b68218cac3c4c, type: 3}
       propertyPath: m_RootOrder
       value: 0

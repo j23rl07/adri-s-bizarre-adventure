@@ -212,16 +212,11 @@ public class Player : MonoBehaviour
 
     public IEnumerator HurtAndRespawn(Vector3 location)
     {
-        float g = rb2d.gravityScale;
-        rb2d.velocity = new Vector2(0, 0);
-        rb2d.gravityScale = 0;
-
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerCombat>().enabled = false;
         GetComponent<Weapon>().enabled = false;
         yield return new WaitForSeconds(respawnTimer);
         Respawn(location);
-        rb2d.gravityScale = g;
         TakeDamage(fallDamage);
     }
 }

@@ -7,29 +7,30 @@ public class BasicCameraController : MonoBehaviour
 {
     [Header("Follow")]
     [SerializeField] private Transform target;
-    [SerializeField] private Vector3 offset;
-    [Range(1, 15)]
-    [SerializeField] private float smoothFactor = 8;
-
-    [Header("Camera Sections")]
     [SerializeField] private Vector3 levelMinBounds;
     [SerializeField] private Vector3 levelMaxBounds;
+    [SerializeField] private Vector3 initialOffset;
+    private Vector3 offset;
+    [Range(1, 15)]
+    [SerializeField] private float smoothFactor = 8;
+    private int zCoord = -10;
+
+    [Header("Camera Sections")]
     [SerializeField] private float transitionDuration = .5f;
     [Range(1, 15)]
     [SerializeField] private float transitionFactor = 8;
     private Vector3 minValues, maxValues;
-    private bool isChanged = false;
-    private Collider2D pendingCollision = null;
+    private GameObject currentSection;
 
     [Serializable]
-    public class CameraChange
+    public class CameraSection
     {
-        public GameObject start;
-        public GameObject end;
+        public GameObject section;
         public Vector3 minValues;
         public Vector3 maxValues;
+        public Vector3 offset;
     }
-    public List<CameraChange> cameraChanges = new();
+    public List<CameraSection> cameraSections;
 
     [Header("Background")]
     [SerializeField] private GameObject background = null;
@@ -38,12 +39,11 @@ public class BasicCameraController : MonoBehaviour
     void Start()
     {
         GetComponent<Camera>().orthographicSize = 7;
-        levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, -10);
-        levelMaxBounds = new Vector3(levelMaxBounds.x, levelMaxBounds.y, -10);
+        levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, zCoord);
+        levelMaxBounds = new Vector3(levelMaxBounds.x, levelMaxBounds.y, zCoord);
         minValues = levelMinBounds;
         maxValues = levelMaxBounds;
-
-        target.GetComponent<CameraChangeScript>().basicCameraController = this;
+        offset = initialOffset;
     }
 
     void FixedUpdate()
@@ -73,30 +73,17 @@ public class BasicCameraController : MonoBehaviour
         transform.position = smoothedPosition;
     }
 
-    public void ChangeCameraBounds(Collider2D collision)
+    public void ChangeCameraBounds(GameObject section)
     {
-        //Cambiar los limites si se encuentra dentro de algún tramo de cambio de cámara
-        foreach (CameraChange cameraChange in cameraChanges)
+        foreach (CameraSection cameraSection in cameraSections)
         {
-            Collider2D startCollider = cameraChange.start.GetComponent<Collider2D>();
-            //Para entrar en un nuevo tramo no puedes estar ya dentro de uno anterior
-            if (collision.Equals(startCollider) & !isChanged)
+            if (cameraSection.section.Equals(section) && !section.Equals(currentSection))
             {
+                currentSection = section;
                 StartCoroutine(SmoothTransition());
-                minValues = new Vector3(cameraChange.minValues.x, cameraChange.minValues.y, -10);
-                maxValues = new Vector3(cameraChange.maxValues.x, cameraChange.maxValues.y, -10);
-                isChanged = true;
-                Collider2D endCollider = cameraChange.end.GetComponent<Collider2D>();
-                pendingCollision = endCollider;
-                break;
-            }
-            else if (collision.Equals(pendingCollision) & isChanged)
-            {
-                minValues = new Vector3(levelMinBounds.x, levelMinBounds.y, -10);
-                maxValues = new Vector3(levelMaxBounds.x, levelMaxBounds.y, -10);
-                isChanged = false;
-                pendingCollision = null;
-                break;
+                minValues = new Vector3(cameraSection.minValues.x, cameraSection.minValues.y, zCoord);
+                maxValues = new Vector3(cameraSection.maxValues.x, cameraSection.maxValues.y, zCoord);
+                offset = cameraSection.offset;
             }
         }
     }

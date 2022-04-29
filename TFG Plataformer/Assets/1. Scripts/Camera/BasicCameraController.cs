@@ -20,8 +20,8 @@ public class BasicCameraController : MonoBehaviour
     [Range(1, 15)]
     [SerializeField] private float transitionFactor = 8;
     private Vector3 minValues, maxValues;
-    private GameObject currentSection;
 
+    [SerializeField] private GameObject currentSection;
     [Serializable]
     public class CameraSection
     {

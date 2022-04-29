@@ -255,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallJumping = true;
         wallJump = false;
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x,0);
         if (facingRight == 1)
         {
             rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);

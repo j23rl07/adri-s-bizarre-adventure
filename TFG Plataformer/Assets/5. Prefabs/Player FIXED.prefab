@@ -1163,8 +1163,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -254.53, y: 203.96}
-  m_SizeDelta: {x: 21.59, y: 23.39}
+  m_AnchoredPosition: {x: -258.22562, y: 208.63}
+  m_SizeDelta: {x: 47.4181, y: 32.735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4017893387494090449
 CanvasRenderer:
@@ -1201,11 +1201,11 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 0
 --- !u!1 &4017893387867055846
@@ -1611,7 +1611,8 @@ MonoBehaviour:
   animator: {fileID: 4017893389135811855}
   selfDamage: 20
   fallDamage: 20
-  lastCheckpoint: {x: 0, y: 0, z: 0}
+  lastCheckpointLocation: {x: 0, y: 0, z: 0}
+  lastCheckpoint: {fileID: 0}
   isHurt: 0
   isDead: 0
   canRespawn: 0
@@ -1705,6 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 105eee2fcdda91141bf3f7b07498a494, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canMove: 1
 --- !u!114 &4017893389135811959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,7 +2643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8560692108539608035}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -284.7, y: 207.3, z: -2892.8572}
+  m_LocalPosition: {x: -293.3, y: 207.3, z: -2892.8572}
   m_LocalScale: {x: 8.218286, y: 7.7410927, z: 32.142857}
   m_ConstrainProportionsScale: 0
   m_Children: []

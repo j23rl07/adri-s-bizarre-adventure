@@ -27,8 +27,11 @@ public class Player : MonoBehaviour
     [Header("Other")]
     public int selfDamage = 20;
     public int fallDamage = 20;
-    public Vector3 lastCheckpoint;
+    public Vector3 lastCheckpointLocation;
+    public GameObject lastCheckpoint = null;
     private float respawnTimer = 1f;
+    private BasicCameraController basicCameraControllerScript;
+    private readonly string mainCameraTag = "MainCamera";
 
 
     [HideInInspector] public bool isHurt = false;
@@ -39,10 +42,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        lastCheckpoint = transform.position;
+        lastCheckpointLocation = transform.position;
 
         currentMana = maxMana;
         manaBar.SetMaxMana(maxMana);
@@ -50,6 +52,8 @@ public class Player : MonoBehaviour
         cast = GetComponent<Weapon>();
         spr = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
+
+        basicCameraControllerScript = GameObject.FindGameObjectWithTag(mainCameraTag).GetComponent<BasicCameraController>();
     }
 
     // Update is called once per frame
@@ -72,8 +76,9 @@ public class Player : MonoBehaviour
         //Si toca un checkpoint
         if (collision.gameObject.layer == 10)
         {
-            Vector3 location = collision.transform.GetChild(0).position;
-            lastCheckpoint = new Vector3(location.x, location.y, transform.position.z);
+            lastCheckpoint = collision.gameObject;
+            Vector3 location = lastCheckpoint.transform.GetChild(0).position;
+            lastCheckpointLocation = new Vector3(location.x, location.y, transform.position.z);
         }
         //Si toca una DeathZone
         if(collision.gameObject.layer == 11)
@@ -94,7 +99,7 @@ public class Player : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            StartCoroutine(DeathAndRespawn(lastCheckpoint));
+            StartCoroutine(DeathAndRespawn(lastCheckpointLocation));
         }
     }
 
@@ -146,14 +151,18 @@ public class Player : MonoBehaviour
     {
         isDead = false;
         canRespawn = false;
-
         transform.position = location;
-        GetComponent<PlayerMovement>().enabled = true;
+        if (lastCheckpoint != null)
+            basicCameraControllerScript.ChangeCameraBounds(lastCheckpoint.GetComponent<CheckpointScript>().cameraSection);
+
         GetComponent<PlayerCombat>().enabled = true;
         GetComponent<Weapon>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<BoxCollider2D>().enabled = true;
         GetComponent<CircleCollider2D>().enabled = true;
+        //Cuando solo se hace daño el movimiento lo pone a true PlayerAnimationControler pero cuando muere se tiene que poner desde aqui
+        if (!GetComponent<PlayerMovement>().enabled)
+            GetComponent<PlayerMovement>().enabled = true;
     }
     public void Recover()
     {
@@ -209,8 +218,8 @@ public class Player : MonoBehaviour
             yield return null;
         yield return new WaitForSeconds(respawnTimer);
         Respawn(location);
-        Recover();
         rb2d.gravityScale = g;
+        Recover();
     }
 
     public IEnumerator HurtAndRespawn(Vector3 location, int damage)
@@ -220,8 +229,13 @@ public class Player : MonoBehaviour
         GetComponent<Weapon>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<CircleCollider2D>().enabled = false;
+
+        float g = rb2d.gravityScale;
+        rb2d.velocity = new Vector2(0, 0);
+        rb2d.gravityScale = 0;
         yield return new WaitForSeconds(respawnTimer);
         Respawn(location);
+        rb2d.gravityScale = g;
         TakeDamage(damage);
     }
 }

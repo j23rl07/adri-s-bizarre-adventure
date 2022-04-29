@@ -9,6 +9,7 @@ public class DescansoVidaScript : MonoBehaviour
     private GameObject currentText;
     private bool canBeUsed = true;
     private bool inRange = false;
+    private bool needsHeal;
     private Player playerScript;
     [SerializeField] private int uses = 1;
 
@@ -24,7 +25,7 @@ public class DescansoVidaScript : MonoBehaviour
     {
         if (!PauseMenu.isPauseMenuOn)
         {
-            if (inRange & canBeUsed & playerScript.currentHealth < playerScript.maxHealth & Input.GetKeyDown(KeyCode.E))
+            if (inRange & canBeUsed & needsHeal & Input.GetKeyDown(KeyCode.E))
             {
                 playerScript.heal(playerScript.maxHealth);
                 uses -= 1;
@@ -40,6 +41,14 @@ public class DescansoVidaScript : MonoBehaviour
             currentText.SetActive(true);
             inRange = true;
             playerScript = collision.gameObject.GetComponent<Player>();
+            if (playerScript.currentHealth < playerScript.maxHealth)
+            {
+                needsHeal = true;
+            }
+            else
+            {
+                needsHeal = false;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

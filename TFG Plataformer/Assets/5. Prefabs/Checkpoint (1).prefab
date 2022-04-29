@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6318625400226645450}
   - component: {fileID: 6318625400226645448}
+  - component: {fileID: 4494874815239499278}
   m_Layer: 10
   m_Name: Checkpoint (1)
   m_TagString: Untagged
@@ -156,3 +157,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.31456065, y: 3.4771445}
   m_EdgeRadius: 0
+--- !u!114 &4494874815239499278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318625400226645453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37441e1b1a7a2e6448a557582707f632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraSection: {fileID: 0}

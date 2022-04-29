@@ -52,8 +52,7 @@ public class ArcEnemyProjectile : EnemyDamage
     {
         GameObject[] goldenCoin = GameObject.FindGameObjectsWithTag("MyCoin");
         GameObject[] silverCoin = GameObject.FindGameObjectsWithTag("SilverCoin");
-
-
+     
         foreach (GameObject obj in goldenCoin)
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
@@ -63,6 +62,7 @@ public class ArcEnemyProjectile : EnemyDamage
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -30,6 +30,8 @@ public class SpikeHead : EnemyDamage
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
+
+
         Stop();
     }
 

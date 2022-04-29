@@ -20,6 +20,7 @@ TagManager:
   - Lava
   - Map
   - CuchillaFolio
+  - Water
   layers:
   - Default
   - TransparentFX

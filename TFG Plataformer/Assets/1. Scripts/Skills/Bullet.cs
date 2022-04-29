@@ -20,6 +20,7 @@ public class Bullet : MonoBehaviour
     void OnEnable()
     {
         GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
+        GameObject[] water = GameObject.FindGameObjectsWithTag("Water");
         GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
 
         foreach (GameObject obj in otherObjects)
@@ -31,6 +32,13 @@ public class Bullet : MonoBehaviour
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
+
+        foreach (GameObject obj in water)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+
     }
 
 

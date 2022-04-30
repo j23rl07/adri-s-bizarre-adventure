@@ -5,39 +5,41 @@ using UnityEngine;
 public class ThermoScript : MonoBehaviour
 {
     public Trinket trinket;
-    public Player player;
+    public GameObject player;
+    private bool active = false;
     public TrinketState TrinketState { get; set; }
 
     public ThermoScript()
     {
         TrinketState = new TrinketState();
     }
-
+    public void Start()
+    {
+        player = GameObject.Find("Player FIXED");
+    }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E)) { 
-            if(TrinketState.isEquipped == false)
-            {
-                TrinketState.isEquipped = true;
-                Equip();
-            }
-            else
-            {
-                TrinketState.isEquipped = false;
-                Unequip();
-            }
+        if (transform.GetChild(0).gameObject.activeSelf & active == false)
+        {
+            Equip();
+        }
+        else if (!transform.GetChild(0).gameObject.activeSelf & active == true)
+        {
+            Unequip();
         }
     }
 
     void Equip()
     {
-        player.maxHealth += 25;
-        Debug.Log(player.maxHealth);
+        player.GetComponent<Player>().maxHealth += 25;
+        Debug.Log(player.GetComponent<Player>().maxHealth);
+        active = true;
     }
 
     void Unequip()
     {
-        player.maxHealth -= 25;
-        Debug.Log(player.maxHealth);
+        player.GetComponent<Player>().maxHealth -= 25;
+        Debug.Log(player.GetComponent<Player>().maxHealth);
+        active = false;
     }
 }

@@ -1669,6 +1669,7 @@ MonoBehaviour:
   attackDamage: 40
   attackRange: 0.5
   attackRate: 2.1
+  Trinket: {fileID: 0}
   isAttacking: 0
 --- !u!114 &4017893389135811847
 MonoBehaviour:
@@ -1706,6 +1707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyScoreText: {fileID: 4017893387494090448}
+  ScoreNum: 0
   goldValue: 10
   silverValue: 1
 --- !u!114 &4017893389135811841

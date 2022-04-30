@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 176691596625514308}
   - component: {fileID: 4522666003719907221}
   - component: {fileID: 176691596625514307}
+  - component: {fileID: 717577857420466012}
   m_Layer: 0
   m_Name: MaterialDeEscuela
   m_TagString: Untagged
@@ -312,6 +313,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   damageIncrease: 0
+--- !u!114 &717577857420466012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6605987384722322519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71a869ef05ba3d446aa1dbd3e8300ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trinket: {fileID: 11400000, guid: ef8e6f12edc3ced49918aa99024bc780, type: 2}
+  pc: {fileID: 0}
 --- !u!1 &7338809215531450965
 GameObject:
   m_ObjectHideFlags: 0

@@ -115,12 +115,11 @@ public class Inventory : MonoBehaviour
         {
             if (Tslots[i].GetComponent<TSlotsScript>().isUsed)
             {
-                if(Tslots[i].transform.GetComponentInChildren<ItemsUse>().itemType == type)
+                if(Tslots[i].transform.GetComponentInChildren<Items>().itemType == type)
                 {
                     if (Tslots[i].transform.GetChild(0).GetChild(0).gameObject.activeSelf)
                     {
-                        Tslots[i].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-                        Tslots[i].transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+                        Tslots[i].transform.GetComponentInChildren<InventoryButtons>().deactivateT();
                     }
                 }
             }

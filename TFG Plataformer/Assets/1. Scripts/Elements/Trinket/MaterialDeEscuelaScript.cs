@@ -5,7 +5,8 @@ using UnityEngine;
 public class MaterialDeEscuelaScript : MonoBehaviour
 {
     public Trinket trinket;
-    public PlayerCombat pc;
+    public GameObject player;
+    private bool active = false;
     public TrinketState TrinketState { get; set; }
 
     public MaterialDeEscuelaScript()
@@ -13,32 +14,34 @@ public class MaterialDeEscuelaScript : MonoBehaviour
         TrinketState = new TrinketState();
     }
 
+    public void Start()
+    {
+        player = GameObject.Find("Player FIXED");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (transform.GetChild(0).gameObject.activeSelf & active == false)
         {
-            if (TrinketState.isEquipped == false)
-            {
-                TrinketState.isEquipped = true;
-                Equip();
-            }
-            else
-            {
-                TrinketState.isEquipped = false;
-                Unequip();
-            }
+            Equip();
+        }
+        else if (!transform.GetChild(0).gameObject.activeSelf & active == true)
+        {
+            Unequip();
         }
     }
 
     void Equip()
     {
-        pc.attackDamage += 10;
-        Debug.Log(pc.attackDamage);
+        player.GetComponent<PlayerCombat>().attackDamage += 10;
+        Debug.Log(player.GetComponent<PlayerCombat>().attackDamage);
+        active = true;
     }
 
     void Unequip()
     {
-        pc.attackDamage -= 10;
-        Debug.Log(pc.attackDamage);
+        player.GetComponent<PlayerCombat>().attackDamage -= 10;
+        Debug.Log(player.GetComponent<PlayerCombat>().attackDamage);
+        active = false;
     }
 }

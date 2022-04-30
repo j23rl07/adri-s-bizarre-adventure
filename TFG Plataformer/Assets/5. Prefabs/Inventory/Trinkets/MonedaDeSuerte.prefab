@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 124474710890019987}
   - component: {fileID: 4398391489466635330}
   - component: {fileID: 124474710890019988}
+  - component: {fileID: 1797796426155756267}
   m_Layer: 0
   m_Name: MonedaDeSuerte
   m_TagString: Untagged
@@ -312,6 +313,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   damageIncrease: 0
+--- !u!114 &1797796426155756267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6369404355973646208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40263d5952ac5db47afc2f8f619fea14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trinket: {fileID: 11400000, guid: 65ebc2216cc1fa945b61e0d8a65c6aca, type: 2}
+  sc: {fileID: 0}
 --- !u!1 &7354718062654452098
 GameObject:
   m_ObjectHideFlags: 0

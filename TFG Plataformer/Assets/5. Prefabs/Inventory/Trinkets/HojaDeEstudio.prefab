@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1997162078032506823}
   - component: {fileID: 2812313810283448086}
   - component: {fileID: 1997162078032506816}
+  - component: {fileID: -8287770565462114737}
   m_Layer: 0
   m_Name: HojaDeEstudio
   m_TagString: Untagged
@@ -177,6 +178,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   damageIncrease: 0
+--- !u!114 &-8287770565462114737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785579009180095700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2fff9536df1714290302be94ed9c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trinket: {fileID: 11400000, guid: b3a85979bab0b19488e696d4749e71f9, type: 2}
+  player: {fileID: 4017893389135811847, guid: e039f439873082d49b07983ddaa09600, type: 3}
+  active: 0
 --- !u!1 &5384575842250726653
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,16 +18,25 @@ public class InventoryButtons : MonoBehaviour
         
         if (transform.GetChild(0).gameObject.activeSelf)
         {
-            transform.GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(1).gameObject.SetActive(false);
+            deactivateT();
         }
         else
         {
-            inventory.CheckTrincketEInventory(GetComponent<ItemsUse>().itemType);
-            transform.GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(true);
-            transform.GetChild(1).transform.position = new Vector2(transform.parent.transform.parent.position.x + 777, transform.parent.transform.parent.position.y);
+            activateT();
         }      
+    }
+
+    public void deactivateT()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void activateT()
+    {
+        inventory.CheckTrincketEInventory(GetComponent<ItemsUse>().itemType);
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(1).transform.position = new Vector2(transform.parent.transform.parent.position.x + 777, transform.parent.transform.parent.position.y);
     }
 
     public void UseItemH()

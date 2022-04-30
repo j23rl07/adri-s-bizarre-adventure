@@ -5,8 +5,14 @@ using UnityEngine;
 public class HojaDeEstudioScript : MonoBehaviour
 {
     public Trinket trinket;
-    public Player player;
+    public GameObject player;
+    private bool active = false;
     public TrinketState TrinketState { get; set; }
+
+    public void Start()
+    {
+        player = GameObject.Find("Player FIXED");
+    }
 
     public HojaDeEstudioScript()
     {
@@ -15,30 +21,27 @@ public class HojaDeEstudioScript : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (transform.GetChild(0).gameObject.activeSelf & active == false)
         {
-            if (TrinketState.isEquipped == false)
-            {
-                TrinketState.isEquipped = true;
-                Equip();
-            }
-            else
-            {
-                TrinketState.isEquipped = false;
-                Unequip();
-            }
+            Equip();
+        }
+        else if (!transform.GetChild(0).gameObject.activeSelf & active == true)
+        {
+            Unequip();
         }
     }
 
     void Equip()
     {
-        player.maxMana += 25;
-        Debug.Log(player.maxMana);
+        player.GetComponent<Player>().maxMana += 25;
+        Debug.Log(player.GetComponent<Player>().maxMana);
+        active = true;
     }
 
     void Unequip()
     {
-        player.maxMana -= 25;
-        Debug.Log(player.maxMana);
+        player.GetComponent<Player>().maxMana -= 25;
+        Debug.Log(player.GetComponent<Player>().maxMana);
+        active = false;
     }
 }

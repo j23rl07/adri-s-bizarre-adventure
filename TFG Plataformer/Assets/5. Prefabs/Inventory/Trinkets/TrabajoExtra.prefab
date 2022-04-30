@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 4821974929430496932}
   - component: {fileID: 9104897941081402997}
   - component: {fileID: 4821974929430496931}
+  - component: {fileID: 8791293549326037255}
   m_Layer: 0
   m_Name: TrabajoExtra
   m_TagString: Untagged
@@ -312,6 +313,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 1
   damageIncrease: 0
+--- !u!114 &8791293549326037255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1960625161924754871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7286ef5004dd964d81157ab8f4df5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trinket: {fileID: 11400000, guid: 5b6e721507a3e3348bd7503f30a033ff, type: 2}
+  player: {fileID: 0}
 --- !u!1 &2684168115020876725
 GameObject:
   m_ObjectHideFlags: 0

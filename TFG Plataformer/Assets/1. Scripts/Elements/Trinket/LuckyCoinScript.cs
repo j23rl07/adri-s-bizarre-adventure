@@ -5,7 +5,8 @@ using UnityEngine;
 public class LuckyCoinScript : MonoBehaviour
 {
     public Trinket trinket;
-    public ScoreScript sc;
+    public GameObject player;
+    private bool active = false;
     public TrinketState TrinketState { get; set; }
 
     public LuckyCoinScript()
@@ -13,34 +14,36 @@ public class LuckyCoinScript : MonoBehaviour
         TrinketState = new TrinketState();
     }
 
+    public void Start()
+    {
+        player = GameObject.Find("Player FIXED");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (transform.GetChild(0).gameObject.activeSelf & active == false)
         {
-            if (TrinketState.isEquipped == false)
-            {
-                TrinketState.isEquipped = true;
-                Equip();
-            }
-            else
-            {
-                TrinketState.isEquipped = false;
-                Unequip();
-            }
+            Equip();
+        }
+        else if (!transform.GetChild(0).gameObject.activeSelf & active == true)
+        {
+            Unequip();
         }
     }
 
     void Equip()
     {
         Debug.Log("Equipado");
-        sc.goldValue += 5;
-        sc.silverValue += 2;
+        player.GetComponent<ScoreScript>().goldValue += 5;
+        player.GetComponent<ScoreScript>().silverValue += 2;
+        active = true;
     }
 
     void Unequip()
     {
         Debug.Log("Desequipado");
-        sc.goldValue -= 5;
-        sc.silverValue -= 2;
+        player.GetComponent<ScoreScript>().goldValue -= 5;
+        player.GetComponent<ScoreScript>().silverValue -= 2;
+        active = false;
     }
 }

@@ -53,7 +53,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemy.GetComponent<EnemyHealth>().TakeDamage(attackDamage);
             }
-
         }
     }
 

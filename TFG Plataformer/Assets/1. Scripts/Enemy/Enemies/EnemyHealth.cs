@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public Animator animator;
+    [HideInInspector] public bool gotHit = false;
     
     public void Awake()
     {
@@ -16,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        gotHit = true;
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
 

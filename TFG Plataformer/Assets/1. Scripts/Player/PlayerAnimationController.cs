@@ -28,7 +28,7 @@ public class PlayerAnimationController : MonoBehaviour
     private Rigidbody2D rigidBody;
     private PauseMenu pauseMenu;
     private string currentState;
-    private bool canMove = true;
+    [HideInInspector] public bool canMove = true;
     private bool firstTime = true;
     private bool overrideAnimation = false;
 
@@ -57,7 +57,16 @@ public class PlayerAnimationController : MonoBehaviour
              */
             if (playerScript.isDead)
             {
+                playerScript.isHurt = false;
                 ChangeAnimationState(PLAYER_DEATH);
+                if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_DEATH))
+                {
+                    if (GetComponent<SpriteRenderer>().enabled)
+                    {
+                        GetComponent<SpriteRenderer>().enabled = false;
+                        playerScript.canRespawn = true;
+                    }
+                }
             }
             else
             {
@@ -66,11 +75,15 @@ public class PlayerAnimationController : MonoBehaviour
                     ChangeAnimationState(PLAYER_HURT);
                     StopMovement(new Vector2(0, 0), false);
                     overrideAnimation = true;
-
+                    playerCombatScript.enabled = false;
+                    weaponScript.enabled = false;
                     if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 2.5f & animator.GetCurrentAnimatorStateInfo(0).IsName(PLAYER_HURT))
                     {
                         playerScript.isHurt = false;
                         canMove = true;
+                        overrideAnimation = false;
+                        playerCombatScript.enabled = true;
+                        weaponScript.enabled = true;
                     }
                 }
                 else if (playerCombatScript.isAttacking)

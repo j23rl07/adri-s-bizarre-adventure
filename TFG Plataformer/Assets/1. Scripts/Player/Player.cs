@@ -25,19 +25,26 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2d;
 
     [Header("Other")]
-    public int enemyDamage = 20;
+    public int selfDamage = 20;
+    public int fallDamage = 20;
+    public Vector3 lastCheckpointLocation;
+    public GameObject lastCheckpoint = null;
+    private float respawnTimer = 1f;
+    private BasicCameraController basicCameraControllerScript;
+    private readonly string mainCameraTag = "MainCamera";
 
 
     [HideInInspector] public bool isHurt = false;
     [HideInInspector] public bool isDead = false;
+    [HideInInspector] public bool canRespawn = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        lastCheckpointLocation = transform.position;
 
         currentMana = maxMana;
         manaBar.SetMaxMana(maxMana);
@@ -45,6 +52,8 @@ public class Player : MonoBehaviour
         cast = GetComponent<Weapon>();
         spr = GetComponent<SpriteRenderer>();
         rb2d = GetComponent<Rigidbody2D>();
+
+        basicCameraControllerScript = GameObject.FindGameObjectWithTag(mainCameraTag).GetComponent<BasicCameraController>();
     }
 
     // Update is called once per frame
@@ -52,7 +61,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            TakeDamage(enemyDamage);
+            TakeDamage(selfDamage);
         }
 
         if(Input.GetKeyDown(KeyCode.X))
@@ -61,7 +70,26 @@ public class Player : MonoBehaviour
         }
         
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Si toca un checkpoint
+        if (collision.gameObject.layer == 10)
+        {
+            lastCheckpoint = collision.gameObject;
+            Vector3 location = lastCheckpoint.transform.GetChild(0).position;
+            lastCheckpointLocation = new Vector3(location.x, location.y, transform.position.z);
+        }
+        //Si toca una DeathZone
+        if(collision.gameObject.layer == 11)
+        {
+            Vector3 location = collision.transform.GetChild(0).position;
+            location = new Vector3(location.x, location.y, transform.position.z);
+            
+            StartCoroutine(HurtAndRespawn(location, fallDamage));
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         isHurt = true;
@@ -71,9 +99,7 @@ public class Player : MonoBehaviour
 
         if(currentHealth <= 0)
         {
-            GetComponent<PlayerMovement>().enabled = false;
-            isDead = true;
-            GameObject.Destroy(gameObject, 2);
+            StartCoroutine(DeathAndRespawn(lastCheckpointLocation));
         }
     }
 
@@ -107,6 +133,43 @@ public class Player : MonoBehaviour
         }else {
             return false;
         }
+    }
+
+    public void Die()
+    {
+        currentHealth = 0;
+        healthBar.SetHealth(currentHealth);
+        currentMana = 0;
+        manaBar.SetMana(currentMana);
+
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerCombat>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
+        isDead = true;
+    }
+    public void Respawn(Vector3 location)
+    {
+        isDead = false;
+        canRespawn = false;
+        transform.position = location;
+        if (lastCheckpoint != null)
+            basicCameraControllerScript.ChangeCameraBounds(lastCheckpoint.GetComponent<CheckpointScript>().cameraSection);
+
+        GetComponent<PlayerCombat>().enabled = true;
+        GetComponent<Weapon>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = true;
+        //Cuando solo se hace daño el movimiento lo pone a true PlayerAnimationControler pero cuando muere se tiene que poner desde aqui
+        if (!GetComponent<PlayerMovement>().enabled)
+            GetComponent<PlayerMovement>().enabled = true;
+    }
+    public void Recover()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
+        currentMana = maxMana;
+        manaBar.SetMana(currentMana);
     }
 
     //private IEnumerator RegenMana()
@@ -143,5 +206,36 @@ public class Player : MonoBehaviour
         }
 
         yield return 0;
+    }
+
+    public IEnumerator DeathAndRespawn(Vector3 location)
+    {
+        float g = rb2d.gravityScale;
+        rb2d.velocity = new Vector2(0, 0);
+        rb2d.gravityScale = 0;
+        Die();
+        while (!canRespawn)
+            yield return null;
+        yield return new WaitForSeconds(respawnTimer);
+        Respawn(location);
+        rb2d.gravityScale = g;
+        Recover();
+    }
+
+    public IEnumerator HurtAndRespawn(Vector3 location, int damage)
+    {
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerCombat>().enabled = false;
+        GetComponent<Weapon>().enabled = false;
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
+
+        float g = rb2d.gravityScale;
+        rb2d.velocity = new Vector2(0, 0);
+        rb2d.gravityScale = 0;
+        yield return new WaitForSeconds(respawnTimer);
+        Respawn(location);
+        rb2d.gravityScale = g;
+        TakeDamage(damage);
     }
 }

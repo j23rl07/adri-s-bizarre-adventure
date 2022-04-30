@@ -10,6 +10,7 @@ public class DescansoManaScript : MonoBehaviour
     private GameObject currentText;
     private bool canBeUsed = true;
     private bool inRange = false;
+    private bool needsHeal;
     private Player playerScript;
     [SerializeField] private int uses = 1;
     
@@ -25,7 +26,7 @@ public class DescansoManaScript : MonoBehaviour
     {
         if (!PauseMenu.isPauseMenuOn)
         {
-            if (inRange & canBeUsed & playerScript.currentMana < playerScript.maxMana  & Input.GetKeyDown(KeyCode.E))
+            if (inRange & canBeUsed & needsHeal & Input.GetKeyDown(KeyCode.E))
             {
                 playerScript.healMana(playerScript.maxMana);
                 uses -= 1;
@@ -41,6 +42,14 @@ public class DescansoManaScript : MonoBehaviour
             currentText.SetActive(true);
             inRange = true;
             playerScript = collision.gameObject.GetComponent<Player>();
+            if (playerScript.currentMana < playerScript.maxMana)
+            {
+                needsHeal = true;
+            }
+            else
+            {
+                needsHeal = false;
+            }
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

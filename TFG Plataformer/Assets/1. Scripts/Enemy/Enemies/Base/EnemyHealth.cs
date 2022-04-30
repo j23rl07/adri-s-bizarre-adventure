@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public Animator animator;
+    public GameObject dieEffect;
     
     public void Awake()
     {
@@ -62,11 +63,13 @@ public class EnemyHealth : MonoBehaviour
                 GetComponent<RangeEnemy>().enabled = false;
 
             }
+            Instantiate(dieEffect, transform.position, transform.rotation);
             GameObject.Destroy(gameObject);
         }
 
         void Deactivate()
         {
+            Instantiate(dieEffect, transform.position, transform.rotation);
             gameObject.SetActive(false);
         }   
     }

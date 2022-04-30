@@ -147,12 +147,12 @@ public class Player : MonoBehaviour
         GetComponent<Weapon>().enabled = false;
         isDead = true;
     }
-    public void Respawn(Vector3 location)
+    public void Respawn(Vector3 location, bool dead)
     {
         isDead = false;
         canRespawn = false;
         transform.position = location;
-        if (lastCheckpoint != null)
+        if (lastCheckpoint != null & dead)
             basicCameraControllerScript.ChangeCameraBounds(lastCheckpoint.GetComponent<CheckpointScript>().cameraSection);
 
         GetComponent<PlayerCombat>().enabled = true;
@@ -217,7 +217,7 @@ public class Player : MonoBehaviour
         while (!canRespawn)
             yield return null;
         yield return new WaitForSeconds(respawnTimer);
-        Respawn(location);
+        Respawn(location,true);
         rb2d.gravityScale = g;
         Recover();
     }
@@ -230,12 +230,8 @@ public class Player : MonoBehaviour
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<CircleCollider2D>().enabled = false;
 
-        float g = rb2d.gravityScale;
-        rb2d.velocity = new Vector2(0, 0);
-        rb2d.gravityScale = 0;
         yield return new WaitForSeconds(respawnTimer);
-        Respawn(location);
-        rb2d.gravityScale = g;
+        Respawn(location,false);
         TakeDamage(damage);
     }
 }

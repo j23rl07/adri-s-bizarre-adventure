@@ -69,7 +69,7 @@ public class BasicCameraController : MonoBehaviour
                 Mathf.Clamp(targetPosition.z, minValues.z, maxValues.z)
             );
         //Suavizar el movimiento de la camara
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, boundPosition, smoothFactor * Time.deltaTime);
+        Vector3 smoothedPosition = Vector3.Lerp(transform.position, boundPosition, smoothFactor * Time.fixedDeltaTime);
         transform.position = smoothedPosition;
     }
 

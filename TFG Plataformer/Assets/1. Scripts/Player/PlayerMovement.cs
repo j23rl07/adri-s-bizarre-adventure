@@ -55,6 +55,8 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
         rigidBody = GetComponent<Rigidbody2D>();
         circleCollider = GetComponent<CircleCollider2D>();
         pauseMenu = FindObjectOfType<PauseMenu>();
@@ -195,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Dash
-        if ((Input.GetKeyDown(KeyCode.LeftShift) | Input.GetKeyDown(KeyCode.RightShift)) & dashCdCounter <= 0)
+        if (Input.GetKeyDown(KeyCode.LeftShift) & dashCdCounter <= 0)
         {
             dash = true;
         }
@@ -253,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallJumping = true;
         wallJump = false;
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x,0);
         if (facingRight == 1)
         {
             rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
@@ -265,4 +268,5 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(wallJumpAirTime);
         isWallJumping = false;
     }
+
 }

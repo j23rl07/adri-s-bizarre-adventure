@@ -33,15 +33,15 @@ public class TrabajoExtraScript : MonoBehaviour
 
     void Equip()
     {
-        player.GetComponent<Player>().enemyDamage -= 10;
-        Debug.Log(player.GetComponent<Player>().enemyDamage);
+        player.GetComponent<Player>().selfDamage -= 10;
+        Debug.Log(player.GetComponent<Player>().selfDamage);
         active = true;
     }
 
     void Unequip()
     {
-        player.GetComponent<Player>().enemyDamage += 10;
-        Debug.Log(player.GetComponent<Player>().enemyDamage);
+        player.GetComponent<Player>().selfDamage += 10;
+        Debug.Log(player.GetComponent<Player>().selfDamage);
         active = false;
     }
 }

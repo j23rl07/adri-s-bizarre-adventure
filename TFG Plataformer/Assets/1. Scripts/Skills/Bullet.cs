@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public Rigidbody2D rb;
     public int damage = 40;
     public GameObject impactEffect;
+    [HideInInspector] public List<int> allowedLayerCollisions;
 
 
     // Start is called before the first frame update
@@ -17,26 +18,21 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 3);
     }
 
-    void OnEnable()
+    
+
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
-
-        foreach (GameObject obj in otherObjects)
+        if (allowedLayerCollisions.Contains(collision.gameObject.layer))
         {
-            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            if (collision.GetComponent<EnemyHealth>() != null)
+            {
+            collision.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
-    }
-
-
-    void OnTriggerEnter2D(Collider2D enemy)
-    {
-        if (enemy.GetComponent<EnemyHealth>() != null)
-        {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
-        }
-
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
     
 }

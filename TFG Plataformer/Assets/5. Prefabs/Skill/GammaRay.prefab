@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 1783660085069109068}
   - component: {fileID: 3782641031657337650}
   - component: {fileID: 7761310191275072061}
-  - component: {fileID: 5057917502946889139}
+  - component: {fileID: 3551560986719010083}
   - component: {fileID: 9162055450976256739}
   - component: {fileID: 8399333601098815062}
   m_Layer: 0
   m_Name: GammaRay
-  m_TagString: MyCoin
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1103341349
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1bafe9d8b38ab4bf9ba9db099e4d7156, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -109,8 +109,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &5057917502946889139
-CircleCollider2D:
+--- !u!61 &3551560986719010083
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,9 +122,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2508499, y: 0}
+  m_Offset: {x: -0.008962788, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.32067916
+  m_Size: {x: 0.30207443, y: 0.32}
+  m_EdgeRadius: 0
 --- !u!95 &9162055450976256739
 Animator:
   serializedVersion: 4
@@ -157,8 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7542881d0aec6a7428cdb1ae4c537724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 5
+  bulletSpeed: 10
   frecuencia: 20
   magnitud: 0.5
   damage: 40
   impactEffect: {fileID: 3392708303012216590, guid: 63404f8f461c7cb4ca0766fe6f4229f3, type: 3}
+  allowedLayerCollisions: 060000000700000009000000

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour {
 
@@ -44,7 +45,8 @@ public class Weapon : MonoBehaviour {
     [Header("Other")]
     public GameObject bulletPrefab;
     public Animator animator;
-    public GameObject[] prefabs;
+    public List<GameObject> prefabs;
+    public List<int> allowedLayerCollisions;
     private int i = 1;
     public Player player;
     private PauseMenu pauseMenu;
@@ -53,6 +55,7 @@ public class Weapon : MonoBehaviour {
     void Start()
     {
         pauseMenu = FindObjectOfType<PauseMenu>();
+        bulletPrefab.GetComponent<Bullet>().allowedLayerCollisions = allowedLayerCollisions;
     }
 
     void Shoot()
@@ -149,7 +152,9 @@ public class Weapon : MonoBehaviour {
     void changeSkill()
     {
         bulletPrefab = prefabs[i++];
-        if (i == prefabs.Length)
+        
+
+        if (i == prefabs.Count)
         {
             i = 0;
         }
@@ -173,6 +178,22 @@ public class Weapon : MonoBehaviour {
                 break;
             case "Boomerang":
                 rend.sprite = bSprite;
+                break;
+        }
+
+        switch (bulletPrefab.name)
+        {
+            case "GammaRay":
+                bulletPrefab.GetComponent<RayScript>().allowedLayerCollisions = allowedLayerCollisions;
+                break;
+            case "Cuchilla folio":
+                bulletPrefab.GetComponent<CuchillaFolioScript>().allowedLayerCollisions = allowedLayerCollisions;
+                break;
+            case "Boomerang":
+                bulletPrefab.GetComponent<BoomerangScript>().allowedLayerCollisions = allowedLayerCollisions;
+                break;
+            default:
+                bulletPrefab.GetComponent<Bullet>().allowedLayerCollisions = allowedLayerCollisions;
                 break;
         }
     }

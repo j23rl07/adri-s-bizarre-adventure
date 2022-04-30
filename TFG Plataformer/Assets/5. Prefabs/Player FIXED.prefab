@@ -1548,7 +1548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  jumpForce: 15.5
+  jumpForce: 18
   extraJumps: 1
   extraJumpsForce: 12
   groundLayer:

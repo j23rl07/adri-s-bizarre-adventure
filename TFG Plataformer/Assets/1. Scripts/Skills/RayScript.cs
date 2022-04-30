@@ -33,8 +33,26 @@ public class RayScript : MonoBehaviour
     void OnEnable()
     {
         GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
+        GameObject[] silverCoin = GameObject.FindGameObjectsWithTag("SilverCoin");
+        GameObject[] water = GameObject.FindGameObjectsWithTag("Water");
+        GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
 
         foreach (GameObject obj in otherObjects)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+        foreach (GameObject obj in projectiles)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+        foreach (GameObject obj in water)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
+        foreach (GameObject obj in silverCoin)
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }

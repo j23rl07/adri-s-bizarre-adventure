@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            if(GetComponent<SinEnemyProjectile>() != null)
+            if(GetComponent<SinEnemyProjectile>() != null) //Específico para el spawner de MedusaHeads
             {
                 Deactivate();
             }
@@ -39,6 +39,8 @@ public class EnemyHealth : MonoBehaviour
             this.enabled = false;
             GetComponent<Collider2D>().enabled = false;
 
+            /*En caso de que haya que desactivar algún componente en específico que haga funcionar a un enemigo al destruirlo, se realizará desde aquí */
+            
             if (GetComponentInParent<EnemyPatrol>() != null)
             {
                 GetComponentInParent<EnemyPatrol>().enabled = false;
@@ -67,6 +69,7 @@ public class EnemyHealth : MonoBehaviour
             GameObject.Destroy(gameObject);
         }
 
+        //Para MedusaHeads
         void Deactivate()
         {
             Instantiate(dieEffect, transform.position, transform.rotation);

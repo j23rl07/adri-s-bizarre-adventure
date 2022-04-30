@@ -27,7 +27,7 @@ public class SinEnemyProjectile : EnemyDamage
 
     private void Update()
     {
-        //mover el projectil en el eje x
+        //Aplicamos la función seno al proyectil
         pos += transform.up * Time.deltaTime * bulletSpeed;
         transform.position = pos + eje * Mathf.Sin(Time.time * frecuencia) * magnitud;
 

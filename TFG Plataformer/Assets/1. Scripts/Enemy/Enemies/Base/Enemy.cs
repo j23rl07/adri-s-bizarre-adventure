@@ -22,7 +22,8 @@ public class Enemy : EnemyHealth
     [Header("Other")]
     public Player player;
 
-    // Start is called before the first frame update
+    
+    /*En el primer frame obtenemos los componentes y variables necesarias para instanciar al enemigo*/
     private void Awake()
     {
         currentHealth = maxHealth;
@@ -30,6 +31,7 @@ public class Enemy : EnemyHealth
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
     }
 
+    /*Determina cuando el enemigo ataca dependiendo del cooldown establecido al ser el jugador detectado*/
     private void Update()
     {
         cdTimer += Time.deltaTime;
@@ -40,12 +42,16 @@ public class Enemy : EnemyHealth
                 animator.SetTrigger("meleeAttack");
             }
         }
-
+        
+        /*El enemigo patrullará mientras no haya detectado al jugador*/
         if (enemyPatrol != null)
             enemyPatrol.enabled = !PlayerInSight();
 
     }
     
+    /*Generar la zona que detecta al jugador. Las variables range y colliderDistance permiten ajustar el tamaño
+     de dicha caja. Vector3 nos permite resituar la caja. Transform.localScale.x nos permite rotar al enemigo y collider adecuadamente.
+    Se retorna si el jugador se ha detectado o no.*/
     private bool PlayerInSight()
     {
         RaycastHit2D hit =
@@ -56,6 +62,7 @@ public class Enemy : EnemyHealth
         return hit.collider != null;
     }
 
+    /*Usamos Gizmos para dibujar la zona anterior y poder visualizarla*/
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -64,6 +71,7 @@ public class Enemy : EnemyHealth
 
     }
 
+    /*Se llama a la función correspondiente del jugador para que reciba daño al ser detectado*/
     private void damagePlayer()
     {
         if (PlayerInSight())

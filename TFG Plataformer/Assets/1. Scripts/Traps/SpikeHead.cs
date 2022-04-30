@@ -37,13 +37,13 @@ public class SpikeHead : EnemyDamage
 
     private void Update()
     {
-        //Move object to final position if activated
+        //Mueve la trampa al destino en caso de ser activada
         if (attacking) { 
             transform.Translate(finalPos * Time.deltaTime * speed);
         }
         else
         {
-            timer += Time.deltaTime;
+            timer += Time.deltaTime; //Si ha pasado suficiente tiempo para hacer un nuevo movimiento, se comprueba la dirección del jugador
             if(timer > delay)
             {
                 checkForPlayer();
@@ -51,15 +51,18 @@ public class SpikeHead : EnemyDamage
         }
     }
 
+
+
     private void checkForPlayer()
     {
         CalculateDirections();
+        //Por cada una de las direcciones de la trampa, establecemos un raycast para detectar al jugador y dibujamos su Gizmo correspondiente
         for (int i = 0; i < directions.Length; i++)
         {
             Debug.DrawRay(transform.position, directions[i], Color.red);
             RaycastHit2D hit = Physics2D.Raycast(transform.position, directions[i], range, playerLayer);
 
-            if (hit.collider != null && !attacking)
+            if (hit.collider != null && !attacking) //Si no está atacando y deteacta al jugador
             {
                 attacking = true;
                 finalPos = directions[i];
@@ -69,6 +72,7 @@ public class SpikeHead : EnemyDamage
         
     }
 
+    //Cada una de las distintas direcciones en las que se puede mover las trampa, dependiente del rango establecido.
     private void CalculateDirections()
     {
         directions[0] = transform.right * range;

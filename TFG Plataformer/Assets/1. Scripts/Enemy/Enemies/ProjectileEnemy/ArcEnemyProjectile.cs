@@ -26,20 +26,20 @@ public class ArcEnemyProjectile : EnemyDamage
 
     private void Update()
     {
-        // Compute the next position, with arc added in
-        float x0 = startPos.x;
-        float x1 = targetPos.x;
-        float dist = x1 - x0;
-        float nextX = Mathf.MoveTowards(transform.position.x, x1, speed * Time.deltaTime);
-        float baseY = Mathf.Lerp(startPos.y, targetPos.y, (nextX - x0) / dist);
-        float arc = arcHeight * (nextX - x0) * (nextX - x1) / (-0.25f * dist * dist);
-        nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
+        //Calcula la posición final para disparar la bala. Se traza la trayectoria del arco.
+        float x0 = startPos.x; //Posición inicial de la bala
+        float x1 = targetPos.x; //Posición destino
+        float distance = x1 - x0; //Distancia entre ambos puntos
+        float nextX = Mathf.MoveTowards(transform.position.x, x1, speed * Time.deltaTime); //Calcula a través de la posición donde se encuentra la basa hacia donde se tiene que mover en el eje x con una velocidad dada
+        float baseY = Mathf.Lerp(startPos.y, targetPos.y, (nextX - x0) / distance); //Mismo caso que lo anterior para el eye y
+        float arc = arcHeight * (nextX - x0) * (nextX - x1) / (-0.25f * distance * distance); //Calculamos la trayectoria del arco
+        nextPos = new Vector3(nextX, baseY + arc, transform.position.z); //Se determina el nuevo movimiento en base a los parámetros anteriores
 
-        // Rotate to face the next position, and then move there
+        // Rotación y movimiento del proyectil a la nueva posición calculada
         transform.rotation = LookAt2D(nextPos - transform.position);
         transform.position = nextPos;
 
-        // Do something when we reach the target
+        // Destruimos el objeto al llegar a la posición final
         if (nextPos == targetPos) Arrived();
 
         if (duration > resetTime)
@@ -86,12 +86,8 @@ public class ArcEnemyProjectile : EnemyDamage
         Destroy(gameObject);
     }
 
-    /// 
-    /// This is a 2D version of Quaternion.LookAt; it returns a quaternion
-    /// that makes the local +X axis point in the given forward direction.
-    /// 
-    /// forward direction
-    /// Quaternion that rotates +X to align with forward
+    /*Función para que el eje x apunte en la dirección otorgada hacia delante. 
+         Usado para determinar la rotación en la función anterior*/
     static Quaternion LookAt2D(Vector2 forward)
     {
         return Quaternion.Euler(0, 0, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);

@@ -9,6 +9,8 @@ public class ProjectileTrap : MonoBehaviour
     [SerializeField] private GameObject[] projectiles;
     private float timerCd;
 
+    /*En esta primera función determinamos que tipo de proyectiles activar dependiendo del
+    tipo de trampa con el que estemos tratando*/
     private void Attack()
     {
         timerCd = 0;
@@ -29,6 +31,7 @@ public class ProjectileTrap : MonoBehaviour
 
     }
 
+    //Rotar entre proyectiles en la jerarquía
     private int FindFireball()
     {
         for(int i=0; i < projectiles.Length; i++)

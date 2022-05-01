@@ -14,11 +14,14 @@ public class RayScript : MonoBehaviour
     [Header("Bullet")]
     public int damage = 40;
     public GameObject impactEffect;
+    [HideInInspector] public List<int> allowedLayerCollisions;
+
+    private readonly int groundLayer = 6;
 
     void Start()
     {
         pos = transform.position;
-        DestroyObject(gameObject, 5);
+        Destroy(gameObject, 5);
         eje = transform.right;  
 
     }
@@ -30,25 +33,17 @@ public class RayScript : MonoBehaviour
         transform.position = pos + eje * Mathf.Sin(Time.time * frecuencia) * magnitud;
     }
 
-    void OnEnable()
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("MyCoin");
-
-        foreach (GameObject obj in otherObjects)
+        if (allowedLayerCollisions.Contains(collision.gameObject.layer) && collision.gameObject.layer != groundLayer)
         {
-            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            if (collision.GetComponent<EnemyHealth>() != null)
+            {
+                collision.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
-    }
-
-
-    void OnTriggerEnter2D(Collider2D enemy)
-    {
-        if (enemy.GetComponent<EnemyHealth>() != null)
-        {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
-        }
-
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
 }

@@ -11,12 +11,13 @@ public class BoomerangScript : MonoBehaviour
     private Rigidbody2D rb;
     private bool returning = false;
     private bool canTakeDamage = true;
-    private Player player;
+    private GameObject player;
+    [HideInInspector] public List<int> allowedLayerCollisions;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = GameObject.FindGameObjectWithTag("Player");
         rb = GetComponent<Rigidbody2D>();
 
         rb.AddForce(transform.right * force, ForceMode2D.Impulse);
@@ -43,17 +44,20 @@ public class BoomerangScript : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D target)
     {
-        
-        if (target.GetComponent<EnemyHealth>() != null & canTakeDamage)
+        if (allowedLayerCollisions.Contains(target.gameObject.layer))
         {
-            target.GetComponent<EnemyHealth>().TakeDamage(damage);
+            if (target.GetComponent<EnemyHealth>() != null & canTakeDamage)
+            {
+                target.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+
+            if (target.gameObject.layer == 6 & !returning)
+            {
+                rb.velocity = new Vector2(-pullForce, 0);
+            }
         }
 
-        if(target.name == "Tilemap ground" & !returning)
-        {
-            rb.velocity = new Vector2(-pullForce, 0);
-        }
-        if(target.name == "Player" & returning)
+        if (target.CompareTag("Player") & returning)
         {
             Destroy(gameObject);
         }

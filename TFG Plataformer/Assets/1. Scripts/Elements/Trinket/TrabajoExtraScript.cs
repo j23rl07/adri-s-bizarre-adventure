@@ -16,7 +16,7 @@ public class TrabajoExtraScript : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player FIXED");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -34,14 +34,12 @@ public class TrabajoExtraScript : MonoBehaviour
     void Equip()
     {
         player.GetComponent<Player>().selfDamage -= 10;
-        Debug.Log(player.GetComponent<Player>().selfDamage);
         active = true;
     }
 
     void Unequip()
     {
         player.GetComponent<Player>().selfDamage += 10;
-        Debug.Log(player.GetComponent<Player>().selfDamage);
         active = false;
     }
 }

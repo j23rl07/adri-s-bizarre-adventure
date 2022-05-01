@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        inventory.SetActive(false);
+        inventory.GetComponent<Canvas>().enabled = false;
     }
 
     void Update()
@@ -35,19 +35,19 @@ public class Inventory : MonoBehaviour
 
     public void OpenInv()
     {
-        if (!inventory.activeSelf & !PauseMenu.otherMenuOn)
+        if (!inventory.GetComponent<Canvas>().enabled & !PauseMenu.otherMenuOn)
         {
             Time.timeScale = 0;
-            inventory.SetActive(true);
+            inventory.GetComponent<Canvas>().enabled=true;
             PauseMenu.isGamePaused = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             PauseMenu.otherMenuOn = true;
         }
-        else if (inventory.activeSelf)
+        else if (inventory.GetComponent<Canvas>().enabled)
         {
             Time.timeScale = 1;
-            inventory.SetActive(false);
+            inventory.GetComponent<Canvas>().enabled = false;
             PauseMenu.isGamePaused = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;

@@ -16,7 +16,7 @@ public class LuckyCoinScript : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player FIXED");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -33,7 +33,6 @@ public class LuckyCoinScript : MonoBehaviour
 
     void Equip()
     {
-        Debug.Log("Equipado");
         player.GetComponent<ScoreScript>().goldValue += 5;
         player.GetComponent<ScoreScript>().silverValue += 2;
         active = true;
@@ -41,7 +40,6 @@ public class LuckyCoinScript : MonoBehaviour
 
     void Unequip()
     {
-        Debug.Log("Desequipado");
         player.GetComponent<ScoreScript>().goldValue -= 5;
         player.GetComponent<ScoreScript>().silverValue -= 2;
         active = false;

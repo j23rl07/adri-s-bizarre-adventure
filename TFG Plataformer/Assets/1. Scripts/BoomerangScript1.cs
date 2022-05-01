@@ -24,12 +24,6 @@ public class BoomerangScript1 : MonoBehaviour
 
         player = FindObjectOfType<Player>();
         rb = GetComponent<Rigidbody2D>();
-
-        rb.AddForce(transform.right * force, ForceMode2D.Impulse);
-        if(rb.velocity.x < 0)
-        {
-            pullForce = -pullForce;
-        }
     }
 
     // Update is called once per frame
@@ -49,31 +43,10 @@ public class BoomerangScript1 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D target)
     {
+        //ejemplo de código para meter en el inventario (CheckASlotsAvailability -> habilidades, CheckTSlotsAvailability -> trinket)
         if (target.CompareTag("Player"))
         {
-            inventory.CheckTSlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
+            inventory.CheckASlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
         }
-
-        if (target.GetComponent<EnemyHealth>() != null & canTakeDamage)
-        {
-            target.GetComponent<EnemyHealth>().TakeDamage(damage);
-        }
-
-        if(target.name == "Tilemap ground" & !returning)
-        {
-            rb.velocity = new Vector2(-pullForce, 0);
-        }
-        if(target.name == "Player" & returning)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-
-    private IEnumerator TakeDamage()
-    {
-        canTakeDamage = false;
-        yield return new WaitForSeconds(1);
-        canTakeDamage = true;
     }
 }

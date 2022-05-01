@@ -2210,22 +2210,6 @@ MonoBehaviour:
   - {fileID: 6214626131794359704}
   - {fileID: 6214626131416942910}
   - {fileID: 6214626131349236582}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   Tslots:
   - {fileID: 6214626132056887534}
   - {fileID: 6214626132143144008}
@@ -2233,26 +2217,6 @@ MonoBehaviour:
   - {fileID: 6214626131491165821}
   - {fileID: 6214626130427725269}
   - {fileID: 6214626130763996888}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   backPack: []
 --- !u!1 &6214626132012506456
 GameObject:

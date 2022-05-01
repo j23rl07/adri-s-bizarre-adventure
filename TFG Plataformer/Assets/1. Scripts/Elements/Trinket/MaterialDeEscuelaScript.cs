@@ -16,7 +16,7 @@ public class MaterialDeEscuelaScript : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player FIXED");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -34,14 +34,12 @@ public class MaterialDeEscuelaScript : MonoBehaviour
     void Equip()
     {
         player.GetComponent<PlayerCombat>().attackDamage += 10;
-        Debug.Log(player.GetComponent<PlayerCombat>().attackDamage);
         active = true;
     }
 
     void Unequip()
     {
         player.GetComponent<PlayerCombat>().attackDamage -= 10;
-        Debug.Log(player.GetComponent<PlayerCombat>().attackDamage);
         active = false;
     }
 }

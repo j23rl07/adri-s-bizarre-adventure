@@ -15,7 +15,7 @@ public class ThermoScript : MonoBehaviour
     }
     public void Start()
     {
-        player = GameObject.Find("Player FIXED");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     void Update()
     {
@@ -32,14 +32,12 @@ public class ThermoScript : MonoBehaviour
     void Equip()
     {
         player.GetComponent<Player>().maxHealth += 25;
-        Debug.Log(player.GetComponent<Player>().maxHealth);
         active = true;
     }
 
     void Unequip()
     {
         player.GetComponent<Player>().maxHealth -= 25;
-        Debug.Log(player.GetComponent<Player>().maxHealth);
         active = false;
     }
 }

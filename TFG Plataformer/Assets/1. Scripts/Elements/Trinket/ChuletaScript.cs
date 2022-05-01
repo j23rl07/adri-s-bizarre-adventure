@@ -7,7 +7,7 @@ public class ChuletaScript : MonoBehaviour
     public Trinket trinket;
     public GameObject player;
     public TrinketState TrinketState { get; set; }
-    private bool active = false;
+    private bool esperando = false;
 
     public ChuletaScript()
     {
@@ -16,42 +16,30 @@ public class ChuletaScript : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player FIXED");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
     {
-        if (transform.GetChild(0).gameObject.activeSelf & active == false)
+        if (transform.GetChild(0).gameObject.activeSelf & !esperando & player.GetComponent<Player>().currentMana < player.GetComponent<Player>().maxMana)
         {
-            equip();
-        }
-        else if(!transform.GetChild(0).gameObject.activeSelf & active == true)
-        {
-            unequip();
+            StartCoroutine(Equip());
         }
     }
-
-    public void equip()
-    {
-        StartCoroutine(Equip());
-        active = true;
-    }
-
-    public void unequip()
-    {
-        StopAllCoroutines();
-        active = false;
-    }
-
     private IEnumerator Equip()
     {
-        Debug.Log("Recuperando");
+        esperando = true;
         yield return new WaitForSeconds(2);
-        while (player.GetComponent<Player>().currentMana < player.GetComponent<Player>().maxMana)
+        esperando = false;
+        int mana = Mathf.FloorToInt(player.GetComponent<Player>().maxMana * 0.05f);
+        int currentMana = player.GetComponent<Player>().currentMana;
+        int manaMax = player.GetComponent<Player>().maxMana;
+        if (mana + currentMana > manaMax)
         {
-            player.GetComponent<Player>().currentMana += player.GetComponent<Player>().maxMana / 100;
-            player.GetComponent<Player>().manaBar.SetMana(player.GetComponent<Player>().currentMana);
-            yield return player.GetComponent<Player>().regenTick;
+            mana = manaMax - currentMana;
         }
+        player.GetComponent<Player>().currentMana += mana;
+        player.GetComponent<Player>().manaBar.SetMana(player.GetComponent<Player>().currentMana);
+        yield return player.GetComponent<Player>().regenTick;
     }
 }

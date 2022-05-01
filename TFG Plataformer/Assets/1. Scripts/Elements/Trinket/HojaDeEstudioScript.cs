@@ -11,7 +11,7 @@ public class HojaDeEstudioScript : MonoBehaviour
 
     public void Start()
     {
-        player = GameObject.Find("Player FIXED");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public HojaDeEstudioScript()
@@ -34,14 +34,12 @@ public class HojaDeEstudioScript : MonoBehaviour
     void Equip()
     {
         player.GetComponent<Player>().maxMana += 25;
-        Debug.Log(player.GetComponent<Player>().maxMana);
         active = true;
     }
 
     void Unequip()
     {
         player.GetComponent<Player>().maxMana -= 25;
-        Debug.Log(player.GetComponent<Player>().maxMana);
         active = false;
     }
 }

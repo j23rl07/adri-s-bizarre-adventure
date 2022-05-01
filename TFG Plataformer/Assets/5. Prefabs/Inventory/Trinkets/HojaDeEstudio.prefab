@@ -191,8 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trinket: {fileID: 11400000, guid: b3a85979bab0b19488e696d4749e71f9, type: 2}
-  player: {fileID: 4017893389135811847, guid: e039f439873082d49b07983ddaa09600, type: 3}
-  active: 0
+  player: {fileID: 0}
 --- !u!1 &5384575842250726653
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,7 +258,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  m_text: Aumenta la inspiracion maxima en 25
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

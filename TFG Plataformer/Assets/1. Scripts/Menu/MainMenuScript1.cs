@@ -36,7 +36,6 @@ public class MainMenuScript1 : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
-        print("game close");
     }
 
     public void ShowSettings()

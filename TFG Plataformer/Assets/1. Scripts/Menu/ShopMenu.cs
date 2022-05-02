@@ -65,13 +65,14 @@ public class ShopMenu : MonoBehaviour
 
     public void Shop()
     {
-        if (!shopCanvas.activeSelf)
+        if (!shopCanvas.activeSelf & !PauseMenu.otherMenuOn)
         {
             Time.timeScale = 0;
             shopCanvas.SetActive(true);
             PauseMenu.isGamePaused = true;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            PauseMenu.otherMenuOn = true;
 
             //Visualizar el dinero del jugador
             SetPrices();
@@ -83,6 +84,7 @@ public class ShopMenu : MonoBehaviour
             PauseMenu.isGamePaused = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            PauseMenu.otherMenuOn = false;
         }
     }
 

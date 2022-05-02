@@ -18,6 +18,8 @@ public class PauseMenu : MonoBehaviour
 
     private bool wasPaused = false;
 
+    [HideInInspector] public static bool otherMenuOn = false;
+
     void Start()
     {
         if (Screen.fullScreen)

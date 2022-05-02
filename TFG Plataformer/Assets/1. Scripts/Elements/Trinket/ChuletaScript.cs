@@ -5,40 +5,41 @@ using UnityEngine;
 public class ChuletaScript : MonoBehaviour
 {
     public Trinket trinket;
-    public Player player;
+    public GameObject player;
     public TrinketState TrinketState { get; set; }
+    private bool esperando = false;
 
     public ChuletaScript()
     {
         TrinketState = new TrinketState();
     }
 
-    void Update()
+    public void Start()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (TrinketState.isEquipped == false)
-            {
-                TrinketState.isEquipped = true;
-                StartCoroutine(Equip());
-            }
-            else
-            {
-                TrinketState.isEquipped = false;
-                StopAllCoroutines();
-            }
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
+    void Update()
+    {
+        if (transform.GetChild(0).gameObject.activeSelf & !esperando & player.GetComponent<Player>().currentMana < player.GetComponent<Player>().maxMana)
+        {
+            StartCoroutine(Equip());
+        }
+    }
     private IEnumerator Equip()
     {
-        Debug.Log("Recuperando");
+        esperando = true;
         yield return new WaitForSeconds(2);
-        while (player.currentMana < player.maxMana)
+        esperando = false;
+        int mana = Mathf.FloorToInt(player.GetComponent<Player>().maxMana * 0.05f);
+        int currentMana = player.GetComponent<Player>().currentMana;
+        int manaMax = player.GetComponent<Player>().maxMana;
+        if (mana + currentMana > manaMax)
         {
-            player.currentMana += player.maxMana / 100;
-            player.manaBar.SetMana(player.currentMana);
-            yield return player.regenTick;
+            mana = manaMax - currentMana;
         }
+        player.GetComponent<Player>().currentMana += mana;
+        player.GetComponent<Player>().manaBar.SetMana(player.GetComponent<Player>().currentMana);
+        yield return player.GetComponent<Player>().regenTick;
     }
 }

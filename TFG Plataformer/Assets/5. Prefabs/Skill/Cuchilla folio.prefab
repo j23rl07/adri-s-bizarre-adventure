@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5218329150663923696}
   - component: {fileID: 7286254832742265403}
   - component: {fileID: 1854452898429050821}
-  - component: {fileID: 9027720217343119500}
   - component: {fileID: 1324153092865891158}
   - component: {fileID: 3207787814915792020}
+  - component: {fileID: -2137980310973248671}
   m_Layer: 0
   m_Name: Cuchilla folio
   m_TagString: Projectile
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1103341349
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b17a705b1fccb414c9a1ca863d3ff64b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,28 +98,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.9099998
---- !u!114 &9027720217343119500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8988475175282237381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f483a97ed7061bb4a810314e9e1ee552, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 10
-  rb: {fileID: 1324153092865891158}
-  damage: 50
-  impactEffect: {fileID: 3392708303012216590, guid: 63404f8f461c7cb4ca0766fe6f4229f3, type: 3}
 --- !u!50 &1324153092865891158
 Rigidbody2D:
   serializedVersion: 4
@@ -154,3 +138,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotSpeed: 200
+--- !u!114 &-2137980310973248671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8988475175282237381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524bb9cb61ec29e44a1a3ae93add3b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rb: {fileID: 1324153092865891158}
+  damage: 50
+  impactEffect: {fileID: 3392708303012216590, guid: 63404f8f461c7cb4ca0766fe6f4229f3, type: 3}
+  allowedLayerCollisions: 060000000700000009000000

@@ -22,12 +22,12 @@ public class ScoreScript : MonoBehaviour
     {
         if (Coin.tag == "MyCoin")
         {
-            addMoney(10);
+            addMoney(goldValue);
             Destroy(Coin.gameObject);
         }
         if (Coin.tag == "SilverCoin")
         {
-            addMoney(1);
+            addMoney(silverValue);
             Destroy(Coin.gameObject);
         }
     }

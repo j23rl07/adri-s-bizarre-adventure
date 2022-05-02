@@ -21,15 +21,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - 
   - Water
   - UI
   - Ground
   - wall
   - Player
   - Enemies
-  - 
-  - 
+  - Checkpoints
+  - DeathZones
   - 
   - 
   - 
@@ -60,8 +60,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Props
+    uniqueID: 625044075
+    locked: 0
   - name: Foreground
     uniqueID: 248324901
+    locked: 0
+  - name: Enemy
+    uniqueID: 4056700459
+    locked: 0
+  - name: Player
+    uniqueID: 3191625947
     locked: 0
   - name: UI
     uniqueID: 3841028297

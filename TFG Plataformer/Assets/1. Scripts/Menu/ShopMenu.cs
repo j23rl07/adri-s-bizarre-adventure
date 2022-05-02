@@ -35,7 +35,7 @@ public class ShopMenu : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             hintText.gameObject.SetActive(true);
             shopAccess = true;
@@ -46,7 +46,7 @@ public class ShopMenu : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             hintText.gameObject.SetActive(false);
             shopAccess = false;

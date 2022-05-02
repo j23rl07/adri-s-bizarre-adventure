@@ -8,6 +8,7 @@ public class ShopMenu : MonoBehaviour
     [SerializeField] private GameObject hintText;
     [SerializeField] private GameObject shopCanvas;
     [SerializeField] private GameObject floatingTextPrefab;
+    private Inventory inventoryScript;
     [Header("Goods")]
     [SerializeField] private int precioCafe;
     [SerializeField] private int precioChuleta;
@@ -15,18 +16,34 @@ public class ShopMenu : MonoBehaviour
     [SerializeField] private int stockFragInsp;
     [SerializeField] private int precioFragVit;
     [SerializeField] private int stockFragVit;
-    
+    [SerializeField] private GameObject trabajoExtra;
+    [SerializeField] private int precioTrabajoExtra;
+    private int stockTrabajoExtra;
+    [SerializeField] private GameObject MonedaSuerte;
+    [SerializeField] private int precioMonedaSuerte;
+    private int stockMonedaSuerte;
+    [SerializeField] private GameObject ChuletaT;
+    [SerializeField] private int precioChuletaT;
+    private int stockChuletaT;
+
     private bool shopAccess = false;
     private GameObject player;
     private ScoreScript scoreScript;
     private PotionCountScript potionCountScript;
     private HealingItemsScript healingItemsScript;
 
-
     private void Start()
     {
         hintText.SetActive(false);
         shopCanvas.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        inventoryScript = Inventory.instance.GetComponent<Inventory>();
+        stockTrabajoExtra = getTrinketStock(trabajoExtra.name);
+        stockMonedaSuerte = getTrinketStock(MonedaSuerte.name);
+        stockChuletaT = getTrinketStock(ChuletaT.name);
     }
 
     void Update()
@@ -102,6 +119,15 @@ public class ShopMenu : MonoBehaviour
         //FragInsp
         shopCanvas.transform.Find("FragmentoInsp/Text").gameObject.GetComponent<TextMeshProUGUI>().text = precioFragInsp.ToString();
         shopCanvas.transform.Find("FragmentoInsp/Stock/Text").gameObject.GetComponent<TextMeshProUGUI>().text = (stockFragInsp - healingItemsScript.shopManaF).ToString();
+        //TrabajoExtra
+        shopCanvas.transform.Find("TrabajoExtra/Text").gameObject.GetComponent<TextMeshProUGUI>().text = precioTrabajoExtra.ToString();       
+        shopCanvas.transform.Find("TrabajoExtra/Stock/Text").gameObject.GetComponent<TextMeshProUGUI>().text = stockTrabajoExtra.ToString();
+        //MonedaSuerte
+        shopCanvas.transform.Find("MonedaSuerte/Text").gameObject.GetComponent<TextMeshProUGUI>().text = precioMonedaSuerte.ToString();        
+        shopCanvas.transform.Find("MonedaSuerte/Stock/Text").gameObject.GetComponent<TextMeshProUGUI>().text = stockMonedaSuerte.ToString();
+        //ChuletaT
+        shopCanvas.transform.Find("ChuletaT/Text").gameObject.GetComponent<TextMeshProUGUI>().text = precioChuletaT.ToString();
+        shopCanvas.transform.Find("ChuletaT/Stock/Text").gameObject.GetComponent<TextMeshProUGUI>().text = stockChuletaT.ToString();
     }
 
     public void Buy(string obj)
@@ -197,11 +223,94 @@ public class ShopMenu : MonoBehaviour
                     SetPrices();
                 }
                 break;
+
+            case "TrabajoExtra":
+                if (initialMoney < precioTrabajoExtra)
+                {
+                    Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
+                    string errorMsg = "Dinero insuficiente";
+                    CreateErrorMsg(errorMsg, position);
+                }
+                else if (stockTrabajoExtra <= 0)
+                {
+                    Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
+                    string errorMsg = "Capacidad máxima alcanzada";
+                    CreateErrorMsg(errorMsg, position);
+                }
+                else
+                {
+                    inventoryScript.CheckTSlotsAvailability(trabajoExtra, trabajoExtra.name, 1);
+                    scoreScript.addMoney(-precioTrabajoExtra);
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    stockTrabajoExtra -= 1;
+                    SetPrices();
+                }
+                break;
+
+            case "MonedaSuerte":
+                if (initialMoney < precioMonedaSuerte)
+                {
+                    Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
+                    string errorMsg = "Dinero insuficiente";
+                    CreateErrorMsg(errorMsg, position);
+                }
+                else if (stockMonedaSuerte <= 0)
+                {
+                    Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
+                    string errorMsg = "Capacidad máxima alcanzada";
+                    CreateErrorMsg(errorMsg, position);
+                }
+                else
+                {
+                    inventoryScript.CheckTSlotsAvailability(MonedaSuerte, MonedaSuerte.name, 1);
+                    scoreScript.addMoney(-precioTrabajoExtra);
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    stockMonedaSuerte -= 1;
+                    SetPrices();
+                }
+                break;
+
+            case "ChuletaT":
+                if (initialMoney < precioChuletaT)
+                {
+                    Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
+                    string errorMsg = "Dinero insuficiente";
+                    CreateErrorMsg(errorMsg, position);
+                }
+                else if (stockChuletaT <= 0)
+                {
+                    Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
+                    string errorMsg = "Capacidad máxima alcanzada";
+                    CreateErrorMsg(errorMsg, position);
+                }
+                else
+                {
+                    inventoryScript.CheckTSlotsAvailability(ChuletaT, ChuletaT.name, 1);
+                    scoreScript.addMoney(-precioTrabajoExtra);
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    stockChuletaT -= 1;
+                    SetPrices();
+                }
+                break;
         }
     }
 
     private void CreateErrorMsg(string msg, Vector3 position)
     {
         Instantiate(floatingTextPrefab, position, Quaternion.identity, shopCanvas.transform).GetComponent<FloatingText>().text = msg;
+    }
+
+    private int getTrinketStock(string trinket)
+    {
+        int result = 1;
+
+        foreach (GameObject slot in inventoryScript.Tslots)
+        {
+            if(slot.transform.childCount > 0)
+                if (slot.transform.GetChild(0).name.Equals(trinket))
+                    result = 0;
+        }
+
+        return result;
     }
 }

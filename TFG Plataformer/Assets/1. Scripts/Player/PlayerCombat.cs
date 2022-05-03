@@ -15,6 +15,8 @@ public class PlayerCombat : MonoBehaviour
     public float attackRate = 2f;
     float nextAttackTime = 0f;
 
+    public GameObject Trinket;
+
     [HideInInspector] public bool isAttacking = false;
 
     void Start()

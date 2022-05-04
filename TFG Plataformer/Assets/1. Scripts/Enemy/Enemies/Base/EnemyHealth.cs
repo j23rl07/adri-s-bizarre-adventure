@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     public Animator animator;
     public GameObject dieEffect;
+    [HideInInspector] public bool gotHit = false;
     
     public void Awake()
     {
@@ -17,12 +18,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        gotHit = true;
         currentHealth -= damage;
         animator.SetTrigger("Hurt");
 
         if (currentHealth <= 0)
         {
-            if(GetComponent<SinEnemyProjectile>() != null) //Específico para el spawner de MedusaHeads
+            if(GetComponent<SinEnemyProjectile>() != null) //Especï¿½fico para el spawner de MedusaHeads
             {
                 Deactivate();
             }
@@ -39,7 +41,7 @@ public class EnemyHealth : MonoBehaviour
             this.enabled = false;
             GetComponent<Collider2D>().enabled = false;
 
-            /*En caso de que haya que desactivar algún componente en específico que haga funcionar a un enemigo al destruirlo, se realizará desde aquí */
+            /*En caso de que haya que desactivar algï¿½n componente en especï¿½fico que haga funcionar a un enemigo al destruirlo, se realizarï¿½ desde aquï¿½ */
             
             if (GetComponentInParent<EnemyPatrol>() != null)
             {

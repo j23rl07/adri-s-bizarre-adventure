@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public Rigidbody2D rb;
     public int damage = 40;
     public GameObject impactEffect;
+    public List<int> allowedLayerCollisions;
 
 
     // Start is called before the first frame update
@@ -43,20 +44,20 @@ public class Bullet : MonoBehaviour
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
-
-
     }
 
 
-    void OnTriggerEnter2D(Collider2D enemy)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (enemy.GetComponent<EnemyHealth>() != null)
+        if (allowedLayerCollisions.Contains(collision.gameObject.layer))
         {
-            enemy.GetComponent<EnemyHealth>().TakeDamage(damage);
+            if (collision.GetComponent<EnemyHealth>() != null)
+            {
+            collision.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+            Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(gameObject);
         }
-
-        Instantiate(impactEffect, transform.position, transform.rotation);
-        Destroy(gameObject);
     }
     
 }

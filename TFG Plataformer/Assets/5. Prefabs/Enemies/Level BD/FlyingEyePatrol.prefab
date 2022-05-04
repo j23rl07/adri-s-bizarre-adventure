@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1066495667150212182}
   - component: {fileID: 1066495667150212177}
   - component: {fileID: 1066495667150212176}
-  - component: {fileID: 3434281235837103480}
+  - component: {fileID: 5306528155103829353}
   m_Layer: 9
   m_Name: FlyingEye
   m_TagString: Enemy
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -238266837
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -4795363162621231457, guid: 6d7cd4f7505dc674c891ca8946cfd98b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -148,7 +148,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4686253, y: 0.31184074}
   m_EdgeRadius: 0
---- !u!114 &3434281235837103480
+--- !u!114 &5306528155103829353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,13 +157,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1066495667150212180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9c39203a12f39439c16c6ad6371526, type: 3}
+  m_Script: {fileID: 11500000, guid: 5990314c14630314c97f83531686b469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
   currentHealth: 0
-  animator: {fileID: 1525796579076879269, guid: 63404f8f461c7cb4ca0766fe6f4229f3, type: 3}
+  animator: {fileID: 1066495667150212182}
   dieEffect: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 3}
+  gotHit: 0
 --- !u!1 &8718574186375785444
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,12 +25,14 @@ public class RangeEnemy : EnemyHealth
     [Header("Other")]
     public Player player;
 
+    /*En el primer frame obtenemos los componentes y variables necesarias para instanciar al enemigo*/
     private void Awake()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
     }
 
+    /*Determina cuando el enemigo ataca dependiendo del cooldown establecido al ser el jugador detectado*/
     private void Update()
     {
         cdTimer += Time.deltaTime;
@@ -45,6 +47,8 @@ public class RangeEnemy : EnemyHealth
 
     }
 
+    /*El enemigo dispara a través del firePoint. Llama al componente del proyectil correspondiente del array que posee la función que lo activa. 
+     Se resetea el timer de disparo*/
     private void rangedAttack()
     {
         cdTimer = 0;
@@ -62,6 +66,10 @@ public class RangeEnemy : EnemyHealth
         }
         return 0;
     }
+
+    /*Generar la zona que detecta al jugador. Las variables range y colliderDistance permiten ajustar el tamaño
+     de dicha caja. Vector3 nos permite resituar la caja. Transform.localScale.x nos permite rotar al enemigo y collider adecuadamente.
+    Se retorna si el jugador se ha detectado o no.*/
 
     private bool PlayerInSight()
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8916993109407579888}
   - component: {fileID: 8916993109407579889}
   - component: {fileID: 8916993109407579915}
-  - component: {fileID: 8916993109407579916}
+  - component: {fileID: 8734584863483763751}
   m_Layer: 9
   m_Name: EagleEnemy (1)
   m_TagString: Untagged
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   damage: 10
---- !u!114 &8916993109407579916
+--- !u!114 &8734584863483763751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,12 +142,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8916993109407579890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d9c39203a12f39439c16c6ad6371526, type: 3}
+  m_Script: {fileID: 11500000, guid: 5990314c14630314c97f83531686b469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 20
   currentHealth: 0
-  animator: {fileID: 0}
+  animator: {fileID: 8916993109605963874}
+  dieEffect: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 3}
+  gotHit: 0
 --- !u!1 &8916993109605963876
 GameObject:
   m_ObjectHideFlags: 0

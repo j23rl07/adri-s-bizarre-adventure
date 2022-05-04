@@ -12,5 +12,9 @@ public class TrapScript : MonoBehaviour
         {
             player.TakeDamage(100);    
         }
+        if (collision.tag == "Lava")
+        {
+            player.TakeDamage(300);
+        }
     }
 }

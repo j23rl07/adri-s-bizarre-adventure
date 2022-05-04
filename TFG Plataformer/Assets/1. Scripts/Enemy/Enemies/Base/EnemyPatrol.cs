@@ -32,6 +32,8 @@ public class EnemyPatrol : MonoBehaviour
         animator.SetBool("moving", false);
     }
 
+    /*Se comprueba la posición actual del enemigo con la de los puntos de referencia para determinar si seguir caminando
+     en la misma dirección o cambiar*/
     private void Update()
     {
         if (moveLeft)
@@ -50,6 +52,8 @@ public class EnemyPatrol : MonoBehaviour
         }
     }
 
+    /*Determina el tiempo que el enemigo se queda esperando en base a las variables de espera correspondientes.
+     Una vez acabado ese periodo, continúa el movimiento*/
     private void DirectionChange()
     {
         animator.SetBool("moving", false);
@@ -64,11 +68,11 @@ public class EnemyPatrol : MonoBehaviour
         waitTimer = 0;
         animator.SetBool("moving", true);
 
-        //Make enemy face direction
+        //Orienta al enemigo en una dirección determinada
         enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * _direction,
             initScale.y, initScale.z);
 
-        //Move in that direction
+        //Ele enemigo caminará en dicha dirección
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * _direction * speed,
             enemy.position.y, enemy.position.z);
     }

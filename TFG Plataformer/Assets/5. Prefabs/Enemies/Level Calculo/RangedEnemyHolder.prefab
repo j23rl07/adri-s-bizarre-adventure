@@ -150,6 +150,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   animator: {fileID: 540985470811267439}
+  dieEffect: {fileID: 1965343156803978, guid: aa8d6482d70a23445b4b2a928ed1b845, type: 3}
   attackCd: 1
   range: 16
   damage: 5

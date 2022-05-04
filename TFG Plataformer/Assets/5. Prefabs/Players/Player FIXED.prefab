@@ -1440,8 +1440,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1103341349
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 84ce2f114ad12bd4ebafc77060220324, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1677,7 +1677,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionCountText: {fileID: 4017893389303153059}
+  potionNum: 0
   manaPotionCountText: {fileID: 1313748291958238944}
+  manaPotionNum: 0
   player: {fileID: 4017893389135811847}
   healthBar: {fileID: 1313748292237716061}
 --- !u!114 &4017893389135811956
@@ -1707,7 +1709,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1313748292237716061}
   player: {fileID: 4017893389135811847}
---- !u!114 &3134121185973411137
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1751,9 +1752,9 @@ CircleCollider2D:
   m_Offset: {x: 0.03989303, y: -0.91748786}
   serializedVersion: 2
   m_Radius: 0.3793019
+  shopEnergyF: 0
 --- !u!1 &4017893389280138265
 GameObject:
-  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

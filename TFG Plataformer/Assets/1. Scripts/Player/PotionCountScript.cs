@@ -7,9 +7,9 @@ public class PotionCountScript : MonoBehaviour
 {
     [Header("Other")]
     public Text potionCountText;
-    private int potionNum;
+    [HideInInspector] public int potionNum;
     public Text manaPotionCountText;
-    private int manaPotionNum;
+    [HideInInspector] public int manaPotionNum;
     public Player player;
     public HealthBar healthBar;
 

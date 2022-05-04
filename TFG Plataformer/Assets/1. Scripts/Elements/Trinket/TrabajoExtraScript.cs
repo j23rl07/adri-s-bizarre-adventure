@@ -5,7 +5,8 @@ using UnityEngine;
 public class TrabajoExtraScript : MonoBehaviour
 {
     public Trinket trinket;
-    public Player player;
+    public GameObject player;
+    private bool active = false;
     public TrinketState TrinketState { get; set; }
 
     public TrabajoExtraScript()
@@ -13,32 +14,32 @@ public class TrabajoExtraScript : MonoBehaviour
         TrinketState = new TrinketState();
     }
 
+    public void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (transform.GetChild(0).gameObject.activeSelf & active == false)
         {
-            if (TrinketState.isEquipped == false)
-            {
-                TrinketState.isEquipped = true;
-                Equip();
-            }
-            else
-            {
-                TrinketState.isEquipped = false;
-                Unequip();
-            }
+            Equip();
+        }
+        else if (!transform.GetChild(0).gameObject.activeSelf & active == true)
+        {
+            Unequip();
         }
     }
 
     void Equip()
     {
-        player.selfDamage -= 10;
-        Debug.Log(player.selfDamage);
+        player.GetComponent<Player>().selfDamage -= 10;
+        active = true;
     }
 
     void Unequip()
     {
-        player.selfDamage += 10;
-        Debug.Log(player.selfDamage);
+        player.GetComponent<Player>().selfDamage += 10;
+        active = false;
     }
 }

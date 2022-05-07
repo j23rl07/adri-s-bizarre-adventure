@@ -30,15 +30,9 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
 
     void OnEnable()
     {
-        GameObject[] otherObjects = GameObject.FindGameObjectsWithTag("Projectile");
         GameObject[] goldCoins = GameObject.FindGameObjectsWithTag("MyCoin");
         GameObject[] silverCoins = GameObject.FindGameObjectsWithTag("SilverCoin");
 
-
-        foreach (GameObject obj in otherObjects)
-        {
-            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        }
         foreach (GameObject obj in goldCoins)
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());

@@ -21,6 +21,7 @@ TagManager:
   - Map
   - CuchillaFolio
   - Water
+  - Time
   layers:
   - Default
   - TransparentFX

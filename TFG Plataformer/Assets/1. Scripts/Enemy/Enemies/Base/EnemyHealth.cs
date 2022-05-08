@@ -10,6 +10,7 @@ public class EnemyHealth : MonoBehaviour
     public Animator animator;
     public GameObject dieEffect;
     [HideInInspector] public bool gotHit = false;
+
     
     public void Awake()
     {

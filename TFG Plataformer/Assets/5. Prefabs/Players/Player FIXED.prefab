@@ -1372,9 +1372,10 @@ GameObject:
   - component: {fileID: 4017893389135811900}
   - component: {fileID: 4017893389135811956}
   - component: {fileID: 4017893389135811959}
-  - component: {fileID: 3134121185973411137}
   - component: {fileID: 7184109638085522638}
   - component: {fileID: 8145017198125727028}
+  - component: {fileID: 1749179961283522371}
+  - component: {fileID: 8691813285672874855}
   m_Layer: 8
   m_Name: Player FIXED
   m_TagString: Player
@@ -1573,6 +1574,7 @@ MonoBehaviour:
   attackDamage: 40
   attackRange: 1.25
   attackRate: 10
+  Trinket: {fileID: 0}
   isAttacking: 0
 --- !u!114 &4017893389135811847
 MonoBehaviour:
@@ -1709,20 +1711,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1313748292237716061}
   player: {fileID: 4017893389135811847}
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4017893389135811853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4dff79171fd92e4bacc0e87e306dd83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 4017893389135811841}
-  boomerangPrefab: {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
-  cfPrefab: {fileID: 8988475175282237381, guid: 7923c3d134ddefe41ab84149d60b36e9, type: 3}
+  shopEnergyF: 0
+  shopManaF: 0
 --- !u!114 &7184109638085522638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1752,9 +1742,37 @@ CircleCollider2D:
   m_Offset: {x: 0.03989303, y: -0.91748786}
   serializedVersion: 2
   m_Radius: 0.3793019
-  shopEnergyF: 0
+--- !u!114 &1749179961283522371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017893389135811853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4dff79171fd92e4bacc0e87e306dd83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 4017893389135811841}
+  boomerangPrefab: {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
+  cfPrefab: {fileID: 7955106515135191144, guid: ca266ceede34b2348afd9f77acb3ec91, type: 3}
+--- !u!114 &8691813285672874855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017893389135811853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd09026b23dbe594993af743a022be3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4017893389135811847}
 --- !u!1 &4017893389280138265
 GameObject:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}

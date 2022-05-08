@@ -340,7 +340,12 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -2, y: 33}
+        - {x: -64, y: -1}
+        - {x: -64, y: -64}
+        - {x: 64, y: -64}
+        - {x: 64, y: 64}
       tessellationDetail: 0
       bones: []
       spriteID: 42305410000000000800000000000000
@@ -382,7 +387,14 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 43, y: 8}
+        - {x: -21, y: 40}
+        - {x: -64, y: 64}
+        - {x: -64, y: -64}
+        - {x: 64, y: -64}
+        - {x: 64, y: 11}
+        - {x: 64, y: -1}
       tessellationDetail: 0
       bones: []
       spriteID: 82305410000000000800000000000000
@@ -1486,7 +1498,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1ccd8aed95ee63b4087b5e3b0dc9e025
     internalID: 0
     vertices: []
     indices: 
@@ -1519,9 +1531,9 @@ TextureImporter:
       Ice_Bot_26_big_R: 21300010
       Snow_E_R: 21300054
       Igloo_Door_R: 21300076
-      Igloo_M_Dorr_R: 21300068
-      Ice_Top_26_small_R: 21300082
       Ice_platform: 21300056
+      Ice_Top_26_small_R: 21300082
+      Igloo_M_Dorr_R: 21300068
       Snowtree_ground: 21300030
       Snow_G_26_small_R: 21300040
       Snow_G_S_L: 21300032

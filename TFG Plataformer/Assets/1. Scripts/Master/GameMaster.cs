@@ -8,7 +8,7 @@ public class GameMaster : MonoBehaviour
     [Header("Time Parameters")]
     public bool runningTimer;
     public int currentTime;
-    public int maxTime = 750;
+    public int maxTime;
 
     [Header("Position Options")]
     public Transform restartPosition;

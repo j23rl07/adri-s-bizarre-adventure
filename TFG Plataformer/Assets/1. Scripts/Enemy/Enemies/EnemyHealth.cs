@@ -23,40 +23,38 @@ public class EnemyHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
-        }
-
-        void Die()
-        {
             animator.SetBool("IsDead", true);
-            this.enabled = false;
-            GetComponent<Collider2D>().enabled = false;
-
-            if (GetComponentInParent<EnemyPatrol>() != null)
-            {
-                GetComponentInParent<EnemyPatrol>().enabled = false;
-            }
-            if (GetComponent<Enemy>() != null)
-            {
-                GetComponent<Enemy>().enabled = false;
-            }
-
-            if (GetComponent<BoxScript>() != null)
-            {
-                GetComponent<BoxScript>().instantiate();
-            }
-
-            if (GetComponentInChildren<EnemyFireballHolder>() != null)
-            {
-                GetComponentInChildren<EnemyFireballHolder>().enabled = false;
-            }
-            
-            if (GetComponent<RangeEnemy>() != null)
-            {
-                GetComponent<RangeEnemy>().enabled = false;
-
-            }
-            GameObject.Destroy(gameObject);
         }
+    }
+    public void Die()
+    {
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        if (GetComponentInParent<EnemyPatrol>() != null)
+        {
+            GetComponentInParent<EnemyPatrol>().enabled = false;
+        }
+        if (GetComponent<Enemy>() != null)
+        {
+            GetComponent<Enemy>().enabled = false;
+        }
+
+        if (GetComponent<BoxScript>() != null)
+        {
+            GetComponent<BoxScript>().instantiate();
+        }
+
+        if (GetComponentInChildren<EnemyFireballHolder>() != null)
+        {
+            GetComponentInChildren<EnemyFireballHolder>().enabled = false;
+        }
+
+        if (GetComponent<RangeEnemy>() != null)
+        {
+            GetComponent<RangeEnemy>().enabled = false;
+
+        }
+        GameObject.Destroy(gameObject);
     }
 }

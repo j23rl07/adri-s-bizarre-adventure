@@ -42,7 +42,7 @@ public class Enemy : EnemyHealth
         }
 
         if (enemyPatrol != null)
-            enemyPatrol.enabled = !PlayerInSight();
+            enemyPatrol.enabled = !PlayerInSight() && currentHealth > 0;
 
     }
     

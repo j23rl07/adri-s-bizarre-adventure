@@ -37,7 +37,6 @@ public class ShopMenu : MonoBehaviour
         hintText.SetActive(false);
         shopCanvas.SetActive(false);
     }
-
     private void Awake()
     {
         inventoryScript = Inventory.instance.GetComponent<Inventory>();
@@ -45,7 +44,6 @@ public class ShopMenu : MonoBehaviour
         stockMonedaSuerte = getTrinketStock(MonedaSuerte.name);
         stockChuletaT = getTrinketStock(ChuletaT.name);
     }
-
     void Update()
     {
         if (!PauseMenu.isPauseMenuOn)
@@ -56,7 +54,6 @@ public class ShopMenu : MonoBehaviour
             }
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -69,7 +66,6 @@ public class ShopMenu : MonoBehaviour
             healingItemsScript = player.GetComponent<HealingItemsScript>();
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))

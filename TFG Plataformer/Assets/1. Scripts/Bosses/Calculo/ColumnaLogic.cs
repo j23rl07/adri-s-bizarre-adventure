@@ -7,9 +7,14 @@ public class ColumnaLogic : MonoBehaviour
     [Header("Healing Parameters")]
     public int maxHealth;
     public int currentHealth;
-    public Animator animator;
     public GameObject dieEffect;
     [HideInInspector] public bool gotHit = false;
+
+    [Header("Animations")]
+    public Animator animator;
+    public GameObject hitEffect;
+
+    [Header("Boss logic")]
     public CalculoBossLogic cbl;
     public GameObject gb;
 
@@ -22,6 +27,7 @@ public class ColumnaLogic : MonoBehaviour
     {
         gotHit = true;
         currentHealth -= damage;
+        Instantiate(hitEffect, transform.position, transform.rotation);
         animator.SetTrigger("Hurt");
 
         if (currentHealth <= 0)

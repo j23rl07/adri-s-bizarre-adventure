@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BossHealth : MonoBehaviour
 {
@@ -10,7 +11,15 @@ public class BossHealth : MonoBehaviour
     public Animator animator;
     public GameObject dieEffect;
     [HideInInspector] public bool gotHit = false;
+
+    [Header("References")]
     public HealthBar healthBar;
+    public GameObject columns;
+    public GameObject battleZone;
+    public GameObject texto;
+    public GameObject columnaBloqueo;
+    public GameObject seeker;
+    
 
 
     public void Awake()
@@ -36,7 +45,7 @@ public class BossHealth : MonoBehaviour
             this.enabled = false;
             GetComponent<Collider2D>().enabled = false;
             Instantiate(dieEffect, transform.position, transform.rotation);
-            GameObject.Destroy(gameObject);
+            gameObject.active = false;
         }
     }
 
@@ -44,5 +53,14 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+    }
+
+    public void OnDisable()
+    {
+        columns.SetActive(true);
+        battleZone.SetActive(false);
+        texto.SetActive(true);
+        columnaBloqueo.SetActive(false);
+        seeker.SetActive(false);
     }
 }

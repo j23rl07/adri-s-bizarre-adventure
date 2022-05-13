@@ -22,6 +22,8 @@ TagManager:
   - CuchillaFolio
   - Water
   - Time
+  - FxTemporaire
+  - BattleZone
   layers:
   - Default
   - TransparentFX

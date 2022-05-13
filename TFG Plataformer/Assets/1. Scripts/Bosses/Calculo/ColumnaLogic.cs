@@ -9,6 +9,7 @@ public class ColumnaLogic : MonoBehaviour
     public int currentHealth;
     public GameObject dieEffect;
     [HideInInspector] public bool gotHit = false;
+    public HealthBar healthBar;
 
     [Header("Animations")]
     public Animator animator;
@@ -21,12 +22,14 @@ public class ColumnaLogic : MonoBehaviour
     public void Awake()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     public void TakeDamage(int damage)
     {
         gotHit = true;
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
         Instantiate(hitEffect, transform.position, transform.rotation);
         animator.SetTrigger("Hurt");
 
@@ -42,17 +45,23 @@ public class ColumnaLogic : MonoBehaviour
         this.enabled = false;
         GetComponent<Collider2D>().enabled = false;
         Instantiate(dieEffect, transform.position, transform.rotation);
-        if(gb.name == "Columna1")
+        if(gb.name == "Estatua1")
         {
             cbl.st1IsDestroyed = true;
-        }else if (gb.name == "Columna2") {
+        }else if (gb.name == "Estatua2") {
             cbl.st2IsDestroyed = true;
-        }else if (gb.name == "Columna3") {
+        }else if (gb.name == "Estatua3") {
             cbl.st3IsDestroyed = true;
-        }else if (gb.name == "Columna4") {
+        }else if (gb.name == "Estatua4") {
             cbl.st4IsDestroyed = true;
         }
-        GameObject.Destroy(gameObject);
+        gameObject.active = false;
+    }
+
+    public void setMaxHealth()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
 }

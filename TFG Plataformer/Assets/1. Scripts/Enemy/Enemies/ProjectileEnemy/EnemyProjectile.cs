@@ -32,6 +32,7 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
     {
         GameObject[] goldCoins = GameObject.FindGameObjectsWithTag("MyCoin");
         GameObject[] silverCoins = GameObject.FindGameObjectsWithTag("SilverCoin");
+        GameObject[] bz = GameObject.FindGameObjectsWithTag("BattleZone");
 
         foreach (GameObject obj in goldCoins)
         {
@@ -41,6 +42,11 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
+        foreach (GameObject obj in bz)
+        {
+            Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

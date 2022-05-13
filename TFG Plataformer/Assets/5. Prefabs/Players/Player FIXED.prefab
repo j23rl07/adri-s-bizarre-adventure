@@ -1573,7 +1573,7 @@ MonoBehaviour:
     m_Bits: 520
   attackDamage: 40
   attackRange: 1.25
-  attackRate: 10
+  attackRate: 3
   Trinket: {fileID: 0}
   isAttacking: 0
 --- !u!114 &4017893389135811847

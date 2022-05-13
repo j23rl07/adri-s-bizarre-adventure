@@ -27,6 +27,7 @@ public class CalculoBossLogic : MonoBehaviour
     [Header("Other")]
     public Player player;
     public Animator animator;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class CalculoBossLogic : MonoBehaviour
         st2IsDestroyed = false;
         st3IsDestroyed = false;
         st4IsDestroyed = false;
+        InvokeRepeating("EnemySpawn", 5f, 10f);
     }
 
     // Update is called once per frame
@@ -81,5 +83,13 @@ public class CalculoBossLogic : MonoBehaviour
     {
         if (PlayerInSight())
             player.TakeDamage(damage);
+    }
+
+    private void EnemySpawn()
+    {
+        animator.SetTrigger("summon");
+        GameObject enemyToSpawn = Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        enemyToSpawn.transform.position = this.transform.position;
+        enemyToSpawn.SetActive(true);
     }
 }

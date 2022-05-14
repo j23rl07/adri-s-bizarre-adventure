@@ -7,7 +7,7 @@ public class RayScript : MonoBehaviour
     [Header("Sin")]
     public float bulletSpeed = 5.0f;
     public float frecuencia = 20.0f;  // Velocidad a lo largo del seno
-    public float magnitud = 0.5f;   // Tamaño del movimiento en el seno
+    public float magnitud = 0.5f;   // Tamaï¿½o del movimiento en el seno
     private Vector3 eje;
     private Vector3 pos;
 

@@ -19,6 +19,11 @@ public class BattleZone : MonoBehaviour
     public AudioSource audio;
     public AudioSource bossAudio;
 
+    void Start()
+    {
+        bossAudio.loop = true;
+        audio.loop = true;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")

@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
         PlayAudio(BackGroundMusic);
         masterSlider.value = masterVol;
         effectSlider.value = effectsVol;
+        BackGroundMusic.loop = true;
 
         masterSlider.minValue = -80;
         masterSlider.maxValue = 10;
@@ -43,6 +44,7 @@ public class AudioManager : MonoBehaviour
     {
         MasterVolume();
         EffectVolume();
+        
     }
 
     public void MasterVolume()

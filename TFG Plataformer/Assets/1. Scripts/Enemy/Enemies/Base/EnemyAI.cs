@@ -10,7 +10,6 @@ public class EnemyAI : MonoBehaviour
     public float nextRefPointDistance = 3f;
 
     public Transform enemyGraphics;
-
     Path path;
     int currentRefPoint = 0;
     bool pathIsEnded = false;

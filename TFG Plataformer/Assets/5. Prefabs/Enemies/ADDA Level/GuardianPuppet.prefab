@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  damage: 30
+  damage: 100
 --- !u!1 &8108812933825382058
 GameObject:
   m_ObjectHideFlags: 0

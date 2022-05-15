@@ -24,6 +24,8 @@ TagManager:
   - Time
   - FxTemporaire
   - BattleZone
+  - Book
+  - Grid
   layers:
   - Default
   - TransparentFX

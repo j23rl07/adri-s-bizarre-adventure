@@ -26,6 +26,7 @@ TagManager:
   - BattleZone
   - Book
   - Grid
+  - WolfAttack
   layers:
   - Default
   - TransparentFX

@@ -7,22 +7,35 @@ public class StatueHealth : MonoBehaviour
     [Header("Healing Parameters")]
     public int maxHealth;
     public int currentHealth;
-    
+    public HealthBar healthBar;
+
     [Header("Hit Effect")]
     public GameObject dieEffect;
     public GameObject hitEffect;
     [HideInInspector] public bool gotHit = false;
 
+    [Header("Boss Logic")]
+    public BattleZoneBBDD bz;
+    public GameObject gb;
+    [SerializeField] private BoxCollider2D boxCollider;
 
     public void Awake()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+    
+    void OnEnable()
+    {
+        boxCollider.enabled = true;
+        this.enabled = true;
     }
 
     public void TakeDamage(int damage)
     {
         gotHit = true;
         currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
         Instantiate(hitEffect, transform.position, transform.rotation);
 
         if (currentHealth <= 0)
@@ -34,37 +47,31 @@ public class StatueHealth : MonoBehaviour
 
         void Die()
         {
-            this.enabled = false;
             GetComponent<Collider2D>().enabled = false;
-
-            /*En caso de que haya que desactivar alg�n componente en espec�fico que haga funcionar a un enemigo al destruirlo, se realizar� desde aqu� */
-
-            if (GetComponentInParent<EnemyPatrol>() != null)
-            {
-                GetComponentInParent<EnemyPatrol>().enabled = false;
-            }
-            if (GetComponent<Enemy>() != null)
-            {
-                GetComponent<Enemy>().enabled = false;
-            }
-
-            if (GetComponent<BoxScript>() != null)
-            {
-                GetComponent<BoxScript>().instantiate();
-            }
-
-            if (GetComponentInChildren<EnemyFireballHolder>() != null)
-            {
-                GetComponentInChildren<EnemyFireballHolder>().enabled = false;
-            }
-
-            if (GetComponent<RangeEnemy>() != null)
-            {
-                GetComponent<RangeEnemy>().enabled = false;
-
-            }
             Instantiate(dieEffect, transform.position, transform.rotation);
-            GameObject.Destroy(gameObject);
+            if (gb.name == "NucleoLobo")
+            {
+                bz.isWolfDestroyed = true;
+            }
+            else if (gb.name == "NucleoBuho")
+            {
+                bz.isOwlDestroyed = true;
+            }
+            else if (gb.name == "NucleoHeroe")
+            {
+                bz.isHeroDestroyed = true;
+            }
+            else if (gb.name == "NucleoMain")
+            {
+                bz.isMainDestroyed = true;
+            }
+            gameObject.active = false;
         }
+    }
+
+    public void setMaxHealth()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 }

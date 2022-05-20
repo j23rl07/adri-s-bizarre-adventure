@@ -70,7 +70,6 @@ public class ArcEnemyProjectile : EnemyDamage
         if (collision.tag == "Player")
         {
             player.TakeDamage(damage);
-            StartCoroutine(player.playerKnockback(0.01f, 50, player.transform.position));
         }
         base.OnTriggerEnter2D(collision); //llamada a parent script 
         gameObject.SetActive(false);

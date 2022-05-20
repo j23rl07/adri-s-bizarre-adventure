@@ -96,8 +96,9 @@ public class Player : MonoBehaviour
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         StartCoroutine(invulnerability());
+        StartCoroutine(playerKnockback(0.01f, 50, transform.position));
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             StartCoroutine(DeathAndRespawn(lastCheckpointLocation));
         }
@@ -188,10 +189,13 @@ public class Player : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 9, true);
         for (int i = 0; i < nFlashes; i++)
         {
-            spr.color = new Color(1, 0, 0, 0.5f);
-            yield return new WaitForSeconds(invulDuration / (nFlashes * 2));
-            spr.color = Color.white;
-            yield return new WaitForSeconds(invulDuration / (nFlashes * 2));
+            if (spr.color == Color.white)
+            {
+                spr.color = new Color(1, 0, 0, 0.5f);
+                yield return new WaitForSeconds(invulDuration / (nFlashes * 2));
+                spr.color = Color.white;
+                yield return new WaitForSeconds(invulDuration / (nFlashes * 2));
+            }
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
     }

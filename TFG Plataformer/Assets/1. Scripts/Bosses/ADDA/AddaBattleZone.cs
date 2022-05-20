@@ -24,6 +24,9 @@ public class AddaBattleZone : MonoBehaviour
     public GolemBossHealth meleeBossHealth;
     public GolemBossHealth rangeBossHealth;
 
+    [Header("Text")]
+    public GameObject text;
+
     void Start()
     {
         bossAudio.loop = true;
@@ -48,6 +51,7 @@ public class AddaBattleZone : MonoBehaviour
         if(isGolem1Destroyed && isGolem2Destroyed)
         {
             teleport.active = true;
+            text.active = true;
         }
     }
 
@@ -87,7 +91,7 @@ public class AddaBattleZone : MonoBehaviour
                 teleport.SetActive(false);
             }
             healthBars.SetActive(false);
-            
+            text.active = false;
 
         }
     }

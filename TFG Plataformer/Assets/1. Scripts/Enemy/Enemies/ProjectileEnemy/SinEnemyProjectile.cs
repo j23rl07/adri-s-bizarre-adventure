@@ -44,9 +44,7 @@ public class SinEnemyProjectile : EnemyDamage
     {
         if (collision.tag == "Player")
         {
-            player.TakeDamage(damage);
-            StartCoroutine(player.playerKnockback(0.01f, 50, player.transform.position));
-            
+            player.TakeDamage(damage);     
         }
 
     }

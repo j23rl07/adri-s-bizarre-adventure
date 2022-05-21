@@ -5,6 +5,7 @@ using UnityEngine;
 public class InitialZone : MonoBehaviour
 {
     public GameObject canvas;
+    public GameObject text;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -18,6 +19,7 @@ public class InitialZone : MonoBehaviour
         if (collision.tag == "Player")
         {
             canvas.SetActive(true);
+            text.SetActive(false);
         }
     }
 }

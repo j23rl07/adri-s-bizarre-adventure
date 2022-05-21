@@ -58,10 +58,10 @@ public class CalculoBossLogic : MonoBehaviour
             }
         }
 
-        enemies = GameObject.FindGameObjectsWithTag("Puppet")
+        enemies = GameObject.FindGameObjectsWithTag("Puppet");
         if(enemies.Length > 5)
         {
-            Destroy(enemies[0])
+            Destroy(enemies[0]);
         }
     }
 

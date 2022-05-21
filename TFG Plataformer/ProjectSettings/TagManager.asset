@@ -28,6 +28,7 @@ TagManager:
   - Grid
   - WolfAttack
   - StartPos
+  - Puppet
   layers:
   - Default
   - TransparentFX

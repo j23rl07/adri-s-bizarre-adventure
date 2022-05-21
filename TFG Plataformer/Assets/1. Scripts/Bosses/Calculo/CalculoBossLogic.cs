@@ -28,6 +28,7 @@ public class CalculoBossLogic : MonoBehaviour
     public Player player;
     public Animator animator;
     public GameObject enemy;
+    public GameObject[] enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,12 @@ public class CalculoBossLogic : MonoBehaviour
                 cdTimer = 0;
                 animator.SetTrigger("meleeAttack");
             }
+        }
+
+        enemies = GameObject.FindGameObjectsWithTag("Puppet")
+        if(enemies.Length > 5)
+        {
+            Destroy(enemies[0])
         }
     }
 

@@ -31,13 +31,13 @@ public class ThermoScript : MonoBehaviour
 
     void Equip()
     {
-        player.GetComponent<Player>().maxHealth += 25;
+        Player.maxHealth += 25;
         active = true;
     }
 
     void Unequip()
     {
-        player.GetComponent<Player>().maxHealth -= 25;
+        Player.maxHealth -= 25;
         active = false;
     }
 }

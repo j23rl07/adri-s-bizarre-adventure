@@ -21,7 +21,7 @@ public class ChuletaScript : MonoBehaviour
 
     void Update()
     {
-        if (transform.GetChild(0).gameObject.activeSelf & !esperando & player.GetComponent<Player>().currentMana < player.GetComponent<Player>().maxMana)
+        if (transform.GetChild(0).gameObject.activeSelf & !esperando & player.GetComponent<Player>().currentMana < Player.maxMana)
         {
             StartCoroutine(Equip());
         }
@@ -31,9 +31,9 @@ public class ChuletaScript : MonoBehaviour
         esperando = true;
         yield return new WaitForSeconds(2);
         esperando = false;
-        int mana = Mathf.FloorToInt(player.GetComponent<Player>().maxMana * 0.05f);
+        int mana = Mathf.FloorToInt(Player.maxMana * 0.05f);
         int currentMana = player.GetComponent<Player>().currentMana;
-        int manaMax = player.GetComponent<Player>().maxMana;
+        int manaMax = Player.maxMana;
         if (mana + currentMana > manaMax)
         {
             mana = manaMax - currentMana;

@@ -33,13 +33,13 @@ public class HojaDeEstudioScript : MonoBehaviour
 
     void Equip()
     {
-        player.GetComponent<Player>().maxMana += 25;
+        Player.maxMana += 25;
         active = true;
     }
 
     void Unequip()
     {
-        player.GetComponent<Player>().maxMana -= 25;
+        Player.maxMana -= 25;
         active = false;
     }
 }

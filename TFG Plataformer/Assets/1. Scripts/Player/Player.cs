@@ -54,6 +54,17 @@ public class Player : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         basicCameraControllerScript = GameObject.FindGameObjectWithTag(mainCameraTag).GetComponent<BasicCameraController>();
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        FindStartPos();
+    }
+
+    void FindStartPos()
+    {
+        transform.position = GameObject.FindWithTag("StartPos").transform.position;
     }
 
     // Update is called once per frame

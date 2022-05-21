@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/6. Scenes/References/Interfaz.unity
     guid: 496459ae0174a214fbdbcd6a9e657e90
+  - enabled: 1
+    path: Assets/6. Scenes/Nivel Base de datos.unity
+    guid: 58a7a320a50b42d44810e0bd3f7e388b
+  - enabled: 1
+    path: Assets/6. Scenes/Nivel Calculo.unity
+    guid: 49fb6c98b57171648823d29aead0cfff
   - enabled: 0
     path: Assets/6. Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729

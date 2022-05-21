@@ -27,6 +27,7 @@ TagManager:
   - Book
   - Grid
   - WolfAttack
+  - StartPos
   layers:
   - Default
   - TransparentFX

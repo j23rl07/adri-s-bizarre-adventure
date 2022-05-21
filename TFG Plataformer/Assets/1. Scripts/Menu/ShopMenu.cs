@@ -104,7 +104,7 @@ public class ShopMenu : MonoBehaviour
     private void SetPrices()
     {
         //Dinero del jugador
-        shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+        shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
         //Cafe
         shopCanvas.transform.Find("HealthPotion/Text").gameObject.GetComponent<TextMeshProUGUI>().text = precioCafe.ToString();
         //Chuleta
@@ -128,7 +128,7 @@ public class ShopMenu : MonoBehaviour
 
     public void Buy(string obj)
     {
-        int initialMoney = scoreScript.ScoreNum;
+        int initialMoney = ScoreScript.ScoreNum;
 
         switch (obj)
         {
@@ -139,7 +139,7 @@ public class ShopMenu : MonoBehaviour
                     string errorMsg = "Dinero insuficiente";
                     CreateErrorMsg(errorMsg, position);
                 }
-                else if (potionCountScript.potionNum >= 5)
+                else if (PotionCountScript.potionNum >= 5)
                 {
                     Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
                     string errorMsg = "Capacidad máxima alcanzada";
@@ -148,7 +148,7 @@ public class ShopMenu : MonoBehaviour
                 else
                 {
                     scoreScript.addMoney(-precioCafe);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     player.GetComponent<PotionCountScript>().addPotion();
                 }
                 break;
@@ -160,7 +160,7 @@ public class ShopMenu : MonoBehaviour
                     string errorMsg = "Dinero insuficiente";
                     CreateErrorMsg(errorMsg, position);
                 }
-                else if (potionCountScript.manaPotionNum >= 5)
+                else if (PotionCountScript.manaPotionNum >= 5)
                 {
                     Vector3 position = shopCanvas.transform.position + new Vector3(0, -392, 0);
                     string errorMsg = "Capacidad máxima alcanzada";
@@ -169,7 +169,7 @@ public class ShopMenu : MonoBehaviour
                 else
                 {
                     scoreScript.addMoney(-precioChuleta);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     player.GetComponent<PotionCountScript>().addManaPotion();
                 }
                 break;
@@ -192,7 +192,7 @@ public class ShopMenu : MonoBehaviour
                     healingItemsScript.shopEnergyF += 1;
                     healingItemsScript.GetEnergyFragment();
                     scoreScript.addMoney(-precioFragVit);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     SetPrices();
                 }
                 break;
@@ -215,7 +215,7 @@ public class ShopMenu : MonoBehaviour
                     healingItemsScript.shopManaF += 1;
                     healingItemsScript.GetManaFragment();
                     scoreScript.addMoney(-precioFragInsp);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     SetPrices();
                 }
                 break;
@@ -237,7 +237,7 @@ public class ShopMenu : MonoBehaviour
                 {
                     inventoryScript.CheckTSlotsAvailability(trabajoExtra, trabajoExtra.name, 1);
                     scoreScript.addMoney(-precioTrabajoExtra);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     stockTrabajoExtra -= 1;
                     SetPrices();
                 }
@@ -260,7 +260,7 @@ public class ShopMenu : MonoBehaviour
                 {
                     inventoryScript.CheckTSlotsAvailability(MonedaSuerte, MonedaSuerte.name, 1);
                     scoreScript.addMoney(-precioTrabajoExtra);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     stockMonedaSuerte -= 1;
                     SetPrices();
                 }
@@ -283,7 +283,7 @@ public class ShopMenu : MonoBehaviour
                 {
                     inventoryScript.CheckTSlotsAvailability(ChuletaT, ChuletaT.name, 1);
                     scoreScript.addMoney(-precioTrabajoExtra);
-                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = scoreScript.ScoreNum.ToString();
+                    shopCanvas.transform.Find("Money/Text").gameObject.GetComponent<TextMeshProUGUI>().text = ScoreScript.ScoreNum.ToString();
                     stockChuletaT -= 1;
                     SetPrices();
                 }

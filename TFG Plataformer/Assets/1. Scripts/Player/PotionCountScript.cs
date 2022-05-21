@@ -7,18 +7,15 @@ public class PotionCountScript : MonoBehaviour
 {
     [Header("Other")]
     public Text potionCountText;
-    [HideInInspector] public int potionNum;
+    public static int potionNum;
     public Text manaPotionCountText;
-    [HideInInspector] public int manaPotionNum;
+    public static int manaPotionNum;
     public Player player;
     public HealthBar healthBar;
 
     void Start()
     {
-        potionNum = 0;
         potionCountText.text = "" + potionNum;
-
-        manaPotionNum = 0;
         manaPotionCountText.text = "" + manaPotionNum;
 
     }
@@ -53,13 +50,13 @@ public class PotionCountScript : MonoBehaviour
     private void usePotion()
     {
         subPotion();
-        player.heal(System.Convert.ToInt32(player.maxHealth * 0.35));
+        player.heal(System.Convert.ToInt32(Player.maxHealth * 0.35));
     }
 
     private void useManaPotion()
     {
         subManaPotion();
-        player.healMana(System.Convert.ToInt32(player.maxMana * 0.5));
+        player.healMana(System.Convert.ToInt32(Player.maxMana * 0.5));
     }
 
     public void addPotion()

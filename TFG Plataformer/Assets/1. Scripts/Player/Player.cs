@@ -5,12 +5,12 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Health")]
-    public int maxHealth = 100;
+    public static int maxHealth = 100;
     public int currentHealth;
     public HealthBar healthBar;
 
     [Header("Mana")]
-    public int maxMana = 100;
+    public static int maxMana = 100;
     public int currentMana;
     public WaitForSeconds regenTick = new WaitForSeconds(1f);
     public ManaBar manaBar;
@@ -54,7 +54,20 @@ public class Player : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         basicCameraControllerScript = GameObject.FindGameObjectWithTag(mainCameraTag).GetComponent<BasicCameraController>();
+        //DontDestroyOnLoad(gameObject);
     }
+    /*
+    private void OnLevelWasLoaded(int level)
+    {
+        FindStartPos();
+    }
+    */
+
+    /*void FindStartPos()
+    {
+        transform.position = GameObject.FindWithTag("StartPos").transform.position;
+    }
+    */
 
     // Update is called once per frame
     void Update()

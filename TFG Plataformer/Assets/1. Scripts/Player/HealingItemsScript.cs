@@ -20,8 +20,8 @@ public class HealingItemsScript : MonoBehaviour
     {
         if (healingObject.tag == "Aprobado")
         {
-            player.maxHealth += 20;
-            player.maxMana += 20;
+            Player.maxHealth += 20;
+            Player.maxMana += 20;
             Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "EnergyF")
@@ -36,23 +36,23 @@ public class HealingItemsScript : MonoBehaviour
         }
         if (healingObject.tag == "Cookie")
         {
-            player.heal(System.Convert.ToInt32(player.maxHealth * 0.1));
+            player.heal(System.Convert.ToInt32(Player.maxHealth * 0.1));
             Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "Essence")
         {
-            player.healMana(System.Convert.ToInt32(player.maxMana * 0.1));
+            player.healMana(System.Convert.ToInt32(Player.maxMana * 0.1));
             Destroy(healingObject.gameObject);
         }
     }
 
     public void GetEnergyFragment()
     {
-        player.maxHealth += 10;
+        Player.maxHealth += 10;
     }
 
     public void GetManaFragment()
     {
-        player.maxMana += 10;
+        Player.maxMana += 10;
     }
 }

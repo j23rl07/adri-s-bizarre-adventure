@@ -27,7 +27,7 @@ public class DescansoVidaScript : MonoBehaviour
         {
             if (inRange & canBeUsed & needsHeal & Input.GetKeyDown(KeyCode.E))
             {
-                playerScript.heal(playerScript.maxHealth);
+                playerScript.heal(Player.maxHealth);
                 uses -= 1;
                 if (uses <= 0)
                     ToggleUse();
@@ -41,7 +41,7 @@ public class DescansoVidaScript : MonoBehaviour
             currentText.SetActive(true);
             inRange = true;
             playerScript = collision.gameObject.GetComponent<Player>();
-            if (playerScript.currentHealth < playerScript.maxHealth)
+            if (playerScript.currentHealth < Player.maxHealth)
             {
                 needsHeal = true;
             }

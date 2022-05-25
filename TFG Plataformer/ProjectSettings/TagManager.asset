@@ -24,6 +24,11 @@ TagManager:
   - Time
   - FxTemporaire
   - BattleZone
+  - Book
+  - Grid
+  - WolfAttack
+  - StartPos
+  - Puppet
   layers:
   - Default
   - TransparentFX

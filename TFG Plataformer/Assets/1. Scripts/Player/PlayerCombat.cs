@@ -65,6 +65,16 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemy.GetComponent<BossHealth>().TakeDamage(attackDamage);
             }
+
+            if (enemy.GetComponent<GolemBossHealth>() != null)
+            {
+                enemy.GetComponent<GolemBossHealth>().TakeDamage(attackDamage);
+            }
+
+            if (enemy.GetComponent<StatueHealth>() != null)
+            {
+                enemy.GetComponent<StatueHealth>().TakeDamage(attackDamage);
+            }
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
     public Text MyScoreText;
-    [HideInInspector] public int ScoreNum;
+    public static int ScoreNum;
     public int goldValue = 10;
     public int silverValue = 1;
 
@@ -14,7 +14,6 @@ public class ScoreScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScoreNum = 0;
         MyScoreText.text = "" + ScoreNum;
     }
 

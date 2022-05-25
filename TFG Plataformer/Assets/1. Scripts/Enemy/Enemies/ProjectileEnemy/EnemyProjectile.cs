@@ -7,6 +7,7 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
     [SerializeField] private float speed;
     [SerializeField] private float resetTime;
     private float duration;
+    public GameObject impactEffect;
 
     public void triggerProjectile()
     {
@@ -46,7 +47,6 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
         {
             Physics2D.IgnoreCollision(obj.GetComponent<Collider2D>(), GetComponent<Collider2D>());
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,10 +54,11 @@ public class EnemyProjectile : EnemyDamage //herencia de la clase para dañar al 
         if (collision.tag == "Player")
         {
             player.TakeDamage(damage);
-            StartCoroutine(player.playerKnockback(0.01f, 50, player.transform.position));
         }
+       
         base.OnTriggerEnter2D(collision); //llamada a parent script 
         gameObject.SetActive(false);
+        
     }
 
     private void Deactivate()

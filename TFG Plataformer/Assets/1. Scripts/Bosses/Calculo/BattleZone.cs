@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class BattleZone : MonoBehaviour
 {
+    [Header("SliderHealth")]
     public GameObject bossHealthSlider;
     public BossHealth bossHealth;
+
+    [Header("Columna Health")]
     public ColumnaLogic columnaHealth1;
     public ColumnaLogic columnaHealth2;
     public ColumnaLogic columnaHealth3;
     public ColumnaLogic columnaHealth4;
 
+    [Header("Columna reference")]
     public GameObject columna1;
     public GameObject columna2;
     public GameObject columna3;
     public GameObject columna4;
 
+    [Header("Audio")]
     public AudioSource audio;
     public AudioSource bossAudio;
 

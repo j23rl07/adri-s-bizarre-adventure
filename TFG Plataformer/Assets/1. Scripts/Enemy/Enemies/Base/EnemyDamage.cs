@@ -14,7 +14,7 @@ public class EnemyDamage : MonoBehaviour
         if (collision.tag == "Player")
         {
             player.TakeDamage(damage);
-            StartCoroutine(player.playerKnockback(0.005f, 0, player.transform.position));
+            
         }
     }
 }

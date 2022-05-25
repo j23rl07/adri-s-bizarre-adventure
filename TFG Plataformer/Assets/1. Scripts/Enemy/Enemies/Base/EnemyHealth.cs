@@ -127,4 +127,40 @@ public class EnemyHealth : MonoBehaviour
         }
         GameObject.Destroy(gameObject);
     }
+
+    public void BossPDie()
+    {
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        if (GetComponentInParent<EnemyPatrol>() != null)
+        {
+            GetComponentInParent<EnemyPatrol>().enabled = false;
+        }
+        if (GetComponent<Enemy>() != null)
+        {
+            GetComponent<Enemy>().enabled = false;
+        }
+
+        if (GetComponent<BoxScript>() != null)
+        {
+            GetComponent<BoxScript>().instantiate();
+        }
+
+        if (GetComponentInChildren<EnemyFireballHolder>() != null)
+        {
+            GetComponentInChildren<EnemyFireballHolder>().enabled = false;
+        }
+
+        if (GetComponent<RangeEnemy>() != null)
+        {
+            GetComponent<RangeEnemy>().enabled = false;
+
+        }
+
+        GetComponent<Animator>().enabled = false;
+        GetComponent<boss>().enabled = false;
+        GetComponent<Enemy>().enabled = false;
+        //GameObject.Destroy(gameObject);
+    }
 }

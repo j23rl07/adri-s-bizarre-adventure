@@ -5,8 +5,7 @@ using UnityEngine;
 public class Boss_run : StateMachineBehaviour
 {
 
-    public float speed = 3.5f;
-    public float attackRange = 3f;
+    public float speed = 4f;
 
     Transform player;
     Rigidbody2D rb;
@@ -29,11 +28,6 @@ public class Boss_run : StateMachineBehaviour
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
-
-        if(Vector2.Distance(player.position, rb.position) <= attackRange)
-        {
-            animator.SetTrigger("meleeAttack");
-        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

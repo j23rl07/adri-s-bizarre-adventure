@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class bossZoneP : MonoBehaviour
 {
     [Header("SliderHealth")]
-    public GameObject bossHealthSlider;
+    public GameObject canvas;
     public GameObject boss;
     [SerializeField] private BoxCollider2D boxCollider;
 
@@ -24,33 +24,32 @@ public class bossZoneP : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            bossHealthSlider.SetActive(true);
+            canvas.SetActive(true);
             if (audio.isPlaying)
             {
                 audio.Stop();
                 bossAudio.Play();
             }
-            gameObject.SetActive(false);
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
-            boss.GetComponent<Enemy>().currentHealth = boss.GetComponent<Enemy>().maxHealth;
-            boss.transform.position = new Vector3(146.149994f, -39.2000008f, 0f);
             boss.GetComponent<Animator>().enabled = false;
             boxCollider.enabled = false;
+            boss.GetComponent<Enemy>().currentHealth = boss.GetComponent<Enemy>().maxHealth;
+            boss.transform.position = new Vector3(146.149994f, -39.2000008f, 0f);
             abre();
             if (bossAudio.isPlaying)
             {
                 bossAudio.Stop();
                 audio.Play();
             }
-            bossHealthSlider.SetActive(false);
+            canvas.SetActive(false);
         }
     }
 

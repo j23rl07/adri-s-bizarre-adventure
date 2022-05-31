@@ -1362,7 +1362,6 @@ GameObject:
   - component: {fileID: 4017893389135811846}
   - component: {fileID: 4017893389135811845}
   - component: {fileID: 4017893389135811851}
-  - component: {fileID: 4017893389135811850}
   - component: {fileID: 4017893389135811855}
   - component: {fileID: 4017893389135811957}
   - component: {fileID: 4017893389135811854}
@@ -1373,9 +1372,9 @@ GameObject:
   - component: {fileID: 4017893389135811956}
   - component: {fileID: 4017893389135811959}
   - component: {fileID: 7184109638085522638}
-  - component: {fileID: 8145017198125727028}
   - component: {fileID: 1749179961283522371}
   - component: {fileID: 8691813285672874855}
+  - component: {fileID: 8220099681903828342}
   m_Layer: 8
   m_Name: Player FIXED
   m_TagString: Player
@@ -1471,37 +1470,11 @@ Rigidbody2D:
   m_LinearDrag: 0.7
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: 3e624cdff1e1f12439d46c5e0271473a, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &4017893389135811850
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4017893389135811853}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 3e624cdff1e1f12439d46c5e0271473a, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.049076527, y: -0.25923228}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 2.56}
-    newSize: {x: 5.12, y: 2.56}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6805181, y: 0.72019434}
-  m_EdgeRadius: 0
 --- !u!95 &4017893389135811855
 Animator:
   serializedVersion: 4
@@ -1572,7 +1545,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 520
   attackDamage: 40
-  attackRange: 1.25
+  attackRange: 0.8
   attackRate: 3
   Trinket: {fileID: 0}
   isAttacking: 0
@@ -1588,10 +1561,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64d2b462025a8d148bf42e924e5a055a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
   currentHealth: 0
   healthBar: {fileID: 1313748292237716061}
-  maxMana: 100
   currentMana: 0
   manaBar: {fileID: 1313748290340008023}
   invulDuration: 1
@@ -1617,7 +1588,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MyScoreText: {fileID: 4017893387494090448}
-  ScoreNum: 0
   goldValue: 10
   silverValue: 1
 --- !u!114 &4017893389135811841
@@ -1663,7 +1633,7 @@ MonoBehaviour:
   - {fileID: 4443177920443453439, guid: e908b9f6fa6c32646a695588ba16959a, type: 3}
   - {fileID: 1649759527522842908, guid: 06e6383ac7cd15d4ea347e7aa5fd50bf, type: 3}
   - {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
-  allowedLayerCollisions: 
+  allowedLayerCollisions: 060000000700000009000000
   player: {fileID: 4017893389135811847}
   isCasting: 0
 --- !u!114 &4017893389135811900
@@ -1679,9 +1649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   potionCountText: {fileID: 4017893389303153059}
-  potionNum: 0
   manaPotionCountText: {fileID: 1313748291958238944}
-  manaPotionNum: 0
   player: {fileID: 4017893389135811847}
   healthBar: {fileID: 1313748292237716061}
 --- !u!114 &4017893389135811956
@@ -1726,22 +1694,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4017893389135811847}
---- !u!58 &8145017198125727028
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4017893389135811853}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.03989303, y: -0.91748786}
-  serializedVersion: 2
-  m_Radius: 0.3793019
 --- !u!114 &1749179961283522371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1770,6 +1722,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4017893389135811847}
+--- !u!61 &8220099681903828342
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017893389135811853}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04907653, y: -0.6}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 2.56}
+    newSize: {x: 5.12, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 1.15}
+  m_EdgeRadius: 0
 --- !u!1 &4017893389280138265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1905,7 +1883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4017893389395893301}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.01, y: -1, z: 0}
+  m_LocalPosition: {x: 1.01, y: -0.73, z: 0}
   m_LocalScale: {x: 1.0966225, y: 1.0698208, z: 1.3094}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpTime;
 
     private Rigidbody2D rigidBody;
-    private CircleCollider2D circleCollider;
+    private BoxCollider2D boxCollider;
     private int facingRight = 1;
     [HideInInspector] public float horizontalSpeed = 0;
     [HideInInspector] public bool canFlip = true;
@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
 
         rigidBody = GetComponent<Rigidbody2D>();
-        circleCollider = GetComponent<CircleCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
         pauseMenu = FindObjectOfType<PauseMenu>();
 
         gravity = rigidBody.gravityScale;
@@ -123,11 +123,11 @@ public class PlayerMovement : MonoBehaviour
             }
             if (facingRight == 1)
             {
-                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundLayer);
+                WallCheckHit = Physics2D.Raycast(boxCollider.bounds.center, new Vector2(wallDistance, 0), wallDistance, groundLayer);
             } 
             else
             {
-                WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
+                WallCheckHit = Physics2D.Raycast(boxCollider.bounds.center, new Vector2(-wallDistance, 0), wallDistance, groundLayer);
             }
 
             if (WallCheckHit && !IsGrounded() && horizontalSpeed != 0 )
@@ -224,7 +224,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         float extraHeight = 0.1f;
-        RaycastHit2D rayCastHit = Physics2D.CircleCast(circleCollider.bounds.center, circleCollider.radius, Vector2.down, extraHeight, groundLayer);
+        RaycastHit2D rayCastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, extraHeight, groundLayer);
 
         //Debug.Log(rayCastHit.collider);
         isGrounded = rayCastHit.collider != null;

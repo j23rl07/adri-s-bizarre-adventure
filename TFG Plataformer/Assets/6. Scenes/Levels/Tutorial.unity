@@ -2887,6 +2887,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 75053632086038564, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 75053632086038564, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1313748290715066260, guid: e039f439873082d49b07983ddaa09600, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2908,9 +2916,33 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1560700914}
     - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: itemToAdd
+      value: 
+      objectReference: {fileID: 8895077210798577660, guid: ee0c77f1063c62c4eb1b3b8cf7f075e4, type: 3}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: prefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
       propertyPath: canBeHit.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: prefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: prefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: prefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: prefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 3933468183827047702, guid: ddc7e0762bcea3d419df668a375956a9, type: 3}
     - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
       propertyPath: allowedLayerCollisions.Array.size
       value: 3
@@ -2987,6 +3019,18 @@ PrefabInstance:
       propertyPath: wallJumpForceX
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 7689546459763666968, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7689546459763666968, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885426940462052227, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1560700914}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e039f439873082d49b07983ddaa09600, type: 3}
 --- !u!1 &839711743

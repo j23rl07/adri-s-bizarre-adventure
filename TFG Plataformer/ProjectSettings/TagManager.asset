@@ -42,7 +42,7 @@ TagManager:
   - Enemies
   - Checkpoints
   - DeathZones
-  - 
+  - Interactuables
   - 
   - 
   - 
@@ -63,6 +63,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackgroundImage
+    uniqueID: 821906419
+    locked: 0
   - name: Background
     uniqueID: 1392366649
     locked: 0

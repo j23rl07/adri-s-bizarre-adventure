@@ -5,6 +5,11 @@ using System.Collections.Generic;
 
 public class Weapon : MonoBehaviour {
 
+    [Header("Habilidad inicial inventario")]
+    public GameObject itemToAdd;
+    public int amountToAdd;
+    Inventory inventory;
+
     [Header("FireBall FirePoints")]
 
     public Transform fbMidFirePoint;
@@ -54,6 +59,9 @@ public class Weapon : MonoBehaviour {
 
     void Start()
     {
+        inventory = Inventory.instance.GetComponent<Inventory>();
+        inventory.CheckASlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
+
         pauseMenu = FindObjectOfType<PauseMenu>();
         bulletPrefab.GetComponent<Bullet>().allowedLayerCollisions = allowedLayerCollisions;
     }

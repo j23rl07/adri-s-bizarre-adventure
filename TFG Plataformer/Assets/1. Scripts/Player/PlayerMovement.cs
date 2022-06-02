@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private float extraJumpsForce = 12;
     [SerializeField] private LayerMask groundLayer;
+    [HideInInspector] public Vector2 groundCheckDirection;
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private float dashLength = .22f;
@@ -62,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         pauseMenu = FindObjectOfType<PauseMenu>();
 
         gravity = rigidBody.gravityScale;
+        groundCheckDirection = Vector2.down;
     }
 
     // Update is called once per frame
@@ -91,12 +93,12 @@ public class PlayerMovement : MonoBehaviour
             //Si la tecla se mantiene presionada se salta mas alto que si se suelta
             if (jump)
             {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce*(-1*groundCheckDirection.y));
                 jump = false;
             }
             else if (airJump)
             {
-                rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce);
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce*(-1*groundCheckDirection.y));
                 airJump = false;
             }
             if(cancelJump & rigidBody.velocity.y > 0f)
@@ -182,13 +184,14 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpBufferCounter -= Time.deltaTime;
         }
-        //Si la tecla se mantiene presionada salta mas alto que si se suelta
+        //Permite saltar
         if ((jumpBufferCounter > 0 & coyoteTimeCounter > 0))
         {
             jump = true;
             extraJumpsCounter = extraJumps;
             jumpBufferCounter = 0;
         }
+        //Si la tecla se mantiene presionada salta mas alto que si se suelta
         if (Input.GetKeyUp(KeyCode.Space))
         {
             cancelJump = true;
@@ -224,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsGrounded()
     {
         float extraHeight = 0.1f;
-        RaycastHit2D rayCastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, Vector2.down, extraHeight, groundLayer);
+        RaycastHit2D rayCastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, groundCheckDirection, extraHeight, groundLayer);
 
         //Debug.Log(rayCastHit.collider);
         isGrounded = rayCastHit.collider != null;
@@ -258,11 +261,11 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.velocity = new Vector2(rigidBody.velocity.x,0);
         if (facingRight == 1)
         {
-            rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
+            rigidBody.AddForce(new Vector2(-wallJumpForceX, wallJumpForceY * (-1 * groundCheckDirection.y)), ForceMode2D.Impulse);
         }
         else
         {
-            rigidBody.AddForce(new Vector2(wallJumpForceX, wallJumpForceY), ForceMode2D.Impulse);
+            rigidBody.AddForce(new Vector2(wallJumpForceX, wallJumpForceY * (-1 * groundCheckDirection.y)), ForceMode2D.Impulse);
         }
         Flip();
         yield return new WaitForSeconds(wallJumpAirTime);

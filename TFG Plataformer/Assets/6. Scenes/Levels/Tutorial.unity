@@ -3291,6 +3291,14 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1560700914}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: itemToAdd
+      value: 
+      objectReference: {fileID: 9146214290917676854, guid: c92751ba2814bfb4cbb105a1ed70d76a, type: 3}
+    - target: {fileID: 4017893389135811841, guid: e039f439873082d49b07983ddaa09600, type: 3}
+      propertyPath: prefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4017893389135811846, guid: e039f439873082d49b07983ddaa09600, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -42562,6 +42570,26 @@ PrefabInstance:
     - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
       propertyPath: smoothFactor
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
+      propertyPath: currentSection
+      value: 
+      objectReference: {fileID: 1174982401}
+    - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
+      propertyPath: levelMaxBounds.x
+      value: 107.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
+      propertyPath: levelMaxBounds.y
+      value: 39.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
+      propertyPath: levelMinBounds.x
+      value: -11.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
+      propertyPath: levelMinBounds.y
+      value: -1.94
       objectReference: {fileID: 0}
     - target: {fileID: 3209030720464126680, guid: 7df3d2442fdad4343b8330aa659fcaa1, type: 3}
       propertyPath: transitionFactor

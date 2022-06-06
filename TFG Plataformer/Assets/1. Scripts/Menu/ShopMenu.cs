@@ -36,9 +36,7 @@ public class ShopMenu : MonoBehaviour
     {
         hintText.SetActive(false);
         shopCanvas.SetActive(false);
-    }
-    private void Awake()
-    {
+
         inventoryScript = Inventory.instance.GetComponent<Inventory>();
         stockTrabajoExtra = getTrinketStock(trabajoExtra.name);
         stockMonedaSuerte = getTrinketStock(MonedaSuerte.name);

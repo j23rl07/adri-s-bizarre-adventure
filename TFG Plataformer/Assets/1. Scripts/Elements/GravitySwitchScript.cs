@@ -7,6 +7,7 @@ public class GravitySwitchScript : MonoBehaviour
     private GameObject player;
     private Rigidbody2D playerRB;
     private PlayerMovement playerMovementScript;
+    private BasicCameraController cameraControllerScript;
 
     [SerializeField] private GameObject hintText;
 
@@ -19,6 +20,7 @@ public class GravitySwitchScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerRB = player.GetComponent<Rigidbody2D>();
         playerMovementScript = player.GetComponent<PlayerMovement>();
+        cameraControllerScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<BasicCameraController>();
     }
     private void Update()
     {
@@ -52,6 +54,7 @@ public class GravitySwitchScript : MonoBehaviour
     {
         playerRB.gravityScale = -1*playerMovementScript.gravity;
         playerMovementScript.gravity *= -1;
+        cameraControllerScript.offset.y = - cameraControllerScript.offset.y;
         //Cambia la dirección en la que se comprueba la colisión con el suelo
         playerMovementScript.groundCheckDirection *= -1;
     }

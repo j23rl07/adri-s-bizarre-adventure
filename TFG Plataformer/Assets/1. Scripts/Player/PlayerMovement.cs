@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private float extraJumpsForce = 12;
     [SerializeField] private LayerMask groundLayer;
-    [HideInInspector] public Vector2 groundCheckDirection;
+     public Vector2 groundCheckDirection;
     [Header("Dash")]
     [SerializeField] private float dashSpeed = 25f;
     [SerializeField] private float dashLength = .22f;
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PauseMenu pauseMenu;
     
-    [HideInInspector] public float gravity;
+    public float gravity;
 
     // Start is called before the first frame update
     void Start()
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, extraJumpsForce*(-1*groundCheckDirection.y));
                 airJump = false;
             }
-            if(cancelJump & rigidBody.velocity.y > 0f)
+            if(cancelJump & rigidBody.velocity.y*(-1*groundCheckDirection.y) > 0f)
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y*0.5f);
                 cancelJump = false;
@@ -142,7 +142,11 @@ public class PlayerMovement : MonoBehaviour
                 isWallSliding = false;
             }
 
-            if (isWallSliding & rigidBody.velocity.y < 0)
+            if (isWallSliding & rigidBody.velocity.y < 0 & groundCheckDirection.y < 0)
+            {
+                rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * wallSlideSpeed);
+            }
+            else if (isWallSliding & rigidBody.velocity.y > 0 & groundCheckDirection.y > 0)
             {
                 rigidBody.velocity = new Vector2(rigidBody.velocity.x, rigidBody.velocity.y * wallSlideSpeed);
             }

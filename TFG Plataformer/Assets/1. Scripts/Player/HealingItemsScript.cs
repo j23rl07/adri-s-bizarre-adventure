@@ -5,6 +5,7 @@ using UnityEngine;
 public class HealingItemsScript : MonoBehaviour
 {
     public HealthBar healthBar;
+    public ManaBar manaBar;
     public Player player;
 
     [HideInInspector] public int shopEnergyF;
@@ -21,7 +22,11 @@ public class HealingItemsScript : MonoBehaviour
         if (healingObject.tag == "Aprobado")
         {
             Player.maxHealth += 20;
+            healthBar.SetMaxHealth(Player.maxHealth);
+            healthBar.SetHealth(Player.maxHealth - 20);
             Player.maxMana += 20;
+            manaBar.SetMaxMana(Player.maxMana);
+            manaBar.SetMana(Player.maxMana - 20);
             Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "EnergyF")
@@ -49,10 +54,14 @@ public class HealingItemsScript : MonoBehaviour
     public void GetEnergyFragment()
     {
         Player.maxHealth += 10;
+        healthBar.SetMaxHealth(Player.maxHealth);
+        healthBar.SetHealth(Player.maxHealth -10);
     }
 
     public void GetManaFragment()
     {
         Player.maxMana += 10;
+        manaBar.SetMaxMana(Player.maxMana);
+        manaBar.SetMana(Player.maxMana - 10);
     }
 }

@@ -22,13 +22,21 @@ public class Enemy : EnemyHealth
     [Header("Other")]
     public Player player;
 
-    
+    [Header("boss")]
+    public bool isBoss;
+    public HealthBar healthBar;
+
+
     /*En el primer frame obtenemos los componentes y variables necesarias para instanciar al enemigo*/
     private void Awake()
     {
         currentHealth = maxHealth;
         animator = GetComponent<Animator>();
         enemyPatrol = GetComponentInParent<EnemyPatrol>();
+        if (isBoss)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     /*Determina cuando el enemigo ataca dependiendo del cooldown establecido al ser el jugador detectado*/
@@ -42,10 +50,18 @@ public class Enemy : EnemyHealth
                 animator.SetTrigger("meleeAttack");
             }
         }
+
+        if (isBoss)
+        {
+            if (animator.GetBool("Hurt"))
+            {
+                actualizaBarraBoss();
+            }
+        }
         
         /*El enemigo patrullará mientras no haya detectado al jugador*/
         if (enemyPatrol != null)
-            enemyPatrol.enabled = !PlayerInSight();
+            enemyPatrol.enabled = !PlayerInSight() && currentHealth > 0;
 
     }
     
@@ -76,6 +92,11 @@ public class Enemy : EnemyHealth
     {
         if (PlayerInSight())
             player.TakeDamage(damage);
+    }
+
+    public void actualizaBarraBoss()
+    {
+        healthBar.SetHealth(currentHealth);
     }
 
     

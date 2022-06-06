@@ -9,6 +9,7 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     public Animator animator;
     public GameObject dieEffect;
+    public bool useDieEffect = true;
     [HideInInspector] public bool gotHit = false;
 
     
@@ -31,14 +32,24 @@ public class EnemyHealth : MonoBehaviour
             }
             else
             {
-                Die();
+                if (useDieEffect)
+                {
+                    Die(); 
+                }
+                else
+                {
+                    animator.SetBool("IsDead", true);
+                }
             }
             
         }
 
         void Die()
         {
-            animator.SetBool("IsDead", true);
+            if (useDieEffect)
+            {
+                animator.SetBool("IsDead", true);
+            }
             this.enabled = false;
             GetComponent<Collider2D>().enabled = false;
 
@@ -68,15 +79,88 @@ public class EnemyHealth : MonoBehaviour
                 GetComponent<RangeEnemy>().enabled = false;
 
             }
-            Instantiate(dieEffect, transform.position, transform.rotation);
+            if (useDieEffect)
+            {
+                Instantiate(dieEffect, transform.position, transform.rotation);
+            }
             GameObject.Destroy(gameObject);
         }
 
         //Para MedusaHeads
         void Deactivate()
         {
-            Instantiate(dieEffect, transform.position, transform.rotation);
+            if (useDieEffect)
+            {
+                Instantiate(dieEffect, transform.position, transform.rotation);
+            }
             gameObject.SetActive(false);
         }   
+    }
+    public void Die()
+    {
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        if (GetComponentInParent<EnemyPatrol>() != null)
+        {
+            GetComponentInParent<EnemyPatrol>().enabled = false;
+        }
+        if (GetComponent<Enemy>() != null)
+        {
+            GetComponent<Enemy>().enabled = false;
+        }
+
+        if (GetComponent<BoxScript>() != null)
+        {
+            GetComponent<BoxScript>().instantiate();
+        }
+
+        if (GetComponentInChildren<EnemyFireballHolder>() != null)
+        {
+            GetComponentInChildren<EnemyFireballHolder>().enabled = false;
+        }
+
+        if (GetComponent<RangeEnemy>() != null)
+        {
+            GetComponent<RangeEnemy>().enabled = false;
+
+        }
+        GameObject.Destroy(gameObject);
+    }
+
+    public void BossPDie()
+    {
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+
+        if (GetComponentInParent<EnemyPatrol>() != null)
+        {
+            GetComponentInParent<EnemyPatrol>().enabled = false;
+        }
+        if (GetComponent<Enemy>() != null)
+        {
+            GetComponent<Enemy>().enabled = false;
+        }
+
+        if (GetComponent<BoxScript>() != null)
+        {
+            GetComponent<BoxScript>().instantiate();
+        }
+
+        if (GetComponentInChildren<EnemyFireballHolder>() != null)
+        {
+            GetComponentInChildren<EnemyFireballHolder>().enabled = false;
+        }
+
+        if (GetComponent<RangeEnemy>() != null)
+        {
+            GetComponent<RangeEnemy>().enabled = false;
+
+        }
+
+        GetComponent<Animator>().enabled = false;
+        GetComponent<boss>().enabled = false;
+        GetComponent<Enemy>().enabled = false;
+        //GameObject.Destroy(gameObject);
     }
 }

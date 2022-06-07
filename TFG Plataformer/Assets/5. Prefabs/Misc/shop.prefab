@@ -1243,8 +1243,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hintText: {fileID: 6788948198703522668}
   shopCanvas: {fileID: 6788948198321084664}
+  floatingTextPrefab: {fileID: 0}
   precioCafe: 20
   precioChuleta: 20
+  precioFragInsp: 0
+  stockFragInsp: 0
+  precioFragVit: 0
+  stockFragVit: 0
+  trabajoExtra: {fileID: 0}
+  precioTrabajoExtra: 0
+  MonedaSuerte: {fileID: 0}
+  precioMonedaSuerte: 0
+  ChuletaT: {fileID: 0}
+  precioChuletaT: 0
 --- !u!1 &6788948198321084664
 GameObject:
   m_ObjectHideFlags: 0

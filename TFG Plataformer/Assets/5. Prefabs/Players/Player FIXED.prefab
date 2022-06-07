@@ -1470,7 +1470,7 @@ Rigidbody2D:
   m_LinearDrag: 0.7
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3e624cdff1e1f12439d46c5e0271473a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -1514,6 +1514,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  groundCheckDirection: {x: 0, y: 0}
   dashSpeed: 25
   dashLength: 0.22
   dashCooldown: 0.5
@@ -1526,7 +1527,7 @@ MonoBehaviour:
   horizontalSpeed: 0
   canFlip: 1
   isDashing: 0
-  gravity: 0
+  gravity: -3
 --- !u!114 &4017893389135811854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1678,6 +1679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1313748292237716061}
+  manaBar: {fileID: 1313748290340008023}
   player: {fileID: 4017893389135811847}
   shopEnergyF: 0
   shopManaF: 0

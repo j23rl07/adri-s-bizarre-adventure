@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool isHurt = false;
     [HideInInspector] public bool isDead = false;
     [HideInInspector] public bool canRespawn = false;
+    [HideInInspector] public bool isInvulnerable = false;
 
 
     // Start is called before the first frame update
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /* Lo he desactivado porque estoy viendo que luego se nos olvida, si quieres usarlo eres libre pero vuelvelo a comentar luego
         if (Input.GetKeyDown(KeyCode.H))
         {
             TakeDamage(selfDamage);
@@ -81,7 +83,7 @@ public class Player : MonoBehaviour
         {
             healMana(20);
         }
-        
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -105,15 +107,18 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        isHurt = true;
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-        StartCoroutine(invulnerability());
-        StartCoroutine(playerKnockback(0.01f, 50, transform.position));
-
-        if (currentHealth <= 0)
+        if (!isInvulnerable)
         {
-            StartCoroutine(DeathAndRespawn(lastCheckpointLocation));
+            isHurt = true;
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+            StartCoroutine(invulnerability());
+            StartCoroutine(playerKnockback(0.01f, 50, transform.position));
+
+            if (currentHealth <= 0)
+            {
+                StartCoroutine(DeathAndRespawn(lastCheckpointLocation));
+            }
         }
     }
 
@@ -173,7 +178,6 @@ public class Player : MonoBehaviour
         GetComponent<Weapon>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<BoxCollider2D>().enabled = true;
-        GetComponent<CircleCollider2D>().enabled = true;
         //Cuando solo se hace daño el movimiento lo pone a true PlayerAnimationControler pero cuando muere se tiene que poner desde aqui
         if (!GetComponent<PlayerMovement>().enabled)
             GetComponent<PlayerMovement>().enabled = true;
@@ -199,6 +203,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator invulnerability()
     {
+        isInvulnerable = true;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         for (int i = 0; i < nFlashes; i++)
         {
@@ -211,6 +216,7 @@ public class Player : MonoBehaviour
             }
         }
         Physics2D.IgnoreLayerCollision(8, 9, false);
+        isInvulnerable = false;
     }
 
     public IEnumerator playerKnockback(float kbDuration, float kbPow, Vector3 kbDir)
@@ -227,7 +233,6 @@ public class Player : MonoBehaviour
 
     public IEnumerator DeathAndRespawn(Vector3 location)
     {
-        float g = rb2d.gravityScale;
         rb2d.velocity = new Vector2(0, 0);
         rb2d.gravityScale = 0;
         Die();
@@ -235,7 +240,7 @@ public class Player : MonoBehaviour
             yield return null;
         yield return new WaitForSeconds(respawnTimer);
         Respawn(location,true);
-        rb2d.gravityScale = g;
+        rb2d.gravityScale = GetComponent<PlayerMovement>().gravity;
         Recover();
     }
 
@@ -245,7 +250,6 @@ public class Player : MonoBehaviour
         GetComponent<PlayerCombat>().enabled = false;
         GetComponent<Weapon>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<CircleCollider2D>().enabled = false;
 
         yield return new WaitForSeconds(respawnTimer);
         Respawn(location,false);

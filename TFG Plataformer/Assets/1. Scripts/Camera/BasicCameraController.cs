@@ -10,7 +10,7 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private Vector3 levelMinBounds;
     [SerializeField] private Vector3 levelMaxBounds;
     [SerializeField] private Vector3 initialOffset;
-    private Vector3 offset;
+    [HideInInspector] public Vector3 offset, minValues, maxValues;
     [Range(1, 15)]
     [SerializeField] private float smoothFactor = 8;
     private int zCoord = -10;
@@ -19,7 +19,6 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private float transitionDuration = .5f;
     [Range(1, 15)]
     [SerializeField] private float transitionFactor = 8;
-    private Vector3 minValues, maxValues;
 
     [SerializeField] private GameObject currentSection;
     [Serializable]

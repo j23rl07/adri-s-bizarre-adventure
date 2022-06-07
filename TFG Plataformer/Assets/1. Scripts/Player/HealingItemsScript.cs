@@ -22,11 +22,11 @@ public class HealingItemsScript : MonoBehaviour
         if (healingObject.tag == "Aprobado")
         {
             Player.maxHealth += 20;
+            player.currentHealth = Player.maxHealth;
             healthBar.SetMaxHealth(Player.maxHealth);
-            healthBar.SetHealth(Player.maxHealth - 20);
             Player.maxMana += 20;
+            player.currentMana = Player.maxMana;
             manaBar.SetMaxMana(Player.maxMana);
-            manaBar.SetMana(Player.maxMana - 20);
             Destroy(healingObject.gameObject);
         }
         if (healingObject.tag == "EnergyF")
@@ -55,13 +55,13 @@ public class HealingItemsScript : MonoBehaviour
     {
         Player.maxHealth += 10;
         healthBar.SetMaxHealth(Player.maxHealth);
-        healthBar.SetHealth(Player.maxHealth -10);
+        player.currentHealth = Player.maxHealth;
     }
 
     public void GetManaFragment()
     {
         Player.maxMana += 10;
         manaBar.SetMaxMana(Player.maxMana);
-        manaBar.SetMana(Player.maxMana - 10);
+        player.currentMana = Player.maxMana;
     }
 }

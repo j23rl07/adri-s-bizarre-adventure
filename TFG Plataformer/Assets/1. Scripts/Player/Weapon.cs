@@ -159,13 +159,13 @@ public class Weapon : MonoBehaviour {
 
     void changeSkill()
     {
-        bulletPrefab = prefabs[i++];
-        
-
         if (i == prefabs.Count)
         {
             i = 0;
         }
+
+        bulletPrefab = prefabs[i++];
+
 
         switch(bulletPrefab.name)
         {

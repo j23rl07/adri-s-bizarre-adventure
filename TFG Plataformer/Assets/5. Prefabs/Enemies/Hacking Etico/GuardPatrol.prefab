@@ -200,11 +200,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5971149938147125352}
   - component: {fileID: 5971149938147125353}
-  - component: {fileID: 5971149938147125354}
+  - component: {fileID: 7324343520241864038}
   - component: {fileID: 5971149938147125355}
   m_Layer: 0
   m_Name: VisionRange
-  m_TagString: Untagged
+  m_TagString: VisionRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,7 +276,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5971149938147125354
+--- !u!114 &7324343520241864038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,11 +285,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5971149938147126167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81b836da6d9037746842389bf9c4c9c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0424a764c6f749947963a4d62385e7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  damage: 10000
+  damage: 100000
 --- !u!60 &5971149938147125355
 PolygonCollider2D:
   m_ObjectHideFlags: 0

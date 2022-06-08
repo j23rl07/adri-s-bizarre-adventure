@@ -51,6 +51,36 @@ public class BoomerangScript : MonoBehaviour
                 target.GetComponent<EnemyHealth>().TakeDamage(damage);
             }
 
+            if (target.GetComponent<ColumnaLogic>() != null)
+            {
+                target.GetComponent<ColumnaLogic>().TakeDamage(damage);
+            }
+
+            if (target.GetComponent<BossHealth>() != null)
+            {
+                target.GetComponent<BossHealth>().TakeDamage(damage);
+            }
+
+            if (target.GetComponent<GolemBossHealth>() != null)
+            {
+                target.GetComponent<GolemBossHealth>().TakeDamage(damage);
+            }
+
+            if (target.GetComponent<StatueHealth>() != null)
+            {
+                target.GetComponent<StatueHealth>().TakeDamage(damage);
+            }
+
+            if (target.GetComponent<bossHealthR>() != null)
+            {
+                target.GetComponent<bossHealthR>().TakeDamage(damage);
+            }
+
+            if (target.GetComponent<MinionHealth>() != null)
+            {
+                target.GetComponent<MinionHealth>().TakeDamage(damage);
+            }
+
             if (target.gameObject.layer == 6 & !returning)
             {
                 rb.velocity = new Vector2(-pullForce, 0);

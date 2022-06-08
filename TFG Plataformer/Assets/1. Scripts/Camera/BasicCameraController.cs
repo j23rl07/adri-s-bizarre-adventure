@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BasicCameraController : MonoBehaviour
 {
+    [SerializeField] private int tamanyoCamara = 7;
     [Header("Follow")]
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 levelMinBounds;
@@ -35,9 +36,10 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private GameObject background = null;
 
 
+
     void Start()
     {
-        GetComponent<Camera>().orthographicSize = 7;
+        GetComponent<Camera>().orthographicSize = tamanyoCamara;
         levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, zCoord);
         levelMaxBounds = new Vector3(levelMaxBounds.x, levelMaxBounds.y, zCoord);
         minValues = levelMinBounds;

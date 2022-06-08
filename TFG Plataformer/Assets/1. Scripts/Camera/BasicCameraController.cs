@@ -37,6 +37,7 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private GameObject background = null;
 
 
+
     void Start()
     {
         GetComponent<Camera>().orthographicSize = cameraSize;
@@ -61,7 +62,7 @@ public class BasicCameraController : MonoBehaviour
     ///////////////////////FUNCIONES AUXILIARES////////////////////////////
     void Follow()
     {
-        //Añadir el offset
+        //Aï¿½adir el offset
         Vector3 targetPosition = target.position + offset;
         //Limitar la posicion x,y,z de la camara relativa a los confines del nivel
         Vector3 boundPosition = new Vector3(

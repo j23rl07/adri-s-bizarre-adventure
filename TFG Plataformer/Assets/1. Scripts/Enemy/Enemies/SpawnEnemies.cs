@@ -21,11 +21,17 @@ public class SpawnEnemies : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        activo = true;
+        if (collision.gameObject.CompareTag("Player"))
+        { 
+            activo = true;
+        }  
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        activo = false;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            activo = false;
+        }
     }
 }

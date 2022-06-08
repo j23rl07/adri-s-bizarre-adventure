@@ -31,6 +31,36 @@ public class CuchillaFolioScript : MonoBehaviour
                 collision.GetComponent<EnemyHealth>().TakeDamage(damage);
             }
 
+            if (collision.GetComponent<ColumnaLogic>() != null)
+            {
+                collision.GetComponent<ColumnaLogic>().TakeDamage(damage);
+            }
+
+            if (collision.GetComponent<BossHealth>() != null)
+            {
+                collision.GetComponent<BossHealth>().TakeDamage(damage);
+            }
+
+            if (collision.GetComponent<GolemBossHealth>() != null)
+            {
+                collision.GetComponent<GolemBossHealth>().TakeDamage(damage);
+            }
+
+            if (collision.GetComponent<StatueHealth>() != null)
+            {
+                collision.GetComponent<StatueHealth>().TakeDamage(damage);
+            }
+
+            if (collision.GetComponent<bossHealthR>() != null)
+            {
+                collision.GetComponent<bossHealthR>().TakeDamage(damage);
+            }
+
+            if (collision.GetComponent<MinionHealth>() != null)
+            {
+                collision.GetComponent<MinionHealth>().TakeDamage(damage);
+            }
+
             Instantiate(impactEffect, transform.position, transform.rotation);
             Destroy(gameObject);
         }

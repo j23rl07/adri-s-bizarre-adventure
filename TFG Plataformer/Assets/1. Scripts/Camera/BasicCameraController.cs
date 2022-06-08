@@ -10,7 +10,7 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private Vector3 levelMinBounds;
     [SerializeField] private Vector3 levelMaxBounds;
     [SerializeField] private Vector3 initialOffset;
-    private Vector3 offset;
+    [HideInInspector] public Vector3 offset, minValues, maxValues;
     [Range(1, 15)]
     [SerializeField] private float smoothFactor = 8;
     private int zCoord = -10;
@@ -19,7 +19,6 @@ public class BasicCameraController : MonoBehaviour
     [SerializeField] private float transitionDuration = .5f;
     [Range(1, 15)]
     [SerializeField] private float transitionFactor = 8;
-    private Vector3 minValues, maxValues;
 
     [SerializeField] private GameObject currentSection;
     [Serializable]
@@ -32,13 +31,15 @@ public class BasicCameraController : MonoBehaviour
     }
     public List<CameraSection> cameraSections;
 
+    public float cameraSize = 7;
+
     [Header("Background")]
     [SerializeField] private GameObject background = null;
 
 
     void Start()
     {
-        GetComponent<Camera>().orthographicSize = 7;
+        GetComponent<Camera>().orthographicSize = cameraSize;
         levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, zCoord);
         levelMaxBounds = new Vector3(levelMaxBounds.x, levelMaxBounds.y, zCoord);
         minValues = levelMinBounds;

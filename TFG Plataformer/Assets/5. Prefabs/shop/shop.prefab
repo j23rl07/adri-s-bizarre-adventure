@@ -3786,7 +3786,6 @@ MonoBehaviour:
   hintText: {fileID: 6788948198703522668}
   shopCanvas: {fileID: 6788948198321084664}
   floatingTextPrefab: {fileID: 3105479644771298272, guid: ca53aa2573c71c94ab618b9786e48468, type: 3}
-  inventoryScript: {fileID: 6214626131974726567, guid: 109450550818588409f8909abeb48276, type: 3}
   precioCafe: 10
   precioChuleta: 10
   precioFragInsp: 50

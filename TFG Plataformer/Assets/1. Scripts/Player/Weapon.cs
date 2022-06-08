@@ -165,9 +165,8 @@ public class Weapon : MonoBehaviour {
         }
 
         bulletPrefab = prefabs[i++];
-        
 
-        switch(bulletPrefab.name)
+        switch (bulletPrefab.name)
         {
             case "Fireball":
                 rend.sprite = fbSprite;

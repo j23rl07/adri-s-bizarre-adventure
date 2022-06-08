@@ -159,15 +159,16 @@ public class Weapon : MonoBehaviour {
 
     void changeSkill()
     {
-        bulletPrefab = prefabs[i++];
         
-
         if (i == prefabs.Count)
         {
             i = 0;
         }
 
-        switch(bulletPrefab.name)
+        bulletPrefab = prefabs[i++];
+        Debug.Log("i = " + i);
+
+        switch (bulletPrefab.name)
         {
             case "Fireball":
                 rend.sprite = fbSprite;

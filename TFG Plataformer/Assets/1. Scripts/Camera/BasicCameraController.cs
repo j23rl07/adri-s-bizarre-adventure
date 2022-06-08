@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BasicCameraController : MonoBehaviour
 {
-    [SerializeField] private int tamanyoCamara = 7;
     [Header("Follow")]
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 levelMinBounds;
@@ -32,6 +31,8 @@ public class BasicCameraController : MonoBehaviour
     }
     public List<CameraSection> cameraSections;
 
+    public float cameraSize = 7;
+
     [Header("Background")]
     [SerializeField] private GameObject background = null;
 
@@ -39,7 +40,7 @@ public class BasicCameraController : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Camera>().orthographicSize = tamanyoCamara;
+        GetComponent<Camera>().orthographicSize = cameraSize;
         levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, zCoord);
         levelMaxBounds = new Vector3(levelMaxBounds.x, levelMaxBounds.y, zCoord);
         minValues = levelMinBounds;
@@ -61,7 +62,7 @@ public class BasicCameraController : MonoBehaviour
     ///////////////////////FUNCIONES AUXILIARES////////////////////////////
     void Follow()
     {
-        //Añadir el offset
+        //Aï¿½adir el offset
         Vector3 targetPosition = target.position + offset;
         //Limitar la posicion x,y,z de la camara relativa a los confines del nivel
         Vector3 boundPosition = new Vector3(

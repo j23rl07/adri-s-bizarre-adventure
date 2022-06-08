@@ -11,8 +11,9 @@ public class EnemyHealth : MonoBehaviour
     public GameObject dieEffect;
     public bool useDieEffect = true;
     [HideInInspector] public bool gotHit = false;
+    [HideInInspector] public bool isDead = false;
 
-    
+
     public void Awake()
     {
         currentHealth = maxHealth;
@@ -46,6 +47,7 @@ public class EnemyHealth : MonoBehaviour
 
         void Die()
         {
+            isDead = true;
             if (useDieEffect)
             {
                 animator.SetBool("IsDead", true);

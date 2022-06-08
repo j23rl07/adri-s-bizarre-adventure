@@ -31,13 +31,15 @@ public class BasicCameraController : MonoBehaviour
     }
     public List<CameraSection> cameraSections;
 
+    public float cameraSize = 7;
+
     [Header("Background")]
     [SerializeField] private GameObject background = null;
 
 
     void Start()
     {
-        GetComponent<Camera>().orthographicSize = 7;
+        GetComponent<Camera>().orthographicSize = cameraSize;
         levelMinBounds = new Vector3(levelMinBounds.x, levelMinBounds.y, zCoord);
         levelMaxBounds = new Vector3(levelMaxBounds.x, levelMaxBounds.y, zCoord);
         minValues = levelMinBounds;

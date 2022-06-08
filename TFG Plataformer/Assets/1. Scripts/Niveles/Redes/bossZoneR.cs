@@ -17,8 +17,6 @@ public class bossZoneR : MonoBehaviour
     public AudioSource audio;
     public AudioSource bossAudio;
 
-    public bool respawn = false;
-
     public GameObject minionsO;
 
     void Start()
@@ -36,7 +34,6 @@ public class bossZoneR : MonoBehaviour
                 audio.Stop();
                 bossAudio.Play();
             }
-            respawn = false;
         }
     }
 
@@ -55,8 +52,7 @@ public class bossZoneR : MonoBehaviour
                 audio.Play();
             }
             canvas.SetActive(false);
-            respawn = true;
-            minionsO.GetComponent<minions>().paraR = false;
+            minionsO.GetComponent<minions>().respawn = true;
         }
     }
 

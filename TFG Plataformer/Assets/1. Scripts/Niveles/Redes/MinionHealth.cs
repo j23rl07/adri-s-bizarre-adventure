@@ -30,56 +30,44 @@ public class MinionHealth : MonoBehaviour
         {
          Die();
         }
+    }
 
-        void Die()
+    public void Die()
+    {
+        if (useDieEffect)
         {
-            if (useDieEffect)
-            {
-                animator.SetBool("IsDead", true);
-            }
-            this.enabled = false;
-            GetComponent<Collider2D>().enabled = false;
+            animator.SetBool("IsDead", true);
+        }
+        this.enabled = false;
 
-            /*En caso de que haya que desactivar alg�n componente en espec�fico que haga funcionar a un enemigo al destruirlo, se realizar� desde aqu� */
+        /*En caso de que haya que desactivar alg�n componente en espec�fico que haga funcionar a un enemigo al destruirlo, se realizar� desde aqu� */
 
-            if (GetComponent<Enemy>() != null)
-            {
-                GetComponent<Enemy>().enabled = false;
-            }
-
-            if (GetComponent<BoxScript>() != null)
-            {
-                GetComponent<BoxScript>().instantiate();
-            }
-
-            if (GetComponentInChildren<EnemyFireballHolder>() != null)
-            {
-                GetComponentInChildren<EnemyFireballHolder>().enabled = false;
-            }
-
-            if (GetComponent<RangeEnemy>() != null)
-            {
-                GetComponent<RangeEnemy>().enabled = false;
-
-            }
-            if (useDieEffect)
-            {
-                Instantiate(dieEffect, transform.position, transform.rotation);
-            }
-            //GameObject.Destroy(gameObject);
-            gameObject.SetActive(false);
-            gameObject.transform.position = posicionInicial;
+        if (GetComponent<Enemy>() != null)
+        {
+            GetComponent<Enemy>().enabled = false;
         }
 
-        //Para MedusaHeads
-        void Deactivate()
+        if (GetComponent<BoxScript>() != null)
         {
-            if (useDieEffect)
-            {
-                Instantiate(dieEffect, transform.position, transform.rotation);
-            }
-            gameObject.SetActive(false);
+            GetComponent<BoxScript>().instantiate();
         }
+
+        if (GetComponentInChildren<EnemyFireballHolder>() != null)
+        {
+            GetComponentInChildren<EnemyFireballHolder>().enabled = false;
+        }
+
+        if (GetComponent<RangeEnemy>() != null)
+        {
+            GetComponent<RangeEnemy>().enabled = false;
+
+        }
+        if (useDieEffect)
+        {
+            Instantiate(dieEffect, transform.position, transform.rotation);
+        }
+        gameObject.SetActive(false);
+        gameObject.transform.position = posicionInicial;
     }
 
     public void BossPDie()

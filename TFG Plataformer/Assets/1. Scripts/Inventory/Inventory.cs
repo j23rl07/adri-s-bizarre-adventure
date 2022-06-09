@@ -128,7 +128,7 @@ public class Inventory : MonoBehaviour
 
     public void CheckAEInventory(ItemType type)
     {
-        for (int i = 0; i < Tslots.Length; i++)
+        for (int i = 0; i < Aslots.Length; i++)
         {
             if (Aslots[i].GetComponent<ASlotsScript>().isUsed)
             {

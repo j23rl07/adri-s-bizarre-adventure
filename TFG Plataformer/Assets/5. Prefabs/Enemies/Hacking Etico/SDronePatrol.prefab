@@ -103,9 +103,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 248324901
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9e8bdc93279b52b4792a1517a8316bec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.53333336}
   m_FlipX: 0
@@ -244,9 +244,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 248324901
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9e8bdc93279b52b4792a1517a8316bec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.53333336}
   m_FlipX: 0
@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 6954398151074708566}
   - component: {fileID: 6954398151074708567}
   - component: {fileID: 6954398151074708564}
+  - component: {fileID: 3004025733507783540}
   - component: {fileID: 6954398151074708565}
   m_Layer: 0
   m_Name: SurvDrone
@@ -389,9 +390,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1103341349
-  m_SortingLayer: 4
-  m_SortingOrder: -1
+  m_SortingLayerID: -238266837
+  m_SortingLayer: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a1fc1786c427341769dba6c83feadde4, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -421,6 +422,24 @@ MonoBehaviour:
   speed: 3
   waitPeriod: 2
   animator: {fileID: 6954398151074708565}
+--- !u!114 &3004025733507783540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954398151074708560}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93afb2d01408ebf4d8eb597cebd24b1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  downPoint: {fileID: 0}
+  upPoint: {fileID: 0}
+  enemy: {fileID: 0}
+  speed: 0
+  waitPeriod: 0
+  animator: {fileID: 0}
 --- !u!95 &6954398151074708565
 Animator:
   serializedVersion: 4
@@ -544,9 +563,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 248324901
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9e8bdc93279b52b4792a1517a8316bec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.53333336}
   m_FlipX: 0
@@ -719,9 +738,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 248324901
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9e8bdc93279b52b4792a1517a8316bec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.53333336}
   m_FlipX: 0

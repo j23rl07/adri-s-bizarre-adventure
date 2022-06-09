@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class EsconditeScript : MonoBehaviour
 {
+    private bool isInRange;
     private BoxCollider2D escondite;
     private Vector2[] vertices = new Vector2[4];
     [SerializeField] private BoxCollider2D player;
 
     void Start()
     {
+        isInRange = false;
         escondite = GetComponent<BoxCollider2D>();
     }
     private void Update()
     {
-        Debug.Log(VisionRangeScrpit.isActive);
-        if (IsPlayerHidden())
+        if (isInRange && IsPlayerHidden())
         {
             VisionRangeScrpit.isActive = false;
+        }else if (isInRange)
+        {
+            VisionRangeScrpit.isActive = true;
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.Equals(player))
+            isInRange = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.Equals(player))
-        {
-            VisionRangeScrpit.isActive = true;
-        }
+            isInRange = false;
     }
 
     private bool IsPlayerHidden()

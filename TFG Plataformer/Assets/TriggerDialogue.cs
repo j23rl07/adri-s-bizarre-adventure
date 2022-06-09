@@ -11,7 +11,7 @@ public class TriggerDialogue : MonoBehaviour
         if (collision.tag == "Player")
         {
             dialogue.SetActive(true);
+            gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
     }
 }

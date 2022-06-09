@@ -16,9 +16,7 @@ public class VisionRangeScrpit : MonoBehaviour
     {
         if (collision.tag == "Player" && isActive)
         {
-            Debug.Log("toma");
             player.TakeDamage(damage);
-
         }
     }
 }

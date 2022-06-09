@@ -50,7 +50,7 @@ public class Weapon : MonoBehaviour {
     [Header("Other")]
     public GameObject bulletPrefab;
     public Animator animator;
-    public List<GameObject> prefabs;
+    public static List<GameObject> prefabs = new List<GameObject>();
     public List<int> allowedLayerCollisions;
     private int i = 1;
     public Player player;
@@ -61,6 +61,8 @@ public class Weapon : MonoBehaviour {
     {
         inventory = Inventory.instance.GetComponent<Inventory>();
         inventory.CheckASlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
+
+
 
         pauseMenu = FindObjectOfType<PauseMenu>();
         bulletPrefab.GetComponent<Bullet>().allowedLayerCollisions = allowedLayerCollisions;
@@ -155,6 +157,8 @@ public class Weapon : MonoBehaviour {
                 changeSkill();
             }
         }
+
+        Debug.Log(prefabs.Count);
     }
 
     void changeSkill()

@@ -8,6 +8,8 @@ public class Inventory : MonoBehaviour
 
     public static Inventory instance;
 
+    public GameObject firstSkill;
+
     public GameObject[] Aslots;
     public GameObject[] Tslots;
     public GameObject[] backPack;
@@ -18,7 +20,21 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+            if (Weapon.prefabs.Count==0)
+            {
+                Weapon.prefabs.Add(firstSkill);
+            }
+            
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         inventory.GetComponent<Canvas>().enabled = false;
     }
 

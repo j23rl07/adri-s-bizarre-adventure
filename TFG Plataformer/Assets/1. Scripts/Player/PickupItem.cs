@@ -12,11 +12,11 @@ public class PickupItem : MonoBehaviour
     {
         if(item.tag == "Boomerang")
         {
-            weapon.prefabs.Add(boomerangPrefab);
+            Weapon.prefabs.Add(boomerangPrefab);
             Destroy(item.gameObject);
 
         }else if (item.tag == "CuchillaFolio"){
-            weapon.prefabs.Add(cfPrefab);
+            Weapon.prefabs.Add(cfPrefab);
             Destroy(item.gameObject);
         }
         

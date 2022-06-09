@@ -19,7 +19,7 @@ public class PickUpSkill : MonoBehaviour
         if (target.CompareTag("Player"))
         {
             inventory.CheckASlotsAvailability(itemToAdd, itemToAdd.name, amountToAdd);
-            weaponScript.prefabs.Add(skillPrefab);
+            Weapon.prefabs.Add(skillPrefab);
             Destroy(gameObject);
         }
     }

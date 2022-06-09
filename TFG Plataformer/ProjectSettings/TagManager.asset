@@ -29,6 +29,7 @@ TagManager:
   - WolfAttack
   - StartPos
   - Puppet
+  - VisionRange
   layers:
   - Default
   - TransparentFX

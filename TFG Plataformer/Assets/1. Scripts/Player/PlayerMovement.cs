@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!pauseMenu.IsGamePaused())
+        if (!pauseMenu.IsGamePaused())
             GetMovementInputs();
     }
 

@@ -3389,7 +3389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iLevelToLoad: 0
-  sLevelToLoad: Fisica
+  sLevelToLoad: Programacion
   useIntegerToLoadLevel: 0
 --- !u!61 &834281058
 BoxCollider2D:

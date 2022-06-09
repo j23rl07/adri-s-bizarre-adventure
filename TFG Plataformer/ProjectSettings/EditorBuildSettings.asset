@@ -12,11 +12,17 @@ EditorBuildSettings:
     path: Assets/6. Scenes/Levels/Tutorial.unity
     guid: 2e402b77dceeac541915738dd356d6e9
   - enabled: 1
+    path: Assets/6. Scenes/Levels/Programacion.unity
+    guid: aafaf3d85396ed44cad2561261006490
+  - enabled: 1
     path: Assets/6. Scenes/Nivel Calculo.unity
     guid: 2e67c8650fb6ab749b641dc6edb6cd12
   - enabled: 1
     path: Assets/6. Scenes/Levels/Fisica.unity
     guid: ddd1d680a5a34e34eb56b7a80a24bccf
+  - enabled: 1
+    path: Assets/6. Scenes/Levels/Redes.unity
+    guid: db1a97c8312b65043ac5b7280ab0c1c0
   - enabled: 1
     path: Assets/6. Scenes/Nivel Base de datos.unity
     guid: 58a7a320a50b42d44810e0bd3f7e388b

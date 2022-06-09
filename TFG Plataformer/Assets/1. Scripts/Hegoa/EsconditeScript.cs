@@ -24,7 +24,7 @@ public class EsconditeScript : MonoBehaviour
             VisionRangeScrpit.isActive = true;
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if(collision.Equals(player))
             isInRange = true;

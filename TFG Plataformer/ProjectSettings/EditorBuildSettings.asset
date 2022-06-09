@@ -9,15 +9,21 @@ EditorBuildSettings:
     path: Assets/6. Scenes/MainMenu.unity
     guid: 14005d798a7da8947b8a12e0b0d5de98
   - enabled: 1
-    path: Assets/6. Scenes/References/Interfaz.unity
-    guid: 496459ae0174a214fbdbcd6a9e657e90
+    path: Assets/6. Scenes/Levels/Tutorial.unity
+    guid: 2e402b77dceeac541915738dd356d6e9
+  - enabled: 1
+    path: Assets/6. Scenes/Nivel Calculo.unity
+    guid: 2e67c8650fb6ab749b641dc6edb6cd12
+  - enabled: 1
+    path: Assets/6. Scenes/Levels/Fisica.unity
+    guid: ddd1d680a5a34e34eb56b7a80a24bccf
   - enabled: 1
     path: Assets/6. Scenes/Nivel Base de datos.unity
     guid: 58a7a320a50b42d44810e0bd3f7e388b
   - enabled: 1
-    path: Assets/6. Scenes/Nivel Calculo.unity
-    guid: 49fb6c98b57171648823d29aead0cfff
-  - enabled: 0
-    path: Assets/6. Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/6. Scenes/Levels/Hacking Etico.unity
+    guid: 7ab109f8801222a4a966f59850e0a125
+  - enabled: 1
+    path: Assets/6. Scenes/Nivel ADDA.unity
+    guid: 329a164f825021042b3ae5a89b30fe24
   m_configObjects: {}

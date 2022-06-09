@@ -8,7 +8,6 @@ public class CameraButtonScript : MonoBehaviour
     [SerializeField] private Sprite buttonOffSprite;
     [SerializeField] private GameObject visionRange;
     [SerializeField] private GameObject hintText;
-    private GameObject player;
 
     private bool hasAccess;
     private bool isOff;
@@ -19,7 +18,6 @@ public class CameraButtonScript : MonoBehaviour
         hasAccess = false;
         isOff = false;
         GetComponent<SpriteRenderer>().sprite = buttonOnSprite;
-        player = GameObject.FindGameObjectWithTag("Player");
         if (hintText != null)
             hintText.SetActive(false);
     }

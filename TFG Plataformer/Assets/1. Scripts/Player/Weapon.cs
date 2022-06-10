@@ -157,8 +157,6 @@ public class Weapon : MonoBehaviour {
                 changeSkill();
             }
         }
-
-        Debug.Log(prefabs.Count);
     }
 
     void changeSkill()

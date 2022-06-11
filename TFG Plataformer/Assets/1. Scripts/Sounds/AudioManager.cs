@@ -13,7 +13,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [Range(-80, 10)]
-    public float masterVol, effectsVol;
+    public static float masterVol, effectsVol;
 
     public Slider masterSlider, effectSlider;
 

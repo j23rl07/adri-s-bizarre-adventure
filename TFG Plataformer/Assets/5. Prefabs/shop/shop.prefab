@@ -3789,9 +3789,9 @@ MonoBehaviour:
   precioCafe: 10
   precioChuleta: 10
   precioFragInsp: 50
-  stockFragInsp: 5
+  stockFragInsp: 2
   precioFragVit: 50
-  stockFragVit: 5
+  stockFragVit: 2
   trabajoExtra: {fileID: 1960625161924754871, guid: 6c6aa8887afd83441be13a078ff9d783, type: 3}
   precioTrabajoExtra: 100
   MonedaSuerte: {fileID: 6369404355973646208, guid: ddc82d922b5d196488c19923186d5899, type: 3}

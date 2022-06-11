@@ -17,6 +17,8 @@ public class FisicaBossZone : MonoBehaviour
     [SerializeField] private Transform doorSpawn;
     [SerializeField] private GameObject loot;
 
+    private Quaternion rotation;
+
     void Start()
     {
         waitingReward = true;
@@ -42,6 +44,7 @@ public class FisicaBossZone : MonoBehaviour
             bossScript.active = true;
             doorTM.gameObject.SetActive(true);
             canvas.transform.GetChild(0).gameObject.SetActive(true);
+            rotation = bossScript.transform.rotation;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -52,6 +55,9 @@ public class FisicaBossZone : MonoBehaviour
             doorTM.gameObject.SetActive(false);
             canvas.transform.GetChild(0).gameObject.SetActive(false);
             bossScript.gameObject.transform.position = initialPosition.position;
+            bossScript.currentHealth = bossScript.maxHealth;
+            bossScript.transform.rotation = rotation;
+            bossScript.healthBar.SetHealth(bossScript.maxHealth);
         }
     }
 }

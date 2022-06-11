@@ -8,7 +8,7 @@ public class FisicaBoss : EnemyHealth
     [SerializeField] private GameObject player;
     private bool gettingReady;
     [SerializeField] private List<Transform> tpLocations;
-    [SerializeField] private HealthBar healthBar;
+    public HealthBar healthBar;
     [SerializeField] private float delay;
     private float delayTimer;
     [SerializeField] private float atkSpeed;

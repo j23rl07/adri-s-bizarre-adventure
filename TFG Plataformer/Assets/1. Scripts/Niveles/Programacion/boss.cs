@@ -9,6 +9,7 @@ public class boss : MonoBehaviour
     public Transform player;
 
     [SerializeField] private Tilemap tilemap;
+    [SerializeField] private Tilemap tilemap2;
 
     public bool isFlipped = false;
 
@@ -34,6 +35,7 @@ public class boss : MonoBehaviour
     public void boss_muerto()
     {
         tilemap.ClearAllTiles();
+        tilemap2.ClearAllTiles();
     }
 
 }

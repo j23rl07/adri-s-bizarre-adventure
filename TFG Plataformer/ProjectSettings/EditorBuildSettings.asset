@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/6. Scenes/Nivel ADDA.unity
     guid: 329a164f825021042b3ae5a89b30fe24
+  - enabled: 1
+    path: Assets/6. Scenes/Ending.unity
+    guid: acf97ceafd563af4894592b678dfa12b
   m_configObjects: {}
